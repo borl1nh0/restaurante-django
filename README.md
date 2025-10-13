@@ -59,15 +59,15 @@ Para usar desde el **panel de administración**.
 ### 4) `Restaurante`
 **un restaurante con datos de contacto, dirección única y clientes frecuentes.**
 
-| Campo                 | Tipo               | Parámetros                                   | Descripción                                                |
-|-----------------------|--------------------|----------------------------------------------|------------------------------------------------------------|
-| `nombre`              | `CharField`        | `max_length=100`                             | Nombre del restaurante.                                    |
-| `telefono`            | `CharField`        | `max_length=20`                              | Teléfono.                                                  |
-| `email`               | `EmailField`       | `blank=True`                                 | Email (opcional).                                          |
-| `web`                 | `URLField`         | `blank=True`                                 | Web (opcional).                                            |
-| `abierto`             | `BooleanField`     | `default=True`                               | Indicador de apertura.                                     |
-| `direccion`           | `OneToOneField`    | `on_delete=CASCADE`                          | Enlace único a `Direccion`.                                |
-| `clientes_frecuentes` | `ManyToManyField`  | `Cliente`, `blank=True`, `related_name="restaurantes_favoritos"` | Clientes habituales; acceso inverso: `cliente.restaurantes_favoritos`. |
+ Campo                  Tipo                Parámetros                                   Descripción                                                
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ `nombre`               `CharField`         `max_length=100`                              Nombre del restaurante.                                    
+ `telefono`             `CharField`         `max_length=20`                               Teléfono.                                                  
+ `email`                `EmailField`        `blank=True`                                  Email (opcional).                                          
+ `web`                  `URLField`          `blank=True`                                  Web (opcional).                                            
+ `abierto`              `BooleanField`      `default=True`                                Indicador de apertura.                                     
+ `direccion`            `OneToOneField`     `on_delete=CASCADE`                           Enlace único a `Direccion`.                                
+ `clientes_frecuentes`  `ManyToManyField`   `Cliente`, `blank=True`, `related_name="restaurantes_favoritos"`  Clientes habituales; acceso inverso: `cliente.restaurantes_favoritos`. 
 
 - `__str__`: nombre del restaurante.
 
@@ -76,12 +76,12 @@ Para usar desde el **panel de administración**.
 ### 5) `Etiqueta`
 **categorías/etiquetas para platos (ej. “vegano”, “picante”).**
 
-| Campo       | Tipo          Parámetros                   Descripción                                 
-|-----------------------------------------------------------------------------------------------------
-| `nombre`     `CharField`   `max_length=50`, `unique=True`  Nombre único de la etiqueta.             
-| `descripcion` `TextField`  `blank=True`                 Texto opcional.                             
-| `color`      `CharField`   `max_length=10`, `default="verde"`  Color asociado (referencial).         
-| `slug`       `SlugField`   `unique=True`                Identificador URL-friendly único.           
+ Campo       | Tipo          Parámetros                   Descripción                                 
+-----------------------------------------------------------------------------------------------------
+ `nombre`     `CharField`   `max_length=50`, `unique=True`  Nombre único de la etiqueta.             
+ `descripcion` `TextField`  `blank=True`                 Texto opcional.                             
+ `color`      `CharField`   `max_length=10`, `default="verde"`  Color asociado (referencial).         
+ `slug`       `SlugField`   `unique=True`                Identificador URL-friendly único.           
 
 - `__str__`: nombre de la etiqueta.
 
