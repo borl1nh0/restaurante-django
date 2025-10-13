@@ -1,13 +1,10 @@
 # restaurante-django
 
 Proyecto de un **restaurante** con clientes, platos, mesas, reservas y pedidos.  
-Pensado para usar desde el **panel de administración**.
+Para usar desde el **panel de administración**.
 
 ---
-
-## ¿Qué trae?
-
-- **10 modelos** en español (Dirección, Cliente, Plato, etc.).
+- **10 modelos** (Dirección, Cliente, Plato, etc.).
 - Datos de prueba con **Faker** (crea 10 de cada modelo).
 - **Fixture** (copia de seguridad) para guardar/cargar datos.
 - Trabajo por **ramas** para que en GitHub se vea cada paso.
@@ -17,7 +14,7 @@ Pensado para usar desde el **panel de administración**.
 ## Modelos (explicación completa)
 
 ### 1) `Direccion`
-**Qué es:** dirección física completa (se asocia 1–1 con Restaurante).
+**dirección física completa (se asocia 1–1 con Restaurante).**
 
 | Campo          | Tipo                     | Parámetros                 | Descripción                                      |
 |----------------|--------------------------|----------------------------|--------------------------------------------------|
@@ -32,7 +29,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 2) `Cliente`
-**Qué es:** persona registrada que puede reservar y hacer pedidos.
+**persona registrada que puede reservar y hacer pedidos.**
 
 | Campo             | Tipo              | Parámetros                   | Descripción                                 |
 |-------------------|-------------------|------------------------------|---------------------------------------------|
@@ -46,7 +43,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 3) `PerfilCliente`
-**Qué es:** información extra de un cliente (relación 1–1).
+**información extra de un cliente (relación 1–1).**
 
 | Campo              | Tipo               | Parámetros                 | Descripción                                            |
 |--------------------|--------------------|----------------------------|--------------------------------------------------------|
@@ -60,7 +57,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 4) `Restaurante`
-**Qué es:** un restaurante con datos de contacto, dirección única y clientes frecuentes.
+**un restaurante con datos de contacto, dirección única y clientes frecuentes.**
 
 | Campo                 | Tipo               | Parámetros                                   | Descripción                                                |
 |-----------------------|--------------------|----------------------------------------------|------------------------------------------------------------|
@@ -77,7 +74,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 5) `Etiqueta`
-**Qué es:** categorías/etiquetas para platos (ej. “vegano”, “picante”).
+**categorías/etiquetas para platos (ej. “vegano”, “picante”).**
 
 | Campo       | Tipo         | Parámetros                  | Descripción                                 |
 |-------------|--------------|-----------------------------|---------------------------------------------|
@@ -91,7 +88,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 6) `Plato`
-**Qué es:** ítem del menú de un restaurante.
+**ítem del menú de un restaurante.**
 
 | Campo        | Tipo             | Parámetros                                   | Descripción                                       |
 |--------------|------------------|----------------------------------------------|---------------------------------------------------|
@@ -107,7 +104,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 7) `Mesa`
-**Qué es:** mesa física en el restaurante.
+ **mesa física en el restaurante.**
 
 | Campo       | Tipo               | Parámetros                          | Descripción                                   |
 |-------------|--------------------|-------------------------------------|-----------------------------------------------|
@@ -122,7 +119,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 8) `Reserva`
-**Qué es:** reserva de una mesa por un cliente, con fecha y hora.
+**reserva de una mesa por un cliente, con fecha y hora.**
 
 | Campo     | Tipo            | Parámetros                         | Descripción                     |
 |-----------|-----------------|------------------------------------|---------------------------------|
@@ -138,7 +135,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 9) `Pedido`
-**Qué es:** compra del cliente; puede estar asociada a una reserva.
+**compra del cliente; puede estar asociada a una reserva.**
 
 | Campo       | Tipo            | Parámetros                                              | Descripción                                        |
 |-------------|-----------------|---------------------------------------------------------|----------------------------------------------------|
@@ -155,7 +152,7 @@ Pensado para usar desde el **panel de administración**.
 ---
 
 ### 10) `LineaPedido`
-**Qué es:** detalle del pedido (qué plato, cuántas unidades, precio…).
+**detalle del pedido (qué plato, cuántas unidades, precio…).***
 
 | Campo                 | Tipo                 | Parámetros                    | Descripción                              |
 |-----------------------|----------------------|-------------------------------|------------------------------------------|
