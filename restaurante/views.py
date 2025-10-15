@@ -36,3 +36,20 @@ def lista_restaurantes(request):
           .order_by('nombre'))
     return render(request, 'restaurante/restaurantes.html', {'restaurantes': qs})
 
+def detalle_restaurante(request, id: int):
+    """
+    Restaurante con dirección, platos, mesas y clientes frecuentes (M2M).
+    SQL (idea):
+      SELECT * FROM restaurante_restaurante WHERE id=%s;
+      SELECT * FROM restaurante_direccion WHERE id=%s;
+      SELECT * FROM restaurante_plato WHERE restaurante_id=%s ORDER BY nombre;
+      SELECT * FROM restaurante_mesa  WHERE restaurante_id=%s ORDER BY numero;
+      SELECT c.* FROM restaurante_restaurante_clientes_frecuentes rc
+        JOIN restaurante_cliente c ON c.id=rc.cliente_id
+        WHERE rc.restaurante_id=%s;
+    """
+    r = (Restaurante.objects
+         .select_related('direccion')
+         .prefetch_related('clientes_frecuentes', 'plato_set', 'mesa_set')
+         .get(pk=id))
+    return render(request, 'restaurante/restaurante_detalle.html', {'r': r})
