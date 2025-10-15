@@ -65,3 +65,15 @@ def lista_platos(request):
               .prefetch_related('etiquetas')
               .order_by('precio')[:100])
     return render(request, 'restaurante/platos.html', {'platos': platos})
+def platos_por_categoria(request, categoria: str):
+    """
+    Filtra platos por categoría exacta.
+    SQL (idea):
+      SELECT * FROM restaurante_plato WHERE categoria=%s ORDER BY nombre ASC;
+    """
+    platos = (Plato.objects
+              .filter(categoria=categoria)
+              .select_related('restaurante')
+              .prefetch_related('etiquetas')
+              .order_by('nombre'))
+    return render(request, 'restaurante/platos_categoria.html', {'platos': platos, 'categoria': categoria})
