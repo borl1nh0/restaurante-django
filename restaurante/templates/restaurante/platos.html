@@ -1,0 +1,10 @@
+<h1>Platos</h1>
+<ul>
+{% for p in platos %}
+  <li>
+    {{ p.nombre }} — {{ p.precio }} € — {{ p.restaurante.nombre }}<br>
+    Etiquetas: {% for e in p.etiquetas.all %} {{ e.nombre }} {% empty %}(ninguna){% endfor %}
+  </li>
+{% empty %}<li>No hay platos</li>{% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver</a></p>

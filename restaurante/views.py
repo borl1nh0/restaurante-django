@@ -53,3 +53,15 @@ def detalle_restaurante(request, id: int):
          .prefetch_related('clientes_frecuentes', 'plato_set', 'mesa_set')
          .get(pk=id))
     return render(request, 'restaurante/restaurante_detalle.html', {'r': r})
+def lista_platos(request):
+    """
+    Platos con restaurante y etiquetas (M2M) + limit.
+    SQL (idea):
+      SELECT p.*, r.* FROM restaurante_plato p JOIN restaurante_restaurante r ON p.restaurante_id=r.id
+      ORDER BY p.precio ASC LIMIT 100;
+    """
+    platos = (Plato.objects
+              .select_related('restaurante')
+              .prefetch_related('etiquetas')
+              .order_by('precio')[:100])
+    return render(request, 'restaurante/platos.html', {'platos': platos})
