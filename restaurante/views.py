@@ -77,3 +77,21 @@ def platos_por_categoria(request, categoria: str):
               .prefetch_related('etiquetas')
               .order_by('nombre'))
     return render(request, 'restaurante/platos_categoria.html', {'platos': platos, 'categoria': categoria})
+def buscar_platos(request, texto: str, precio_min: int):
+    """
+    AND: precio >= precio_min; OR: nombre contiene texto OR etiqueta.nombre = texto.
+    SQL (idea):
+      SELECT DISTINCT p.* FROM restaurante_plato p
+      LEFT JOIN restaurante_plato_etiquetas pe ON pe.plato_id=p.id
+      LEFT JOIN restaurante_etiqueta e ON e.id=pe.etiqueta_id
+      WHERE p.precio >= %s AND (p.nombre LIKE %texto% OR e.nombre = %s)
+      ORDER BY p.precio ASC;
+    """
+    platos = (Plato.objects
+              .filter(Q(precio__gte=precio_min) &
+                      (Q(nombre__icontains=texto) | Q(etiquetas__nombre__iexact=texto)))
+              .select_related('restaurante')
+              .prefetch_related('etiquetas')
+              .order_by('precio')
+              .distinct())
+    return render(request, 'restaurante/platos_buscar.html', {'platos': platos, 'texto': texto, 'precio_min': precio_min})
