@@ -142,3 +142,16 @@ def clientes_frecuentes(request):
                 .prefetch_related('restaurantes_favoritos')
                 .order_by('nombre'))
     return render(request, 'restaurante/clientes_frecuentes.html', {'clientes': clientes})
+def buscar_simple(request, texto: str):
+    """
+    Busca clientes y platos por nombre (OR). URL con re_path (regex).
+    SQL (idea):
+      SELECT * FROM restaurante_cliente WHERE nombre LIKE %texto% ORDER BY nombre ASC LIMIT 50;
+      SELECT * FROM restaurante_plato   WHERE nombre LIKE %texto% ORDER BY nombre ASC LIMIT 50;
+    """
+    clientes = Cliente.objects.filter(nombre__icontains=texto).order_by('nombre')[:50]
+    platos = (Plato.objects
+              .filter(nombre__icontains=texto)
+              .select_related('restaurante')
+              .order_by('nombre')[:50])
+    return render(request, 'restaurante/buscar_simple.html', {'texto': texto, 'clientes': clientes, 'platos': platos})
