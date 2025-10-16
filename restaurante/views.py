@@ -125,3 +125,20 @@ def pedidos_sin_lineas(request):
                .select_related('cliente', 'restaurante', 'reserva')
                .order_by('id'))
     return render(request, 'restaurante/pedidos_sin_lineas.html', {'pedidos': pedidos})
+def clientes_frecuentes(request):
+    """
+    M2M inversa + filtro por aggregate (HAVING): clientes con >= 1 pedido.
+    SQL (idea):
+      SELECT c.*, COUNT(p.id) AS num_pedidos
+      FROM restaurante_cliente c
+      LEFT JOIN restaurante_pedido p ON p.cliente_id=c.id
+      GROUP BY c.id
+      HAVING COUNT(p.id) >= 1
+      ORDER BY c.nombre ASC;
+    """
+    clientes = (Cliente.objects
+                .annotate(num_pedidos=Count('pedido'))
+                .filter(num_pedidos__gte=1)
+                .prefetch_related('restaurantes_favoritos')
+                .order_by('nombre'))
+    return render(request, 'restaurante/clientes_frecuentes.html', {'clientes': clientes})

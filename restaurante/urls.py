@@ -10,5 +10,6 @@ urlpatterns = [
     path('platos/buscar/<str:texto>/<int:precio_min>/', views.buscar_platos, name='buscar_platos'),
     path('pedidos/', views.lista_pedidos, name='lista_pedidos'),
     path('pedidos/sin-lineas/', views.pedidos_sin_lineas, name='pedidos_sin_lineas'),
+    path('clientes/frecuentes/', views.clientes_frecuentes, name='clientes_frecuentes'),
 
 ]
