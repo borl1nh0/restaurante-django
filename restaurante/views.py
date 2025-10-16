@@ -112,3 +112,16 @@ def lista_pedidos(request):
                .prefetch_related('lineapedido_set__plato')
                .order_by('-creado')[:100])
     return render(request, 'restaurante/pedidos.html', {'resumen': resumen, 'pedidos': pedidos})
+def pedidos_sin_lineas(request):
+    """
+    Pedidos sin líneas (isnull=True en LineaPedido).
+    SQL (idea):
+      SELECT p.* FROM restaurante_pedido p
+      LEFT JOIN restaurante_lineapedido lp ON lp.pedido_id=p.id
+      WHERE lp.id IS NULL;
+    """
+    pedidos = (Pedido.objects
+               .filter(lineapedido__isnull=True)
+               .select_related('cliente', 'restaurante', 'reserva')
+               .order_by('id'))
+    return render(request, 'restaurante/pedidos_sin_lineas.html', {'pedidos': pedidos})
