@@ -1,0 +1,16 @@
+<h1>Pedidos</h1>
+<p>Suma: {{ resumen.suma }} — Promedio: {{ resumen.promedio }}</p>
+<ul>
+{% for ped in pedidos %}
+  <li>
+    Pedido {{ ped.id }} — {{ ped.cliente.nombre }} — {{ ped.restaurante.nombre }}
+    {% if ped.reserva %} — Reserva: {{ ped.reserva.fecha }} {{ ped.reserva.hora }}{% endif %}
+    <ul>
+      {% for lp in ped.lineapedido_set.all %}
+        <li>{{ lp.cantidad }}x {{ lp.plato.nombre }} — {{ lp.precio_unitario }} €</li>
+      {% empty %}<li>Sin líneas</li>{% endfor %}
+    </ul>
+  </li>
+{% empty %}<li>No hay pedidos</li>{% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver</a></p>

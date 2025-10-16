@@ -95,3 +95,20 @@ def buscar_platos(request, texto: str, precio_min: int):
               .order_by('precio')
               .distinct())
     return render(request, 'restaurante/platos_buscar.html', {'platos': platos, 'texto': texto, 'precio_min': precio_min})
+def lista_pedidos(request):
+    """
+    SUM/AVG (aggregate) y listado con líneas.
+    SQL (idea):
+      SELECT SUM(total) AS suma, AVG(total) AS promedio FROM restaurante_pedido;
+      SELECT p.*, c.*, r.*
+      FROM restaurante_pedido p
+      JOIN restaurante_cliente c ON p.cliente_id=c.id
+      JOIN restaurante_restaurante r ON p.restaurante_id=r.id
+      ORDER BY p.creado DESC LIMIT 100;
+    """
+    resumen = Pedido.objects.aggregate(suma=Sum('total'), promedio=Avg('total'))
+    pedidos = (Pedido.objects
+               .select_related('cliente', 'restaurante', 'reserva')
+               .prefetch_related('lineapedido_set__plato')
+               .order_by('-creado')[:100])
+    return render(request, 'restaurante/pedidos.html', {'resumen': resumen, 'pedidos': pedidos})
