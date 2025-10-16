@@ -1,0 +1,10 @@
+<h1>Buscar platos</h1>
+<p>Texto: "{{ texto }}" — Min: {{ precio_min }} €</p>
+<ul>
+  {% for p in platos %}
+    <li>{{ p.nombre }} — {{ p.precio }} € — {{ p.restaurante.nombre }}</li>
+  {% empty %}
+    <li>No hay</li>
+  {% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver</a></p>
