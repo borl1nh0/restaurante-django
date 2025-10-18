@@ -24,5 +24,10 @@ handler500 = 'restaurante.views.error_500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('', include('restaurante.urls')),   
 ]
+=======
+    path('', include('restaurante.urls')),
+]
+>>>>>>> urls_tarea

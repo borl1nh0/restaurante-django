@@ -1,0 +1,10 @@
+<h1>Clientes frecuentes</h1>
+<ul>
+{% for c in clientes %}
+  <li>
+    {{ c.nombre }} — Pedidos: {{ c.num_pedidos }} — Favoritos:
+    {% for r in c.restaurantes_favoritos.all %} {{ r.nombre }} {% empty %}(ninguno){% endfor %}
+  </li>
+{% empty %}<li>No hay clientes</li>{% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver</a></p>

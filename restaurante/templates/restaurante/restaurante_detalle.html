@@ -1,0 +1,13 @@
+<h1>{{ r.nombre }}</h1>
+<p>Dirección: {{ r.direccion.calle }} {{ r.direccion.numero }}, {{ r.direccion.ciudad }}</p>
+
+<h2>Platos</h2>
+<ul>{% for p in r.plato_set.all %}<li>{{ p.nombre }} — {{ p.precio }} €</li>{% empty %}<li>Sin platos</li>{% endfor %}</ul>
+
+<h2>Mesas</h2>
+<ul>{% for m in r.mesa_set.all %}<li>Mesa {{ m.numero }} ({{ m.capacidad }})</li>{% empty %}<li>Sin mesas</li>{% endfor %}</ul>
+
+<h2>Clientes frecuentes</h2>
+<ul>{% for c in r.clientes_frecuentes.all %}<li>{{ c.nombre }} ({{ c.email }})</li>{% empty %}<li>Sin clientes</li>{% endfor %}</ul>
+
+<p><a href="{% url 'lista_restaurantes' %}">Volver</a></p>

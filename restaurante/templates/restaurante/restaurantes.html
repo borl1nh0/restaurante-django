@@ -1,0 +1,11 @@
+<h1>Restaurantes</h1>
+<ul>
+  {% for r in restaurantes %}
+    <li>
+      <a href="{% url 'detalle_restaurante' r.id %}">{{ r.nombre }}</a><br>
+      Dirección: {{ r.direccion.calle }} {{ r.direccion.numero }}, {{ r.direccion.ciudad }}<br>
+      Platos: {{ r.num_platos }} — Mesas: {{ r.num_mesas }}
+    </li>
+  {% empty %}<li>No hay restaurantes</li>{% endfor %}
+</ul>
+<p><a href="{% url 'index' %}">Volver</a></p>

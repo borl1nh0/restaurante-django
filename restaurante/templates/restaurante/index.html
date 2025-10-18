@@ -1,0 +1,13 @@
+<h1>Índice</h1>
+<ul>
+  <li><a href="{% url 'lista_restaurantes' %}">Restaurantes</a></li>
+  <li><a href="{% url 'lista_platos' %}">Platos</a></li>
+  <li><a href="{% url 'platos_por_categoria' 'principal' %}">Platos por categoría: principal</a></li>
+  <li><a href="{% url 'buscar_platos' 'pa' 10 %}">Buscar platos (texto="pa", min=10€)</a></li>
+  <li><a href="{% url 'lista_pedidos' %}">Pedidos (con resumen)</a></li>
+  <li><a href="{% url 'pedidos_sin_lineas' %}">Pedidos sin líneas</a></li>
+  <li><a href="{% url 'clientes_frecuentes' %}">Clientes frecuentes (con HAVING)</a></li>
+  <li><a href="{% url 'buscar_simple' 'ana' %}">Buscar simple (re_path): "ana"</a></li>
+  <li><a href="{% url 'detalle_restaurante' 1 %}">Detalle restaurante (id=1)</a></li>
+  <li><a href="{% url 'platos_por_categoria' 'postre' %}">Platos por categoría: postre</a></li>
+</ul>

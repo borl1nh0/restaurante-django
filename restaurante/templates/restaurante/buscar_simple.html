@@ -1,0 +1,21 @@
+<h1>Buscar: "{{ texto }}"</h1>
+
+<h2>Clientes</h2>
+<ul>
+  {% for c in clientes %}
+    <li>{{ c.nombre }} — {{ c.email }}</li>
+  {% empty %}
+    <li>Sin clientes</li>
+  {% endfor %}
+</ul>
+
+<h2>Platos</h2>
+<ul>
+  {% for p in platos %}
+    <li>{{ p.nombre }} — {{ p.restaurante.nombre }}</li>
+  {% empty %}
+    <li>Sin platos</li>
+  {% endfor %}
+</ul>
+
+<p><a href="{% url 'index' %}">Volver</a></p>
