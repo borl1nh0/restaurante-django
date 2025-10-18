@@ -1,119 +1,145 @@
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from faker import Faker
-from restaurante.models import *
+from decimal import Decimal
+
+from restaurante.models import (
+    Direccion, Restaurante, Cliente, PerfilCliente, Etiqueta,
+    Plato, Mesa, Reserva, Pedido, LineaPedido
+)
 
 class Command(BaseCommand):
-    
+    help = "Genera 10 datos de cada modelo con Faker (simple y sin cosas raras)."
+
+    @transaction.atomic  # Todo o nada: si falla algo, no deja datos a medias
     def handle(self, *args, **options):
-        fake = Faker("es_ES")
+        fake = Faker('es_ES')
 
-        direcciones = [Direccion.objects.create(
-            calle=fake.street_name(),
-            numero=fake.random_int(min=1, max=200),
-            ciudad=fake.city(),
-            codigo_postal=fake.postcode()[:10],
-            provincia=fake.state()
-        ) for _ in range(10)]
+        # 1) Direcciones
+        direcciones = []
+        for _ in range(10):
+            d = Direccion.objects.create(
+                calle=fake.street_name(),
+                numero=fake.random_int(1, 200),
+                ciudad=fake.city(),
+                codigo_postal=fake.postcode(),
+                provincia=fake.state()
+            )
+            direcciones.append(d)
 
-        clientes = [Cliente.objects.create(
-            nombre=fake.name(),
-            email=fake.unique.email(),
-            telefono=fake.phone_number()
-        ) for _ in range(10)]
-
-        perfiles = [PerfilCliente.objects.create(
-            cliente=c,
-            alergias=fake.word(),
-            preferencias=fake.sentence(nb_words=3),
-            recibe_noticias=fake.boolean()
-        ) for c in clientes]
-
+        # 2) Restaurantes (cada uno con una direccion)
         restaurantes = []
         for i in range(10):
             r = Restaurante.objects.create(
-                nombre=f"Restaurante {i+1}",
+                nombre=fake.company(),
                 telefono=fake.phone_number(),
-                email=fake.unique.company_email(),
-                web=fake.url(),
+                email=fake.free_email(),
+                web="",
                 abierto=True,
-                direccion=direcciones[i]
+                direccion=direcciones[i % len(direcciones)]
             )
-            r.clientes_frecuentes.add(*fake.random_elements(elements=clientes, length=3, unique=False))
             restaurantes.append(r)
 
-        etiquetas = [Etiqueta.objects.create(
-            nombre=fake.unique.word().lower(),
-            descripcion=fake.sentence(),
-            color=fake.random_element(elements=["rojo","verde","azul"]),
-            slug=fake.unique.slug()
-        ) for _ in range(10)]
-
-        platos = []
+        # 3) Clientes y 4) PerfilCliente (uno a uno)
+        clientes = []
         for _ in range(10):
-            p = Plato.objects.create(
-                restaurante=fake.random_element(restaurantes),
-                nombre=fake.word().capitalize(),
-                precio="10.00",
-                categoria=fake.random_element(elements=["entrante","principal","postre"]),
-                disponible=True
+            c = Cliente.objects.create(
+                nombre=fake.name(),
+                email=fake.unique.email(),  # que no se repita
+                telefono=fake.phone_number()
             )
-            p.etiquetas.add(*fake.random_elements(elements=etiquetas, length=2, unique=False))
-            platos.append(p)
+            PerfilCliente.objects.create(
+                cliente=c,
+                alergias="",
+                preferencias="",
+                recibe_noticias=fake.boolean()
+            )
+            clientes.append(c)
 
-        mesas = [Mesa.objects.create(
-            restaurante=fake.random_element(restaurantes),
-            numero=i+1,
-            capacidad=fake.random_int(min=2, max=8),
-            ubicacion=fake.random_element(elements=["interior","terraza"]),
-            activa=True
-        ) for i in range(10)]
+        # 5) Etiquetas 
+        etiquetas = []
+        for nombre in ["vegano", "picante", "sin_gluten", "postre", "bebida"]:
+            e, _ = Etiqueta.objects.get_or_create(nombre=nombre, slug=nombre)
+            etiquetas.append(e)
 
-        reservas = [Reserva.objects.create(
-            cliente=fake.random_element(clientes),
-            mesa=fake.random_element(mesas),
-            fecha=fake.date_this_month(),
-            hora=fake.time_object(),
-            estado=fake.random_element(elements=["pendiente","confirmada","cancelada"]),
-            notas=fake.sentence()
-        ) for _ in range(10)]
+        # 6) Platos (2 por restaurante, con 0–2 etiquetas)
+        platos = []
+        for r in restaurantes:
+            for _ in range(2):
+                p = Plato.objects.create(
+                    restaurante=r,
+                    nombre=fake.unique.word().capitalize(),
+                    precio=Decimal(str(fake.pydecimal(left_digits=2, right_digits=2, positive=True))),
+                    categoria=fake.random_element(elements=['entrada','principal','postre','bebida']),
+                    disponible=True
+                )
+                # añadir algunas etiquetas (opcional)
+                for e in fake.random_elements(elements=etiquetas, length=fake.random_int(0,2), unique=False):
+                    p.etiquetas.add(e)
+                platos.append(p)
 
-        # ---- ARREGLO OneToOne: no reutilizar la misma Reserva para varios Pedidos ----
-        usados_reserva_ids = set()
-        pedidos = []
+        # 7) Mesas (2 por restaurante)
+        mesas = []
+        for r in restaurantes:
+            for i in range(2):
+                m = Mesa.objects.create(
+                    restaurante=r,
+                    numero=i + 1,
+                    capacidad=fake.random_int(2, 8),
+                    ubicacion=fake.random_element(elements=['interior', 'terraza']),
+                    activa=True
+                )
+                mesas.append(m)
+
+        # 8) Reservas (10 en total)
+        reservas = []
         for _ in range(10):
-            disponibles = [r for r in reservas if r.id not in usados_reserva_ids]
-            reserva_elegida = fake.random_element([None] + disponibles)
+            res = Reserva.objects.create(
+                cliente=fake.random_element(elements=clientes),
+                mesa=fake.random_element(elements=mesas),
+                fecha=fake.date_between(start_date='-5d', end_date='+5d'),
+                hora=fake.time_object(),
+                estado=fake.random_element(elements=['pendiente', 'confirmada', 'cancelada']),
+                notas=""
+            )
+            reservas.append(res)
 
-            p = Pedido.objects.create(
-                cliente=fake.random_element(clientes),
-                restaurante=fake.random_element(restaurantes),
-                reserva=reserva_elegida,
-                total="0.00",
+        # 9) Pedidos (10 en total) —  (OneToOne)
+        pedidos = []
+        reservas_libres = list(Reserva.objects.filter(pedido__isnull=True))
+        for _ in range(10):
+            reserva_opcional = None
+            if reservas_libres and fake.boolean():
+                reserva_opcional = reservas_libres.pop(0)  
+
+            ped = Pedido.objects.create(
+                cliente=fake.random_element(elements=clientes),
+                restaurante=fake.random_element(elements=restaurantes),
+                reserva=reserva_opcional,
+                total=Decimal('0.00'),
                 pagado=fake.boolean()
             )
-            if reserva_elegida:
-                usados_reserva_ids.add(reserva_elegida.id)
-            pedidos.append(p)
-        # ---------------------------------------------------------------------------
+            pedidos.append(ped)
 
+        # 10) Líneas de pedido (1–3 por pedido) + cálculo del total
         for ped in pedidos:
-            plato = fake.random_element(platos)
-            cantidad = fake.random_int(min=1, max=3)
-            LineaPedido.objects.create(
-                pedido=ped,
-                plato=plato,
-                cantidad=cantidad,
-                precio_unitario=str(plato.precio),
-                comentario="",
-                descuento_porcentaje=0
-            )
-
-        # Recalcular totales
-        for ped in pedidos:
-            total = 0.0
-            for lp in LineaPedido.objects.filter(pedido=ped):
-                total += float(lp.precio_unitario) * lp.cantidad
-            ped.total = f"{total:.2f}"
+            platos_del_restaurante = [p for p in platos if p.restaurante_id == ped.restaurante_id]
+            total = Decimal('0.00')
+            for _ in range(fake.random_int(1, 3)):
+                if not platos_del_restaurante:
+                    break
+                plato = fake.random_element(elements=platos_del_restaurante)
+                cantidad = fake.random_int(1, 3)
+                LineaPedido.objects.create(
+                    pedido=ped,
+                    plato=plato,
+                    cantidad=cantidad,
+                    precio_unitario=plato.precio,
+                    comentario="",
+                    descuento_porcentaje=0
+                )
+                total += plato.precio * cantidad
+            ped.total = total
             ped.save()
 
-        self.stdout.write(self.style.SUCCESS("10 registros por cada modelo creados."))
+        self.stdout.write(self.style.SUCCESS("Seed listo: 10 de cada modelo (aprox.)."))

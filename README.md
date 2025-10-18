@@ -33,7 +33,6 @@ preferencias (TextField, blank=True).
 recibe_noticias (BooleanField, default=False).
 
 *4) Restaurante
-
 nombre (CharField, 100).
 telefono (CharField, 20).
 email (EmailField, blank=True).
@@ -86,3 +85,6 @@ cantidad (PositiveIntegerField, default=1).
 precio_unitario (DecimalField, 6,2): precio del plato en ese momento.
 comentario (CharField, 120, blank=True).
 descuento_porcentaje (PositiveIntegerField, default=0).
+
+
+** self.stdout.write(self.style.SUCCESS -> Nos avisa por consola que se a creado bien
