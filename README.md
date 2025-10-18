@@ -26,7 +26,7 @@ email (EmailField, unique=True): no se puede repetir.
 telefono (CharField, 20, blank=True): opcional.
 fecha_registro (DateTimeField, auto_now_add=True): fecha de alta automática.
 
-*3) PerfilCliente
+* 3) PerfilCliente
 cliente (OneToOne a Cliente, on_delete=CASCADE): si borro el cliente, se borra su perfil.
 alergias (TextField, blank=True).
 preferencias (TextField, blank=True).
