@@ -88,3 +88,12 @@ descuento_porcentaje (PositiveIntegerField, default=0).
 
 
 ** self.stdout.write(self.style.SUCCESS -> Nos avisa por consola que se a creado bien
+
+## Cómo ejecutar
+
+py -m venv myvenv
+myvenv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py loaddata backups\datos.json   # o: python manage.py seed_10
+python manage.py runserver
