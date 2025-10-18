@@ -148,8 +148,13 @@ descuento_porcentaje (PositiveIntegerField, default=0).
 ## Cómo ejecutar
 
 py -m venv myvenv
+
 myvenv\Scripts\activate
+
 pip install -r requirements.txt
+
 python manage.py migrate
+
 python manage.py loaddata backups\datos.json   # o: python manage.py seed_10
+
 python manage.py runserver
