@@ -1,16 +1,12 @@
-# restaurante/management/commands/seed_10.py
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.db.models import Sum
 from faker import Faker
-from decimal import Decimal
 
 from restaurante.models import (Direccion, Restaurante, Cliente, PerfilCliente, Etiqueta,Plato, Mesa, Reserva, Pedido, LineaPedido)
 
 class Command(BaseCommand):
-  
-
-    @transaction.atomic
     def handle(self, *args, **options):
         fake = Faker('es_ES')
 
