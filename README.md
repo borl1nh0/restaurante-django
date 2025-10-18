@@ -11,3 +11,78 @@ Para usar desde el **panel de administración**.
 
 ---
 
+Modelos (explicación clara)
+*1) Dirección
+calle (CharField, max_length=120): nombre de la calle.
+numero (PositiveIntegerField): número del portal.
+ciudad (CharField, 80).
+codigo_postal (CharField, 10): se usa Char para permitir formatos con letras.
+provincia (CharField, 80).
+Uso: una dirección se asigna a un restaurante (OneToOne).
+
+*2) Cliente
+nombre (CharField, 100).
+email (EmailField, unique=True): no se puede repetir.
+telefono (CharField, 20, blank=True): opcional.
+fecha_registro (DateTimeField, auto_now_add=True): fecha de alta automática.
+
+*3) PerfilCliente
+cliente (OneToOne a Cliente, on_delete=CASCADE): si borro el cliente, se borra su perfil.
+alergias (TextField, blank=True).
+preferencias (TextField, blank=True).
+recibe_noticias (BooleanField, default=False).
+
+*4) Restaurante
+
+nombre (CharField, 100).
+telefono (CharField, 20).
+email (EmailField, blank=True).
+web (URLField, blank=True).
+abierto (BooleanField, default=True).
+direccion (OneToOne a Dirección, CASCADE).
+clientes_frecuentes (ManyToMany a Cliente, blank=True, related_name="restaurantes_favoritos").
+
+*5) Etiqueta
+nombre (CharField, 50, unique=True): p.ej. “vegano”, “picante”.
+descripcion (TextField, blank=True).
+color (CharField, 10, default="verde").
+slug (SlugField, unique=True): nombre apto para URL.
+
+*6) Plato
+restaurante (ForeignKey a Restaurante, CASCADE).
+nombre (CharField, 100).
+precio (DecimalField, max_digits=6, decimal_places=2): dinero con 2 decimales.
+categoria (CharField, 20, default="principal"): entrada, principal, postre…
+disponible (BooleanField, default=True).
+etiquetas (ManyToMany a Etiqueta, blank=True).
+
+*7) Mesa
+restaurante (ForeignKey a Restaurante, CASCADE).
+numero (PositiveIntegerField).
+capacidad (PositiveIntegerField).
+ubicacion (CharField, 20, default="interior").
+activa (BooleanField, default=True).
+
+*8) Reserva
+cliente (ForeignKey a Cliente, CASCADE).
+mesa (ForeignKey a Mesa, CASCADE).
+fecha (DateField) y hora (TimeField).
+estado (CharField, 20, default="pendiente"): pendiente/confirmada/cancelada.
+notas (TextField, blank=True).
+
+*9) Pedido
+cliente (ForeignKey a Cliente, CASCADE).
+restaurante (ForeignKey a Restaurante, CASCADE).
+reserva (OneToOne a Reserva, SET_NULL, null=True, blank=True): un pedido puede estar ligado a una reserva; si se borra la reserva, queda NULL.
+total (DecimalField, 8,2, default=0).
+pagado (BooleanField, default=False).
+creado (DateTimeField, auto_now_add=True).
+platos (ManyToMany a Plato, through="LineaPedido"): relación con tabla intermedia.
+
+*10) Línea de Pedido (tabla intermedia con extras)
+pedido (ForeignKey a Pedido, CASCADE).
+plato (ForeignKey a Plato, CASCADE).
+cantidad (PositiveIntegerField, default=1).
+precio_unitario (DecimalField, 6,2): precio del plato en ese momento.
+comentario (CharField, 120, blank=True).
+descuento_porcentaje (PositiveIntegerField, default=0).
