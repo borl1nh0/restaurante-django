@@ -80,11 +80,17 @@ platos (ManyToMany a Plato, through="LineaPedido"): relación con tabla intermed
 
 # 10) Línea de Pedido (tabla intermedia con extras)
 -pedido (ForeignKey a Pedido, CASCADE).
+
 -plato (ForeignKey a Plato, CASCADE).
+
 -cantidad (PositiveIntegerField, default=1).
+
 -precio_unitario (DecimalField, 6,2): precio del plato en ese momento.
+
 -comentario (CharField, 120, blank=True).
+
 -descuento_porcentaje (PositiveIntegerField, default=0).
+
 
 
 # self.stdout.write(self.style.SUCCESS -> Nos avisa por consola que se a creado bien
