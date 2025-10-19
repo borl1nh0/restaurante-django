@@ -145,6 +145,11 @@ descuento_porcentaje (PositiveIntegerField, default=0).
 
 # self.stdout.write(self.style.SUCCESS -> Nos avisa por consola que se a creado bien
 # on_delete=models.SET_NULL es para que si se anula un pedido, no lo borre de la base de datos( tenia pensado hacer una pagina de desperdicios pero se me iba de las manos)
+
+from django.db.models import Q, Count, Sum, Avg --> herramientas para construir consultas (QuerySets) 
+
+De los viwers me entere poco sinceramente.
+
 ## Cómo ejecutar en Linux
 
 git clone https://github.com/borl1nh0/restaurante-django
@@ -163,7 +168,7 @@ python manage.py runserver
 
 ## Cómo ejecutar en Windows (lo hice en windows)
 
-https://github.com/borl1nh0/restaurante-django
+git clone https://github.com/borl1nh0/restaurante-django
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -> Se usa para activar un entorno virtual ya que por politicas de windows lo bloquea, de esta forma hacemos una "excepcion".
 
@@ -173,6 +178,6 @@ pip install -r requirements.txt
 
 python manage.py migrate
 
-python manage.py loaddata backups\datos.json   # o: python manage.py seed_10
+python manage.py loaddata backups\datos.json  o: python manage.py seed_10
 
 python manage.py runserver
