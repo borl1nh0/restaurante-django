@@ -1,2233 +1,1838 @@
 [
 {
-  "model": "admin.logentry",
-  "pk": 1,
-  "fields": {
-    "action_time": "2025-10-18T14:22:28.484",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "Ana Codina Men�ndez",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2025-10-18T14:23:27.042",
-    "user": 1,
-    "content_type": 14,
-    "object_id": "20",
-    "object_repr": "Antes",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 3,
-  "fields": {
-    "action_time": "2025-10-18T14:23:57.492",
-    "user": 1,
-    "content_type": 14,
-    "object_id": "20",
-    "object_repr": "Anacardo",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 1,
-  "fields": {
-    "name": "Can add log entry",
-    "content_type": 1,
-    "codename": "add_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 2,
-  "fields": {
-    "name": "Can change log entry",
-    "content_type": 1,
-    "codename": "change_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 3,
-  "fields": {
-    "name": "Can delete log entry",
-    "content_type": 1,
-    "codename": "delete_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 4,
-  "fields": {
-    "name": "Can view log entry",
-    "content_type": 1,
-    "codename": "view_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 5,
-  "fields": {
-    "name": "Can add permission",
-    "content_type": 2,
-    "codename": "add_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 6,
-  "fields": {
-    "name": "Can change permission",
-    "content_type": 2,
-    "codename": "change_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can delete permission",
-    "content_type": 2,
-    "codename": "delete_permission"
-  }
-},
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2025-10-21T10:28:00.657",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "3",
+        "object_repr": "anacardo",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2025-10-21T10:28:14.319",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "Ana del Oliver",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2025-10-21T10:28:54.704",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "10",
+        "object_repr": "Palacio",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Nombre\"]}}]"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
 {
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can view permission",
-    "content_type": 2,
-    "codename": "view_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
-    "name": "Can add group",
-    "content_type": 3,
-    "codename": "add_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 10,
-  "fields": {
-    "name": "Can change group",
-    "content_type": 3,
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 11,
-  "fields": {
-    "name": "Can delete group",
-    "content_type": 3,
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 12,
-  "fields": {
-    "name": "Can view group",
-    "content_type": 3,
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 13,
-  "fields": {
-    "name": "Can add user",
-    "content_type": 4,
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 14,
-  "fields": {
-    "name": "Can change user",
-    "content_type": 4,
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 15,
-  "fields": {
-    "name": "Can delete user",
-    "content_type": 4,
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 16,
-  "fields": {
-    "name": "Can view user",
-    "content_type": 4,
-    "codename": "view_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 17,
-  "fields": {
-    "name": "Can add content type",
-    "content_type": 5,
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 18,
-  "fields": {
-    "name": "Can change content type",
-    "content_type": 5,
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 19,
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": 5,
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 20,
-  "fields": {
-    "name": "Can view content type",
-    "content_type": 5,
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 21,
-  "fields": {
-    "name": "Can add session",
-    "content_type": 6,
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 22,
-  "fields": {
-    "name": "Can change session",
-    "content_type": 6,
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 23,
-  "fields": {
-    "name": "Can delete session",
-    "content_type": 6,
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 24,
-  "fields": {
-    "name": "Can view session",
-    "content_type": 6,
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 25,
-  "fields": {
-    "name": "Can add cliente",
-    "content_type": 7,
-    "codename": "add_cliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 26,
-  "fields": {
-    "name": "Can change cliente",
-    "content_type": 7,
-    "codename": "change_cliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 27,
-  "fields": {
-    "name": "Can delete cliente",
-    "content_type": 7,
-    "codename": "delete_cliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 28,
-  "fields": {
-    "name": "Can view cliente",
-    "content_type": 7,
-    "codename": "view_cliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 29,
-  "fields": {
-    "name": "Can add direccion",
-    "content_type": 8,
-    "codename": "add_direccion"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 30,
-  "fields": {
-    "name": "Can change direccion",
-    "content_type": 8,
-    "codename": "change_direccion"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 31,
-  "fields": {
-    "name": "Can delete direccion",
-    "content_type": 8,
-    "codename": "delete_direccion"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 32,
-  "fields": {
-    "name": "Can view direccion",
-    "content_type": 8,
-    "codename": "view_direccion"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 33,
-  "fields": {
-    "name": "Can add etiqueta",
-    "content_type": 9,
-    "codename": "add_etiqueta"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 34,
-  "fields": {
-    "name": "Can change etiqueta",
-    "content_type": 9,
-    "codename": "change_etiqueta"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 35,
-  "fields": {
-    "name": "Can delete etiqueta",
-    "content_type": 9,
-    "codename": "delete_etiqueta"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 36,
-  "fields": {
-    "name": "Can view etiqueta",
-    "content_type": 9,
-    "codename": "view_etiqueta"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 37,
-  "fields": {
-    "name": "Can add mesa",
-    "content_type": 10,
-    "codename": "add_mesa"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 38,
-  "fields": {
-    "name": "Can change mesa",
-    "content_type": 10,
-    "codename": "change_mesa"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 39,
-  "fields": {
-    "name": "Can delete mesa",
-    "content_type": 10,
-    "codename": "delete_mesa"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 40,
-  "fields": {
-    "name": "Can view mesa",
-    "content_type": 10,
-    "codename": "view_mesa"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 41,
-  "fields": {
-    "name": "Can add pedido",
-    "content_type": 11,
-    "codename": "add_pedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 42,
-  "fields": {
-    "name": "Can change pedido",
-    "content_type": 11,
-    "codename": "change_pedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 43,
-  "fields": {
-    "name": "Can delete pedido",
-    "content_type": 11,
-    "codename": "delete_pedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 44,
-  "fields": {
-    "name": "Can view pedido",
-    "content_type": 11,
-    "codename": "view_pedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 45,
-  "fields": {
-    "name": "Can add linea pedido",
-    "content_type": 12,
-    "codename": "add_lineapedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 46,
-  "fields": {
-    "name": "Can change linea pedido",
-    "content_type": 12,
-    "codename": "change_lineapedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 47,
-  "fields": {
-    "name": "Can delete linea pedido",
-    "content_type": 12,
-    "codename": "delete_lineapedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 48,
-  "fields": {
-    "name": "Can view linea pedido",
-    "content_type": 12,
-    "codename": "view_lineapedido"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 49,
-  "fields": {
-    "name": "Can add perfil cliente",
-    "content_type": 13,
-    "codename": "add_perfilcliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 50,
-  "fields": {
-    "name": "Can change perfil cliente",
-    "content_type": 13,
-    "codename": "change_perfilcliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 51,
-  "fields": {
-    "name": "Can delete perfil cliente",
-    "content_type": 13,
-    "codename": "delete_perfilcliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 52,
-  "fields": {
-    "name": "Can view perfil cliente",
-    "content_type": 13,
-    "codename": "view_perfilcliente"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 53,
-  "fields": {
-    "name": "Can add plato",
-    "content_type": 14,
-    "codename": "add_plato"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 54,
-  "fields": {
-    "name": "Can change plato",
-    "content_type": 14,
-    "codename": "change_plato"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 55,
-  "fields": {
-    "name": "Can delete plato",
-    "content_type": 14,
-    "codename": "delete_plato"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 56,
-  "fields": {
-    "name": "Can view plato",
-    "content_type": 14,
-    "codename": "view_plato"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 57,
-  "fields": {
-    "name": "Can add reserva",
-    "content_type": 15,
-    "codename": "add_reserva"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 58,
-  "fields": {
-    "name": "Can change reserva",
-    "content_type": 15,
-    "codename": "change_reserva"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 59,
-  "fields": {
-    "name": "Can delete reserva",
-    "content_type": 15,
-    "codename": "delete_reserva"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 60,
-  "fields": {
-    "name": "Can view reserva",
-    "content_type": 15,
-    "codename": "view_reserva"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 61,
-  "fields": {
-    "name": "Can add restaurante",
-    "content_type": 16,
-    "codename": "add_restaurante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 62,
-  "fields": {
-    "name": "Can change restaurante",
-    "content_type": 16,
-    "codename": "change_restaurante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 63,
-  "fields": {
-    "name": "Can delete restaurante",
-    "content_type": 16,
-    "codename": "delete_restaurante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 64,
-  "fields": {
-    "name": "Can view restaurante",
-    "content_type": 16,
-    "codename": "view_restaurante"
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$870000$c5x9drzjfBza18QcwFIrj5$G7z7zYVTqHU0crJbkgkwjTvummzkY6e4vKI0XtGkvu8=",
-    "last_login": "2025-10-18T14:22:12.718",
-    "is_superuser": true,
-    "username": "BoRLo",
-    "first_name": "",
-    "last_name": "",
-    "email": "asd@asd.es",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2025-10-18T14:21:56.646",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 2,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 4,
-  "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "cliente"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "direccion"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "etiqueta"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 10,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "mesa"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 11,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "pedido"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 12,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "lineapedido"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 13,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "perfilcliente"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 14,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "plato"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 15,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "reserva"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 16,
-  "fields": {
-    "app_label": "restaurante",
-    "model": "restaurante"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "cwixkktcw9baip5iwrlqmoghxdrnsw0i",
-  "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGlne9cYfSnrOYK0_wQHkSHFSIe4OkVJA-2bmvUTgba1h62UJUxZnAeL0u0VOj9J2kO_cbrNMc1uXKcpdkQft8jrn8rwc7t9B5V6_NbEj1IocRh9ZKc-6MNEINo1OJSg2GWSrfY7ghoEQNRoGYOKkwGTx_gDHrzcb:1vA5wq:CL5m55h4YF0DbvwDfOMYBt1ewc4TKPu1z5hk982HXZA",
-    "expire_date": "2025-11-01T14:22:12.721"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 1,
-  "fields": {
-    "calle": "Alameda Cintia Ferr�ndiz",
-    "numero": 173,
-    "ciudad": "Melilla",
-    "codigo_postal": "42786",
-    "provincia": "Ourense"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 2,
-  "fields": {
-    "calle": "C. de Loreto Jaume",
-    "numero": 136,
-    "ciudad": "Lugo",
-    "codigo_postal": "08978",
-    "provincia": "Ourense"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 3,
-  "fields": {
-    "calle": "C. de Juan Francisco Caro",
-    "numero": 128,
-    "ciudad": "Badajoz",
-    "codigo_postal": "13434",
-    "provincia": "Ciudad"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 4,
-  "fields": {
-    "calle": "Calle de Baudelio Vives",
-    "numero": 69,
-    "ciudad": "Madrid",
-    "codigo_postal": "25243",
-    "provincia": "Barcelona"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 5,
-  "fields": {
-    "calle": "Camino de Carina Molina",
-    "numero": 7,
-    "ciudad": "Guip�zcoa",
-    "codigo_postal": "11812",
-    "provincia": "Zamora"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 6,
-  "fields": {
-    "calle": "Pasaje Estela Berrocal",
-    "numero": 194,
-    "ciudad": "Asturias",
-    "codigo_postal": "13292",
-    "provincia": "Alicante"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 7,
-  "fields": {
-    "calle": "Paseo de Alondra Gallardo",
-    "numero": 86,
-    "ciudad": "Huelva",
-    "codigo_postal": "10388",
-    "provincia": "Pontevedra"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 8,
-  "fields": {
-    "calle": "Camino de Cir�aco Pedraza",
-    "numero": 188,
-    "ciudad": "Ceuta",
-    "codigo_postal": "05415",
-    "provincia": "Melilla"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 9,
-  "fields": {
-    "calle": "Acceso Elisabet Sabater",
-    "numero": 5,
-    "ciudad": "Teruel",
-    "codigo_postal": "21198",
-    "provincia": "Badajoz"
-  }
-},
-{
-  "model": "restaurante.direccion",
-  "pk": 10,
-  "fields": {
-    "calle": "C. de Victoria Ojeda",
-    "numero": 65,
-    "ciudad": "La Rioja",
-    "codigo_postal": "09658",
-    "provincia": "Vizcaya"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 1,
-  "fields": {
-    "nombre": "Ana Codina Men�ndez",
-    "email": "roldanluisina@example.com",
-    "telefono": "+34871 625 525",
-    "fecha_registro": "2025-10-18T14:08:47.194"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 2,
-  "fields": {
-    "nombre": "Pascuala de Segovia",
-    "email": "rosa-mariaberrocal@example.net",
-    "telefono": "+34842 73 69 92",
-    "fecha_registro": "2025-10-18T14:08:47.195"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 3,
-  "fields": {
-    "nombre": "Gala de Nicol�s",
-    "email": "noguescalisto@example.net",
-    "telefono": "+34 622 039 901",
-    "fecha_registro": "2025-10-18T14:08:47.195"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 4,
-  "fields": {
-    "nombre": "Ruperto Mayoral Salom",
-    "email": "lbarbera@example.org",
-    "telefono": "+34901 107 704",
-    "fecha_registro": "2025-10-18T14:08:47.196"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 5,
-  "fields": {
-    "nombre": "Dar�o Izquierdo Leiva",
-    "email": "pablocalvo@example.net",
-    "telefono": "+34 844 51 50 64",
-    "fecha_registro": "2025-10-18T14:08:47.196"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 6,
-  "fields": {
-    "nombre": "Pancho Amor Leal",
-    "email": "pnunez@example.org",
-    "telefono": "+34 827902772",
-    "fecha_registro": "2025-10-18T14:08:47.196"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 7,
-  "fields": {
-    "nombre": "Gervasio Castej�n-Andres",
-    "email": "infantevirgilio@example.com",
-    "telefono": "+34821 68 23 70",
-    "fecha_registro": "2025-10-18T14:08:47.196"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 8,
-  "fields": {
-    "nombre": "Alicia Corral Palau",
-    "email": "ksalva@example.com",
-    "telefono": "+34 883 74 28 18",
-    "fecha_registro": "2025-10-18T14:08:47.196"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 9,
-  "fields": {
-    "nombre": "Olimpia Vi�a Lerma",
-    "email": "trinidad69@example.org",
-    "telefono": "+34977 038 944",
-    "fecha_registro": "2025-10-18T14:08:47.197"
-  }
-},
-{
-  "model": "restaurante.cliente",
-  "pk": 10,
-  "fields": {
-    "nombre": "Baltasar Otero Blanca",
-    "email": "nicolastovar@example.com",
-    "telefono": "+34 825693545",
-    "fecha_registro": "2025-10-18T14:08:47.197"
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 1,
-  "fields": {
-    "cliente": 1,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": true
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 2,
-  "fields": {
-    "cliente": 2,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": false
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 3,
-  "fields": {
-    "cliente": 3,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": true
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 4,
-  "fields": {
-    "cliente": 4,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": false
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 5,
-  "fields": {
-    "cliente": 5,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": true
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 6,
-  "fields": {
-    "cliente": 6,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": true
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 7,
-  "fields": {
-    "cliente": 7,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": false
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 8,
-  "fields": {
-    "cliente": 8,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": true
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 9,
-  "fields": {
-    "cliente": 9,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": false
-  }
-},
-{
-  "model": "restaurante.perfilcliente",
-  "pk": 10,
-  "fields": {
-    "cliente": 10,
-    "alergias": "",
-    "preferencias": "",
-    "recibe_noticias": false
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 1,
-  "fields": {
-    "nombre": "Compa��a LVAS S.L.",
-    "telefono": "+34 924 979 804",
-    "email": "agata15@gmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 1,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 2,
-  "fields": {
-    "nombre": "Distribuciones Bermudez & Asociados S.L.N.E",
-    "telefono": "+34902 24 62 31",
-    "email": "trujillojuliana@gmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 2,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 3,
-  "fields": {
-    "nombre": "Supermercados Gibert S.L.N.E",
-    "telefono": "+34 976 90 31 88",
-    "email": "mmarques@hotmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 3,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 4,
-  "fields": {
-    "nombre": "Quevedo y Ballester S.L.",
-    "telefono": "+34 728 822 715",
-    "email": "nvera@yahoo.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 4,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 5,
-  "fields": {
-    "nombre": "Soluciones CS S.L.L.",
-    "telefono": "+34842544068",
-    "email": "juliancleto@gmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 5,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 6,
-  "fields": {
-    "nombre": "Martorell & Asociados S.Coop.",
-    "telefono": "+34 928600498",
-    "email": "eligiatrujillo@hotmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 6,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 7,
-  "fields": {
-    "nombre": "Verdejo & Asociados S.Com.",
-    "telefono": "+34 746 78 46 32",
-    "email": "hectormartin@yahoo.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 7,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 8,
-  "fields": {
-    "nombre": "Miner�a Ib�rica S.L.N.E",
-    "telefono": "+34 884 11 99 22",
-    "email": "viviana50@yahoo.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 8,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 9,
-  "fields": {
-    "nombre": "Servicios PC S.L.",
-    "telefono": "+34 877 668 021",
-    "email": "canetefabian@yahoo.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 9,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.restaurante",
-  "pk": 10,
-  "fields": {
-    "nombre": "Nicolau & Asociados S.Com.",
-    "telefono": "+34 980 34 14 79",
-    "email": "rufina60@gmail.com",
-    "web": "",
-    "abierto": true,
-    "direccion": 10,
-    "clientes_frecuentes": []
-  }
-},
-{
-  "model": "restaurante.etiqueta",
-  "pk": 1,
-  "fields": {
-    "nombre": "vegano",
-    "descripcion": "",
-    "color": "verde",
-    "slug": "vegano"
-  }
-},
-{
-  "model": "restaurante.etiqueta",
-  "pk": 2,
-  "fields": {
-    "nombre": "picante",
-    "descripcion": "",
-    "color": "verde",
-    "slug": "picante"
-  }
-},
-{
-  "model": "restaurante.etiqueta",
-  "pk": 3,
-  "fields": {
-    "nombre": "sin_gluten",
-    "descripcion": "",
-    "color": "verde",
-    "slug": "sin_gluten"
-  }
-},
-{
-  "model": "restaurante.etiqueta",
-  "pk": 4,
-  "fields": {
-    "nombre": "postre",
-    "descripcion": "",
-    "color": "verde",
-    "slug": "postre"
-  }
-},
-{
-  "model": "restaurante.etiqueta",
-  "pk": 5,
-  "fields": {
-    "nombre": "bebida",
-    "descripcion": "",
-    "color": "verde",
-    "slug": "bebida"
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 1,
-  "fields": {
-    "restaurante": 1,
-    "nombre": "Igual",
-    "precio": "36.84",
-    "categoria": "bebida",
-    "disponible": true,
-    "etiquetas": [
-      1,
-      5
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 2,
-  "fields": {
-    "restaurante": 1,
-    "nombre": "Todav�a",
-    "precio": "54.50",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": [
-      1
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 3,
-  "fields": {
-    "restaurante": 2,
-    "nombre": "Estaban",
-    "precio": "80.35",
-    "categoria": "bebida",
-    "disponible": true,
-    "etiquetas": [
-      3
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 4,
-  "fields": {
-    "restaurante": 2,
-    "nombre": "Tenemos",
-    "precio": "47.38",
-    "categoria": "principal",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 5,
-  "fields": {
-    "restaurante": 3,
-    "nombre": "Militar",
-    "precio": "23.50",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": [
-      2,
-      3
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 6,
-  "fields": {
-    "restaurante": 3,
-    "nombre": "Busca",
-    "precio": "84.47",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 7,
-  "fields": {
-    "restaurante": 4,
-    "nombre": "Europea",
-    "precio": "48.07",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 8,
-  "fields": {
-    "restaurante": 4,
-    "nombre": "Realizar",
-    "precio": "24.67",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 9,
-  "fields": {
-    "restaurante": 5,
-    "nombre": "Esfuerzo",
-    "precio": "34.30",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": [
-      2
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 10,
-  "fields": {
-    "restaurante": 5,
-    "nombre": "Contra",
-    "precio": "84.74",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 11,
-  "fields": {
-    "restaurante": 6,
-    "nombre": "Ning�n",
-    "precio": "74.04",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": [
-      2
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 12,
-  "fields": {
-    "restaurante": 6,
-    "nombre": "Uni�n",
-    "precio": "92.31",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": [
-      4
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 13,
-  "fields": {
-    "restaurante": 7,
-    "nombre": "Nosotros",
-    "precio": "13.76",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 14,
-  "fields": {
-    "restaurante": 7,
-    "nombre": "Sistema",
-    "precio": "11.64",
-    "categoria": "bebida",
-    "disponible": true,
-    "etiquetas": [
-      5
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 15,
-  "fields": {
-    "restaurante": 8,
-    "nombre": "Actividades",
-    "precio": "47.28",
-    "categoria": "bebida",
-    "disponible": true,
-    "etiquetas": [
-      3,
-      4
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 16,
-  "fields": {
-    "restaurante": 8,
-    "nombre": "Muy",
-    "precio": "96.29",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": [
-      2,
-      5
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 17,
-  "fields": {
-    "restaurante": 9,
-    "nombre": "Mitad",
-    "precio": "75.59",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": [
-      2,
-      5
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 18,
-  "fields": {
-    "restaurante": 9,
-    "nombre": "Tal",
-    "precio": "64.88",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": [
-      4
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 19,
-  "fields": {
-    "restaurante": 10,
-    "nombre": "C�mo",
-    "precio": "64.28",
-    "categoria": "entrada",
-    "disponible": true,
-    "etiquetas": [
-      2,
-      3
-    ]
-  }
-},
-{
-  "model": "restaurante.plato",
-  "pk": 20,
-  "fields": {
-    "restaurante": 10,
-    "nombre": "Anacardo",
-    "precio": "66.60",
-    "categoria": "postre",
-    "disponible": true,
-    "etiquetas": []
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 1,
-  "fields": {
-    "restaurante": 1,
-    "numero": 1,
-    "capacidad": 6,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 2,
-  "fields": {
-    "restaurante": 1,
-    "numero": 2,
-    "capacidad": 6,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 3,
-  "fields": {
-    "restaurante": 2,
-    "numero": 1,
-    "capacidad": 5,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 4,
-  "fields": {
-    "restaurante": 2,
-    "numero": 2,
-    "capacidad": 5,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 5,
-  "fields": {
-    "restaurante": 3,
-    "numero": 1,
-    "capacidad": 2,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 6,
-  "fields": {
-    "restaurante": 3,
-    "numero": 2,
-    "capacidad": 3,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 7,
-  "fields": {
-    "restaurante": 4,
-    "numero": 1,
-    "capacidad": 2,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 8,
-  "fields": {
-    "restaurante": 4,
-    "numero": 2,
-    "capacidad": 7,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 9,
-  "fields": {
-    "restaurante": 5,
-    "numero": 1,
-    "capacidad": 2,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 10,
-  "fields": {
-    "restaurante": 5,
-    "numero": 2,
-    "capacidad": 7,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 11,
-  "fields": {
-    "restaurante": 6,
-    "numero": 1,
-    "capacidad": 3,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 12,
-  "fields": {
-    "restaurante": 6,
-    "numero": 2,
-    "capacidad": 8,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 13,
-  "fields": {
-    "restaurante": 7,
-    "numero": 1,
-    "capacidad": 5,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 14,
-  "fields": {
-    "restaurante": 7,
-    "numero": 2,
-    "capacidad": 2,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 15,
-  "fields": {
-    "restaurante": 8,
-    "numero": 1,
-    "capacidad": 3,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 16,
-  "fields": {
-    "restaurante": 8,
-    "numero": 2,
-    "capacidad": 4,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 17,
-  "fields": {
-    "restaurante": 9,
-    "numero": 1,
-    "capacidad": 8,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 18,
-  "fields": {
-    "restaurante": 9,
-    "numero": 2,
-    "capacidad": 3,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 19,
-  "fields": {
-    "restaurante": 10,
-    "numero": 1,
-    "capacidad": 6,
-    "ubicacion": "terraza",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.mesa",
-  "pk": 20,
-  "fields": {
-    "restaurante": 10,
-    "numero": 2,
-    "capacidad": 4,
-    "ubicacion": "interior",
-    "activa": true
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 1,
-  "fields": {
-    "cliente": 10,
-    "mesa": 17,
-    "fecha": "2025-10-22",
-    "hora": "16:41:35",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 2,
-  "fields": {
-    "cliente": 4,
-    "mesa": 10,
-    "fecha": "2025-10-16",
-    "hora": "12:45:32",
-    "estado": "pendiente",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 3,
-  "fields": {
-    "cliente": 10,
-    "mesa": 3,
-    "fecha": "2025-10-16",
-    "hora": "02:37:48",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 4,
-  "fields": {
-    "cliente": 7,
-    "mesa": 5,
-    "fecha": "2025-10-20",
-    "hora": "22:59:24",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 5,
-  "fields": {
-    "cliente": 3,
-    "mesa": 4,
-    "fecha": "2025-10-18",
-    "hora": "06:55:13",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 6,
-  "fields": {
-    "cliente": 1,
-    "mesa": 20,
-    "fecha": "2025-10-22",
-    "hora": "07:02:41",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 7,
-  "fields": {
-    "cliente": 2,
-    "mesa": 2,
-    "fecha": "2025-10-21",
-    "hora": "10:20:01",
-    "estado": "pendiente",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 8,
-  "fields": {
-    "cliente": 1,
-    "mesa": 12,
-    "fecha": "2025-10-17",
-    "hora": "21:23:36",
-    "estado": "cancelada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 9,
-  "fields": {
-    "cliente": 9,
-    "mesa": 16,
-    "fecha": "2025-10-16",
-    "hora": "06:19:40",
-    "estado": "confirmada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.reserva",
-  "pk": 10,
-  "fields": {
-    "cliente": 1,
-    "mesa": 6,
-    "fecha": "2025-10-22",
-    "hora": "06:27:13",
-    "estado": "cancelada",
-    "notas": ""
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 1,
-  "fields": {
-    "cliente": 8,
-    "restaurante": 2,
-    "reserva": null,
-    "total": "284.28",
-    "pagado": true,
-    "creado": "2025-10-18T14:08:47.211"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 2,
-  "fields": {
-    "cliente": 8,
-    "restaurante": 5,
-    "reserva": 1,
-    "total": "102.90",
-    "pagado": true,
-    "creado": "2025-10-18T14:08:47.211"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 3,
-  "fields": {
-    "cliente": 9,
-    "restaurante": 5,
-    "reserva": 2,
-    "total": "407.56",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.211"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 4,
-  "fields": {
-    "cliente": 10,
-    "restaurante": 5,
-    "reserva": 3,
-    "total": "187.64",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 5,
-  "fields": {
-    "cliente": 2,
-    "restaurante": 2,
-    "reserva": null,
-    "total": "321.40",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 6,
-  "fields": {
-    "cliente": 1,
-    "restaurante": 9,
-    "reserva": null,
-    "total": "335.11",
-    "pagado": true,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 7,
-  "fields": {
-    "cliente": 7,
-    "restaurante": 6,
-    "reserva": 4,
-    "total": "535.59",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 8,
-  "fields": {
-    "cliente": 4,
-    "restaurante": 3,
-    "reserva": 5,
-    "total": "70.50",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 9,
-  "fields": {
-    "cliente": 8,
-    "restaurante": 10,
-    "reserva": 6,
-    "total": "133.20",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.pedido",
-  "pk": 10,
-  "fields": {
-    "cliente": 10,
-    "restaurante": 5,
-    "reserva": null,
-    "total": "254.22",
-    "pagado": false,
-    "creado": "2025-10-18T14:08:47.212"
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 1,
-  "fields": {
-    "pedido": 1,
-    "plato": 4,
-    "cantidad": 3,
-    "precio_unitario": "47.38",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 2,
-  "fields": {
-    "pedido": 1,
-    "plato": 4,
-    "cantidad": 3,
-    "precio_unitario": "47.38",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 3,
-  "fields": {
-    "pedido": 2,
-    "plato": 9,
-    "cantidad": 3,
-    "precio_unitario": "34.30",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 4,
-  "fields": {
-    "pedido": 3,
-    "plato": 10,
-    "cantidad": 2,
-    "precio_unitario": "84.74",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 5,
-  "fields": {
-    "pedido": 3,
-    "plato": 9,
-    "cantidad": 2,
-    "precio_unitario": "34.30",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 6,
-  "fields": {
-    "pedido": 3,
-    "plato": 10,
-    "cantidad": 2,
-    "precio_unitario": "84.74",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 7,
-  "fields": {
-    "pedido": 4,
-    "plato": 9,
-    "cantidad": 2,
-    "precio_unitario": "34.30",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 8,
-  "fields": {
-    "pedido": 4,
-    "plato": 9,
-    "cantidad": 1,
-    "precio_unitario": "34.30",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 9,
-  "fields": {
-    "pedido": 4,
-    "plato": 10,
-    "cantidad": 1,
-    "precio_unitario": "84.74",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 10,
-  "fields": {
-    "pedido": 5,
-    "plato": 3,
-    "cantidad": 3,
-    "precio_unitario": "80.35",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 11,
-  "fields": {
-    "pedido": 5,
-    "plato": 3,
-    "cantidad": 1,
-    "precio_unitario": "80.35",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 12,
-  "fields": {
-    "pedido": 6,
-    "plato": 17,
-    "cantidad": 1,
-    "precio_unitario": "75.59",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 13,
-  "fields": {
-    "pedido": 6,
-    "plato": 18,
-    "cantidad": 2,
-    "precio_unitario": "64.88",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 14,
-  "fields": {
-    "pedido": 6,
-    "plato": 18,
-    "cantidad": 2,
-    "precio_unitario": "64.88",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 15,
-  "fields": {
-    "pedido": 7,
-    "plato": 11,
-    "cantidad": 1,
-    "precio_unitario": "74.04",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 16,
-  "fields": {
-    "pedido": 7,
-    "plato": 12,
-    "cantidad": 3,
-    "precio_unitario": "92.31",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 17,
-  "fields": {
-    "pedido": 7,
-    "plato": 12,
-    "cantidad": 2,
-    "precio_unitario": "92.31",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 18,
-  "fields": {
-    "pedido": 8,
-    "plato": 5,
-    "cantidad": 3,
-    "precio_unitario": "23.50",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 19,
-  "fields": {
-    "pedido": 9,
-    "plato": 20,
-    "cantidad": 2,
-    "precio_unitario": "66.60",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
-},
-{
-  "model": "restaurante.lineapedido",
-  "pk": 20,
-  "fields": {
-    "pedido": 10,
-    "plato": 10,
-    "cantidad": 3,
-    "precio_unitario": "84.74",
-    "comentario": "",
-    "descuento_porcentaje": 0
-  }
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 4,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 5,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 6,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add cliente",
+        "content_type": 7,
+        "codename": "add_cliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change cliente",
+        "content_type": 7,
+        "codename": "change_cliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete cliente",
+        "content_type": 7,
+        "codename": "delete_cliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view cliente",
+        "content_type": 7,
+        "codename": "view_cliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add direccion",
+        "content_type": 8,
+        "codename": "add_direccion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change direccion",
+        "content_type": 8,
+        "codename": "change_direccion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete direccion",
+        "content_type": 8,
+        "codename": "delete_direccion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view direccion",
+        "content_type": 8,
+        "codename": "view_direccion"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add etiqueta",
+        "content_type": 9,
+        "codename": "add_etiqueta"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change etiqueta",
+        "content_type": 9,
+        "codename": "change_etiqueta"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete etiqueta",
+        "content_type": 9,
+        "codename": "delete_etiqueta"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view etiqueta",
+        "content_type": 9,
+        "codename": "view_etiqueta"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add mesa",
+        "content_type": 10,
+        "codename": "add_mesa"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change mesa",
+        "content_type": 10,
+        "codename": "change_mesa"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete mesa",
+        "content_type": 10,
+        "codename": "delete_mesa"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view mesa",
+        "content_type": 10,
+        "codename": "view_mesa"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add pedido",
+        "content_type": 11,
+        "codename": "add_pedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change pedido",
+        "content_type": 11,
+        "codename": "change_pedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete pedido",
+        "content_type": 11,
+        "codename": "delete_pedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view pedido",
+        "content_type": 11,
+        "codename": "view_pedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add linea pedido",
+        "content_type": 12,
+        "codename": "add_lineapedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change linea pedido",
+        "content_type": 12,
+        "codename": "change_lineapedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete linea pedido",
+        "content_type": 12,
+        "codename": "delete_lineapedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view linea pedido",
+        "content_type": 12,
+        "codename": "view_lineapedido"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add perfil cliente",
+        "content_type": 13,
+        "codename": "add_perfilcliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change perfil cliente",
+        "content_type": 13,
+        "codename": "change_perfilcliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete perfil cliente",
+        "content_type": 13,
+        "codename": "delete_perfilcliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view perfil cliente",
+        "content_type": 13,
+        "codename": "view_perfilcliente"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can add plato",
+        "content_type": 14,
+        "codename": "add_plato"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can change plato",
+        "content_type": 14,
+        "codename": "change_plato"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can delete plato",
+        "content_type": 14,
+        "codename": "delete_plato"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can view plato",
+        "content_type": 14,
+        "codename": "view_plato"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can add reserva",
+        "content_type": 15,
+        "codename": "add_reserva"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can change reserva",
+        "content_type": 15,
+        "codename": "change_reserva"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can delete reserva",
+        "content_type": 15,
+        "codename": "delete_reserva"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can view reserva",
+        "content_type": 15,
+        "codename": "view_reserva"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+        "name": "Can add restaurante",
+        "content_type": 16,
+        "codename": "add_restaurante"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+        "name": "Can change restaurante",
+        "content_type": 16,
+        "codename": "change_restaurante"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+        "name": "Can delete restaurante",
+        "content_type": 16,
+        "codename": "delete_restaurante"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+        "name": "Can view restaurante",
+        "content_type": 16,
+        "codename": "view_restaurante"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$e5k6DvxLFd0DBtddO7lTtN$+U1D4+OEceAO8ZCdd8ptGkSBfUCKNTn5f93dVzyJbw8=",
+        "last_login": "2025-10-21T08:44:04.666",
+        "is_superuser": true,
+        "username": "BoRLo",
+        "first_name": "",
+        "last_name": "",
+        "email": "ad@asd.es",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-10-21T08:43:44.510",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "m60xbtpldk4yfzkdl1ryu6fsf35l07fo",
+    "fields": {
+        "session_data": ".eJxVjEEOgjAQRe_StWloizODS_eegcxMi6CmTSisjHcXEha6_e-9_zY9r8vYrzXN_RTNxThz-t2E9ZnyDuKD871YLXmZJ7G7Yg9a7a3E9Loe7t_ByHXcakwDtkBngSYIuRAZgOKgnWP0HiE5UWAWpx5c2wUi3AIKpNiIVzSfL9XzN1Q:1vB66G:F6b45Z68vCMuV13JTgR1MeJE-tbOTQ18s2Tjd43NfkE",
+        "expire_date": "2025-11-04T08:44:04.670"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 1,
+    "fields": {
+        "calle": "Rambla de Rosario Paz",
+        "numero": 65,
+        "ciudad": "Navarra",
+        "codigo_postal": "25943",
+        "provincia": "Cantabria"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 2,
+    "fields": {
+        "calle": "Pasaje Patricia Fernández",
+        "numero": 130,
+        "ciudad": "Girona",
+        "codigo_postal": "30356",
+        "provincia": "Ourense"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 3,
+    "fields": {
+        "calle": "Plaza Tatiana Ayala",
+        "numero": 157,
+        "ciudad": "Barcelona",
+        "codigo_postal": "02030",
+        "provincia": "Cáceres"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 4,
+    "fields": {
+        "calle": "Camino Régulo Alberola",
+        "numero": 113,
+        "ciudad": "Cantabria",
+        "codigo_postal": "33096",
+        "provincia": "Lleida"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 5,
+    "fields": {
+        "calle": "Plaza Renato Salvador",
+        "numero": 19,
+        "ciudad": "Cáceres",
+        "codigo_postal": "47948",
+        "provincia": "Asturias"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 6,
+    "fields": {
+        "calle": "Rambla Roldán Valls",
+        "numero": 81,
+        "ciudad": "Badajoz",
+        "codigo_postal": "29465",
+        "provincia": "Guadalajara"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 7,
+    "fields": {
+        "calle": "Cuesta Roberto Mendizábal",
+        "numero": 50,
+        "ciudad": "Murcia",
+        "codigo_postal": "28134",
+        "provincia": "Pontevedra"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 8,
+    "fields": {
+        "calle": "Glorieta de Jerónimo Páez",
+        "numero": 126,
+        "ciudad": "Salamanca",
+        "codigo_postal": "18777",
+        "provincia": "Albacete"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 9,
+    "fields": {
+        "calle": "C. Chus Pallarès",
+        "numero": 62,
+        "ciudad": "Álava",
+        "codigo_postal": "27330",
+        "provincia": "Santa Cruz de Tenerife"
+    }
+},
+{
+    "model": "restaurante.direccion",
+    "pk": 10,
+    "fields": {
+        "calle": "Pasaje Loida Amaya",
+        "numero": 1,
+        "ciudad": "Toledo",
+        "codigo_postal": "21093",
+        "provincia": "Soria"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 1,
+    "fields": {
+        "nombre": "Bernarda Andrade Corral",
+        "email": "munozestrella@example.org",
+        "telefono": "+34 881 18 14 57",
+        "fecha_registro": "2025-10-21T10:07:52.525"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 2,
+    "fields": {
+        "nombre": "Ana del Oliver",
+        "email": "earenas@example.org",
+        "telefono": "+34825884588",
+        "fecha_registro": "2025-10-21T10:07:52.528"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 3,
+    "fields": {
+        "nombre": "Chus Celestino Camacho Cañas",
+        "email": "zsotelo@example.net",
+        "telefono": "+34 827760964",
+        "fecha_registro": "2025-10-21T10:07:52.531"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 4,
+    "fields": {
+        "nombre": "Luciano del Gelabert",
+        "email": "martiriollobet@example.com",
+        "telefono": "+34880 22 84 60",
+        "fecha_registro": "2025-10-21T10:07:52.534"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 5,
+    "fields": {
+        "nombre": "Reyes Oller Toro",
+        "email": "americo22@example.net",
+        "telefono": "+34825 40 18 06",
+        "fecha_registro": "2025-10-21T10:07:52.537"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 6,
+    "fields": {
+        "nombre": "Marino de Acedo",
+        "email": "criadoanacleto@example.org",
+        "telefono": "+34821 447 362",
+        "fecha_registro": "2025-10-21T10:07:52.540"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 7,
+    "fields": {
+        "nombre": "Ruperto Cabeza Correa",
+        "email": "iaragones@example.com",
+        "telefono": "+34 841880375",
+        "fecha_registro": "2025-10-21T10:07:52.543"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 8,
+    "fields": {
+        "nombre": "Yago de Lillo",
+        "email": "rporta@example.net",
+        "telefono": "+34981 302 392",
+        "fecha_registro": "2025-10-21T10:07:52.546"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 9,
+    "fields": {
+        "nombre": "Alejo Alcolea-Pont",
+        "email": "lucenamaria-cristina@example.org",
+        "telefono": "+34 978 03 55 11",
+        "fecha_registro": "2025-10-21T10:07:52.551"
+    }
+},
+{
+    "model": "restaurante.cliente",
+    "pk": 10,
+    "fields": {
+        "nombre": "Florencio Contreras-Porta",
+        "email": "eloisa25@example.org",
+        "telefono": "+34 882500107",
+        "fecha_registro": "2025-10-21T10:07:52.554"
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 1,
+    "fields": {
+        "cliente": 1,
+        "alergias": "hacía",
+        "preferencias": "Años caso fuentes.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 2,
+    "fields": {
+        "cliente": 2,
+        "alergias": "cierto",
+        "preferencias": "Distintas universidad.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 3,
+    "fields": {
+        "cliente": 3,
+        "alergias": "felipe",
+        "preferencias": "Dado cultura.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 4,
+    "fields": {
+        "cliente": 4,
+        "alergias": "su",
+        "preferencias": "Llega texto.",
+        "recibe_noticias": false
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 5,
+    "fields": {
+        "cliente": 5,
+        "alergias": "producción",
+        "preferencias": "Contrario hechos.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 6,
+    "fields": {
+        "cliente": 6,
+        "alergias": "como",
+        "preferencias": "Guerra tales sobre.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 7,
+    "fields": {
+        "cliente": 7,
+        "alergias": "así",
+        "preferencias": "Volvió hacer.",
+        "recibe_noticias": false
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 8,
+    "fields": {
+        "cliente": 8,
+        "alergias": "todas",
+        "preferencias": "Sí contra socialista cual.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 9,
+    "fields": {
+        "cliente": 9,
+        "alergias": "zonas",
+        "preferencias": "General estar.",
+        "recibe_noticias": true
+    }
+},
+{
+    "model": "restaurante.perfilcliente",
+    "pk": 10,
+    "fields": {
+        "cliente": 10,
+        "alergias": "salida",
+        "preferencias": "Hacia.",
+        "recibe_noticias": false
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 1,
+    "fields": {
+        "nombre": "Restaurante 1",
+        "telefono": "+34 847255197",
+        "email": "evaristo59@hnos.es",
+        "web": "https://www.sergio.com/",
+        "abierto": true,
+        "direccion": 1,
+        "clientes_frecuentes": [
+            5,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 2,
+    "fields": {
+        "nombre": "Restaurante 2",
+        "telefono": "+34 949 052 023",
+        "email": "amadaquiroga@grupo.com",
+        "web": "https://www.barragan.com/",
+        "abierto": true,
+        "direccion": 2,
+        "clientes_frecuentes": [
+            1,
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 3,
+    "fields": {
+        "nombre": "Restaurante 3",
+        "telefono": "+34 875 08 31 02",
+        "email": "epeinado@alimentacion.net",
+        "web": "http://www.carpio.com/",
+        "abierto": true,
+        "direccion": 3,
+        "clientes_frecuentes": [
+            1,
+            2,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 4,
+    "fields": {
+        "nombre": "Restaurante 4",
+        "telefono": "+34825378499",
+        "email": "xfuertes@falco.es",
+        "web": "https://www.comercializadora.com/",
+        "abierto": true,
+        "direccion": 4,
+        "clientes_frecuentes": [
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 5,
+    "fields": {
+        "nombre": "Restaurante 5",
+        "telefono": "+34 984978393",
+        "email": "pfonseca@talleres.com",
+        "web": "http://www.construccion.net/",
+        "abierto": true,
+        "direccion": 5,
+        "clientes_frecuentes": [
+            4,
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 6,
+    "fields": {
+        "nombre": "Restaurante 6",
+        "telefono": "+34984 640 499",
+        "email": "plamelchor@davila.org",
+        "web": "https://www.casares.com/",
+        "abierto": true,
+        "direccion": 6,
+        "clientes_frecuentes": [
+            5,
+            8
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 7,
+    "fields": {
+        "nombre": "Restaurante 7",
+        "telefono": "+34800 07 49 44",
+        "email": "irene69@salazar.com",
+        "web": "http://www.desarrollo.com/",
+        "abierto": true,
+        "direccion": 7,
+        "clientes_frecuentes": [
+            2,
+            10
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 8,
+    "fields": {
+        "nombre": "Restaurante 8",
+        "telefono": "+34978 67 32 32",
+        "email": "adolfo25@desarrollo.es",
+        "web": "http://anna.com/",
+        "abierto": true,
+        "direccion": 8,
+        "clientes_frecuentes": [
+            1,
+            2,
+            6
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 9,
+    "fields": {
+        "nombre": "Restaurante 9",
+        "telefono": "+34 973918990",
+        "email": "francisco-josecalzada@banco.net",
+        "web": "https://www.infraestructuras.org/",
+        "abierto": true,
+        "direccion": 9,
+        "clientes_frecuentes": [
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "restaurante.restaurante",
+    "pk": 10,
+    "fields": {
+        "nombre": "Restaurante 10",
+        "telefono": "+34 984 401 982",
+        "email": "teresalobato@diego.org",
+        "web": "http://www.norberto.com/",
+        "abierto": true,
+        "direccion": 10,
+        "clientes_frecuentes": [
+            4,
+            10
+        ]
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 1,
+    "fields": {
+        "nombre": "deseo",
+        "descripcion": "Tuvo fuerzas temas tiempos corazón manuel recursos.",
+        "color": "azul",
+        "slug": "summer-teacher-our"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 2,
+    "fields": {
+        "nombre": "ser",
+        "descripcion": "Junto podría electoral distintas había josé pedro.",
+        "color": "azul",
+        "slug": "wait-central-gun"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 3,
+    "fields": {
+        "nombre": "ex",
+        "descripcion": "Costa momentos hacerlo los.",
+        "color": "rojo",
+        "slug": "treat-together"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 4,
+    "fields": {
+        "nombre": "ciudad",
+        "descripcion": "Podía victoria jefe.",
+        "color": "verde",
+        "slug": "middle-agency"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 5,
+    "fields": {
+        "nombre": "bueno",
+        "descripcion": "Efectos nosotros septiembre podía.",
+        "color": "verde",
+        "slug": "once-gas-sport"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 6,
+    "fields": {
+        "nombre": "sido",
+        "descripcion": "Constitución no cierta desde estuvo precios.",
+        "color": "rojo",
+        "slug": "much-structure-of"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 7,
+    "fields": {
+        "nombre": "américa",
+        "descripcion": "Intereses demasiado marzo sentido.",
+        "color": "azul",
+        "slug": "throughout-wide"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 8,
+    "fields": {
+        "nombre": "uno",
+        "descripcion": "París pueblo compañía familia tenido necesidad don trata.",
+        "color": "azul",
+        "slug": "picture-by-tv"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 9,
+    "fields": {
+        "nombre": "desde",
+        "descripcion": "Deben encuentro imposible.",
+        "color": "rojo",
+        "slug": "name-matter"
+    }
+},
+{
+    "model": "restaurante.etiqueta",
+    "pk": 10,
+    "fields": {
+        "nombre": "época",
+        "descripcion": "Suficiente temas proyectos actividad has hay.",
+        "color": "azul",
+        "slug": "score-assume-seem"
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 1,
+    "fields": {
+        "restaurante": 7,
+        "nombre": "Derecha",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            2,
+            7
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 2,
+    "fields": {
+        "restaurante": 5,
+        "nombre": "Oposición",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            7
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 3,
+    "fields": {
+        "restaurante": 7,
+        "nombre": "anacardo",
+        "precio": "10.00",
+        "categoria": "postre",
+        "disponible": true,
+        "etiquetas": [
+            6,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 4,
+    "fields": {
+        "restaurante": 4,
+        "nombre": "Destino",
+        "precio": "10.00",
+        "categoria": "postre",
+        "disponible": true,
+        "etiquetas": [
+            4,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 5,
+    "fields": {
+        "restaurante": 8,
+        "nombre": "Nunca",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            4,
+            6
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 6,
+    "fields": {
+        "restaurante": 1,
+        "nombre": "Equipo",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            3,
+            8
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 7,
+    "fields": {
+        "restaurante": 10,
+        "nombre": "Algo",
+        "precio": "10.00",
+        "categoria": "principal",
+        "disponible": true,
+        "etiquetas": [
+            7,
+            10
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 8,
+    "fields": {
+        "restaurante": 2,
+        "nombre": "Pequeña",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            3,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 9,
+    "fields": {
+        "restaurante": 4,
+        "nombre": "Fuera",
+        "precio": "10.00",
+        "categoria": "postre",
+        "disponible": true,
+        "etiquetas": [
+            6,
+            10
+        ]
+    }
+},
+{
+    "model": "restaurante.plato",
+    "pk": 10,
+    "fields": {
+        "restaurante": 2,
+        "nombre": "Palacio",
+        "precio": "10.00",
+        "categoria": "entrante",
+        "disponible": true,
+        "etiquetas": [
+            2,
+            9
+        ]
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 1,
+    "fields": {
+        "restaurante": 8,
+        "numero": 1,
+        "capacidad": 2,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 2,
+    "fields": {
+        "restaurante": 5,
+        "numero": 2,
+        "capacidad": 7,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 3,
+    "fields": {
+        "restaurante": 4,
+        "numero": 3,
+        "capacidad": 7,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 4,
+    "fields": {
+        "restaurante": 7,
+        "numero": 4,
+        "capacidad": 7,
+        "ubicacion": "terraza",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 5,
+    "fields": {
+        "restaurante": 10,
+        "numero": 5,
+        "capacidad": 3,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 6,
+    "fields": {
+        "restaurante": 1,
+        "numero": 6,
+        "capacidad": 6,
+        "ubicacion": "terraza",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 7,
+    "fields": {
+        "restaurante": 2,
+        "numero": 7,
+        "capacidad": 3,
+        "ubicacion": "terraza",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 8,
+    "fields": {
+        "restaurante": 8,
+        "numero": 8,
+        "capacidad": 4,
+        "ubicacion": "terraza",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 9,
+    "fields": {
+        "restaurante": 2,
+        "numero": 9,
+        "capacidad": 5,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.mesa",
+    "pk": 10,
+    "fields": {
+        "restaurante": 3,
+        "numero": 10,
+        "capacidad": 4,
+        "ubicacion": "interior",
+        "activa": true
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 1,
+    "fields": {
+        "cliente": 6,
+        "mesa": 6,
+        "fecha": "2025-10-14",
+        "hora": "14:57:48.623",
+        "estado": "confirmada",
+        "notas": "Cinco mayo parece aun ni sectores etapa."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 2,
+    "fields": {
+        "cliente": 3,
+        "mesa": 1,
+        "fecha": "2025-10-05",
+        "hora": "20:53:40.701",
+        "estado": "cancelada",
+        "notas": "Sería miembros siete semanas años."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 3,
+    "fields": {
+        "cliente": 9,
+        "mesa": 9,
+        "fecha": "2025-10-10",
+        "hora": "09:24:44.929",
+        "estado": "pendiente",
+        "notas": "Marcha pie he dar."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 4,
+    "fields": {
+        "cliente": 9,
+        "mesa": 6,
+        "fecha": "2025-10-05",
+        "hora": "21:47:38.233",
+        "estado": "confirmada",
+        "notas": "Estas rodríguez pie podrá libro aumento acuerdo."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 5,
+    "fields": {
+        "cliente": 8,
+        "mesa": 4,
+        "fecha": "2025-10-16",
+        "hora": "12:13:49.786",
+        "estado": "confirmada",
+        "notas": "Dicen lejos norte."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 6,
+    "fields": {
+        "cliente": 9,
+        "mesa": 6,
+        "fecha": "2025-10-17",
+        "hora": "04:23:30.253",
+        "estado": "pendiente",
+        "notas": "Fuego desde porque siquiera."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 7,
+    "fields": {
+        "cliente": 3,
+        "mesa": 3,
+        "fecha": "2025-10-19",
+        "hora": "09:03:25.641",
+        "estado": "pendiente",
+        "notas": "Que efecto ocasión adelante he mañana líder."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 8,
+    "fields": {
+        "cliente": 7,
+        "mesa": 8,
+        "fecha": "2025-10-15",
+        "hora": "20:31:31.254",
+        "estado": "cancelada",
+        "notas": "París sistema río cuales fiscal llegado."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 9,
+    "fields": {
+        "cliente": 5,
+        "mesa": 3,
+        "fecha": "2025-10-09",
+        "hora": "23:33:29.727",
+        "estado": "confirmada",
+        "notas": "Conseguir experiencia próximo idea mundial hubo."
+    }
+},
+{
+    "model": "restaurante.reserva",
+    "pk": 10,
+    "fields": {
+        "cliente": 5,
+        "mesa": 3,
+        "fecha": "2025-10-08",
+        "hora": "17:00:48.376",
+        "estado": "pendiente",
+        "notas": "Juez permite aún unidad."
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 1,
+    "fields": {
+        "cliente": 7,
+        "restaurante": 8,
+        "reserva": 1,
+        "total": "30.00",
+        "pagado": false,
+        "creado": "2025-10-21T10:07:52.853"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 2,
+    "fields": {
+        "cliente": 3,
+        "restaurante": 4,
+        "reserva": 6,
+        "total": "10.00",
+        "pagado": false,
+        "creado": "2025-10-21T10:07:52.858"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 3,
+    "fields": {
+        "cliente": 4,
+        "restaurante": 7,
+        "reserva": 2,
+        "total": "30.00",
+        "pagado": true,
+        "creado": "2025-10-21T10:07:52.864"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 4,
+    "fields": {
+        "cliente": 2,
+        "restaurante": 10,
+        "reserva": 4,
+        "total": "20.00",
+        "pagado": true,
+        "creado": "2025-10-21T10:07:52.867"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 5,
+    "fields": {
+        "cliente": 3,
+        "restaurante": 3,
+        "reserva": 10,
+        "total": "20.00",
+        "pagado": false,
+        "creado": "2025-10-21T10:07:52.871"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 6,
+    "fields": {
+        "cliente": 10,
+        "restaurante": 7,
+        "reserva": 5,
+        "total": "10.00",
+        "pagado": true,
+        "creado": "2025-10-21T10:07:52.874"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 7,
+    "fields": {
+        "cliente": 9,
+        "restaurante": 7,
+        "reserva": 9,
+        "total": "30.00",
+        "pagado": false,
+        "creado": "2025-10-21T10:07:52.878"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 8,
+    "fields": {
+        "cliente": 9,
+        "restaurante": 8,
+        "reserva": 7,
+        "total": "10.00",
+        "pagado": false,
+        "creado": "2025-10-21T10:07:52.880"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 9,
+    "fields": {
+        "cliente": 9,
+        "restaurante": 6,
+        "reserva": 8,
+        "total": "10.00",
+        "pagado": true,
+        "creado": "2025-10-21T10:07:52.884"
+    }
+},
+{
+    "model": "restaurante.pedido",
+    "pk": 10,
+    "fields": {
+        "cliente": 4,
+        "restaurante": 4,
+        "reserva": null,
+        "total": "20.00",
+        "pagado": true,
+        "creado": "2025-10-21T10:07:52.888"
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 1,
+    "fields": {
+        "pedido": 1,
+        "plato": 3,
+        "cantidad": 3,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 2,
+    "fields": {
+        "pedido": 2,
+        "plato": 2,
+        "cantidad": 1,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 3,
+    "fields": {
+        "pedido": 3,
+        "plato": 10,
+        "cantidad": 3,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 4,
+    "fields": {
+        "pedido": 4,
+        "plato": 10,
+        "cantidad": 2,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 5,
+    "fields": {
+        "pedido": 5,
+        "plato": 1,
+        "cantidad": 2,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 6,
+    "fields": {
+        "pedido": 6,
+        "plato": 9,
+        "cantidad": 1,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 7,
+    "fields": {
+        "pedido": 7,
+        "plato": 1,
+        "cantidad": 3,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 8,
+    "fields": {
+        "pedido": 8,
+        "plato": 2,
+        "cantidad": 1,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 9,
+    "fields": {
+        "pedido": 9,
+        "plato": 6,
+        "cantidad": 1,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
+},
+{
+    "model": "restaurante.lineapedido",
+    "pk": 10,
+    "fields": {
+        "pedido": 10,
+        "plato": 10,
+        "cantidad": 2,
+        "precio_unitario": "10.00",
+        "comentario": "",
+        "descuento_porcentaje": 0
+    }
 }
 ]
