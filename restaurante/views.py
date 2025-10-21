@@ -1,5 +1,6 @@
 # restaurante/views.py
 from django.shortcuts import render
+from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 
@@ -12,13 +13,13 @@ def index(request):
 
 
 def error_400(request, exception):
-    return render(request, 'restaurante/400.html', status=400)
+    return render(request, 'errores/400.html', None,None,400)
 def error_403(request, exception):
-    return render(request, 'restaurante/403.html', status=403)
+    return render(request, 'errores/403.html', None,None,403)
 def error_404(request, exception):
-    return render(request, 'restaurante/404.html', status=404)
+    return render(request, 'errores/404.html', None,None,404)
 def error_500(request):
-    return render(request, 'restaurante/500.html', status=500)
+    return render(request, 'errores/500.html', None,None,500)
 
 def lista_restaurantes(request):
     """
@@ -95,7 +96,7 @@ def platos_por_categoria(request, categoria: str):
     Filtra platos por categoría exacta (param str).
     Optimización: select_related + prefetch_related + order_by.
 
-    SQL (idea):
+    SQL:
       SELECT * FROM restaurante_plato
        WHERE categoria=%s
        ORDER BY nombre ASC;
