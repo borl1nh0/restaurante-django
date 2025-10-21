@@ -24,8 +24,7 @@ def error_500(request):
 def lista_restaurantes(request):
     """
     restaurantes con su dirección (OneToOne) y contadores de platos/mesas.
-    Optimización: select_related (O2O) + annotate(Count) + order_by.
-
+   
     SQL:
       SELECT r.*, d.*, COUNT(DISTINCT p.id) AS num_platos, COUNT(DISTINCT m.id) AS num_mesas
       FROM restaurante_restaurante r
@@ -52,7 +51,7 @@ def detalle_restaurante(request, id: int):
     Muestra un restaurante con dirección, platos, mesas y clientes frecuentes.
     
 
-    SQL (idea):
+    SQL:
       SELECT * FROM restaurante_restaurante WHERE id=%s;
       SELECT * FROM restaurante_direccion WHERE id=%s;
       SELECT * FROM restaurante_plato WHERE restaurante_id=%s ORDER BY nombre;
@@ -75,7 +74,7 @@ def lista_platos(request):
     Lista platos con su restaurante y etiquetas (M2M), ordenado por precio.
     Optimización: select_related (FK) + prefetch_related (M2M) + limit.
 
-    SQL (idea):
+    SQL:
       SELECT p.*, r.*
         FROM restaurante_plato p
         JOIN restaurante_restaurante r ON p.restaurante_id=r.id
@@ -121,7 +120,7 @@ def buscar_platos(request, texto: str, precio_min: int):
       - OR : nombre contiene 'texto'  OR  etiqueta.nombre = 'texto'
     Optimización: select_related + prefetch_related + distinct (por M2M).
 
-    SQL (idea):
+    SQL:
       SELECT DISTINCT p.*
         FROM restaurante_plato p
    LEFT JOIN restaurante_plato_etiquetas pe ON pe.plato_id=p.id
@@ -153,7 +152,7 @@ def lista_pedidos(request):
     Muestra pedidos recientes y un resumen global (SUM/AVG).
     Optimización: select_related (FK/O2O) + prefetch_related (reversa de líneas).
 
-    SQL (idea):
+    SQL:
       SELECT SUM(total) AS suma, AVG(total) AS promedio
         FROM restaurante_pedido;
 
@@ -184,7 +183,7 @@ def pedidos_sin_lineas(request):
     """
     Lista pedidos que no tienen ninguna línea (reversa isnull=True).
 
-    SQL (idea):
+    SQL:
       SELECT p.*
         FROM restaurante_pedido p
    LEFT JOIN restaurante_lineapedido lp ON lp.pedido_id=p.id
@@ -204,7 +203,7 @@ def clientes_frecuentes(request):
     Clientes con nº de pedidos (aggregate por fila) y favoritos (M2M).
     Requisito HAVING: filtrar por anotación (num_pedidos >= 1).
 
-    SQL (idea):
+    SQL:
       SELECT c.*, COUNT(p.id) AS num_pedidos
         FROM restaurante_cliente c
    LEFT JOIN restaurante_pedido p ON p.cliente_id=c.id
@@ -227,7 +226,7 @@ def buscar_simple(request, texto: str):
     Búsqueda sencilla con re_path: clientes y platos por nombre (OR).
     Optimización: order_by + limit; select_related para mostrar restaurante.
 
-    SQL (idea):
+    SQL:
       SELECT * FROM restaurante_cliente
        WHERE nombre LIKE %texto%
        ORDER BY nombre ASC
