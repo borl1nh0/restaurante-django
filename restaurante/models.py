@@ -85,7 +85,7 @@ class Reserva(models.Model):
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    reserva = models.OneToOneField(Reserva, on_delete=models.SET_NULL, null=True, blank=True)
+    reserva = models.OneToOneField(Reserva, on_delete=models.SET_NULL, null=True, blank=True) #este codigo es para borrar la reserva pero el pedido lo dejaria "guardado" teni pensado crea una pagina de merma, o desperdicios, y con este codigo podria hacerlo.
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     pagado = models.BooleanField(default=False)
     creado = models.DateTimeField(auto_now_add=True)
