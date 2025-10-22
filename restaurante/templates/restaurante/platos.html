@@ -4,7 +4,7 @@
   <li>
     {{ p.nombre }} — {{ p.precio }} € — {{ p.restaurante.nombre }}<br>
     Etiquetas: {% for e in p.etiquetas.all %} {{ e.nombre }} {% empty %}(ninguna){% endfor %}
-   
+   <hr>
   </li>
 {% empty %}<li>No hay platos</li>{% endfor %}
 </ul>
