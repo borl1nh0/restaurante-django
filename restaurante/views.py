@@ -14,14 +14,18 @@ def index(request):
 
 def error_400(request, exception=None):
     return render(request, 'errores/400.html', None, None, 400)
+
 def error_403(request, exception=None):
     return render(request, 'errores/403.html', None, None, 403)
+
 def error_404(request, exception=None):
     return render(request, 'errores/404.html', None, None, 404)
+
 def error_500(request, exception=None):
     return render(request, 'errores/500.html', None, None, 500)
 
 def lista_restaurantes(request):
+    
     """
     restaurantes con su dirección (OneToOne) y contadores de platos/mesas.
    
