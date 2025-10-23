@@ -9,6 +9,7 @@
       {% for lp in ped.lineapedido_set.all %}
         <li>{{ lp.cantidad }}x {{ lp.plato.nombre }} — {{ lp.precio_unitario }} €</li>
       {% empty %}<li>Sin líneas</li>{% endfor %}
+      <hr>
     </ul>
   </li>
 {% empty %}<li>No hay pedidos</li>{% endfor %}

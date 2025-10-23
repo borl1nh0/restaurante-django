@@ -1,5 +1,6 @@
 <h1>Platos de categoría: {{ categoria }}</h1>
 <ul>
   {% for p in platos %}<li>{{ p.nombre }} — {{ p.precio }} € — {{ p.restaurante.nombre }}</li>{% empty %}<li>No hay platos</li>{% endfor %}
+  
 </ul>
 <p><a href="{% url 'index' %}">Volver</a></p>

@@ -2,7 +2,7 @@
 <ul>
   {% for r in restaurantes %}
     <li>
-      <a href="{% url 'detalle_restaurante' r.id %}">{{ r.nombre }}</a><br>
+      <a href="{% url 'detalle_restaurante' r.id %}">{{ r.nombre }}</a><br> <!-- Nos lleva a la vista detalle_restaurante con el id del restaurante-->
       Dirección: {{ r.direccion.calle }} {{ r.direccion.numero }}, {{ r.direccion.ciudad }}<br>
       Platos: {{ r.num_platos }} — Mesas: {{ r.num_mesas }}
     </li>
