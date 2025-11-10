@@ -1,0 +1,11 @@
+<li>
+  {{ p.nombre|capfirst }} — {{ p.precio|floatformat:2 }} €
+  {% if p.precio > 20 %}
+    (Caro)
+  {% elif p.precio > 10 %}
+    (Medio)
+  {% else %}
+    (Económico)
+  {% endif %}
+  — {{ p.restaurante.nombre|upper }}
+</li>

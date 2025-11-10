@@ -10,8 +10,6 @@ def index(request):
     """
     return render(request, 'restaurante/index.html')
 
-
-
 def error_400(request, exception=None):
     return render(request, 'errores/400.html', None, None, 400)
 
