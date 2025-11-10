@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Restaurante Bueno{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+  <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+  <header>
+    <img src="{% static 'img/logo.jpg' %}" alt="Logo del Restaurante" width="120">
+
+    {% include 'restaurante/menu.html' %}
+  </header>
+
+  <section id="contenido">
+    {% block header %} {% endblock %}
+    {% block content %} {% endblock %}
+  </section>
+
+  {% include 'restaurante/footer.html' %}
+</body>
+</html>
