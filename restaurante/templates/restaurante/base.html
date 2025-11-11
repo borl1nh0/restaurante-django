@@ -1,7 +1,7 @@
-{% load static %}
 <!doctype html>
 <html lang="es">
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <title>{% block title %}Restaurante Bueno{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
@@ -9,7 +9,9 @@
 </head>
 <body>
   <header>
-    <img src="{% static 'img/logo.jpg' %}" alt="Logo del Restaurante" width="120">
+    <div class="logo">
+      <img src="{% static 'img/logo.jpg' %}" alt="Logo del Restaurante" width="120">
+    </div>
 
     {% include 'restaurante/menu.html' %}
   </header>

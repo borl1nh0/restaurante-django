@@ -1,0 +1,39 @@
+/* Centrar y dar color al logo */
+.logo {
+  display: block;
+  margin: 0 auto; 
+  background-color: #f2f2f2; /* Color de fondo*/
+  padding: 10px;
+  width: fit-content; 
+}
+
+/* Centrar y */
+nav {
+  text-align: center; 
+  background-color: #4CAF50; 
+  padding: 10px 0;
+  
+}
+
+nav ul {
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+  
+  
+}
+
+nav ul li {
+  display: inline-block; 
+  margin: 0 15px;
+ 
+}
+
+/* Centrar y dar color al footer */
+footer {
+  text-align: center; 
+  background-color: #333333; 
+  color: white; 
+  padding: 15px 0;
+  margin-top: 20px;
+}
