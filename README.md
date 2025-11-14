@@ -181,3 +181,18 @@ python manage.py migrate
 python manage.py loaddata backups\datos.json  o: python manage.py seed_10
 
 python manage.py runserver
+
+
+## Requisitos de entrega
+- Menú superior con links (`templates/site/partials/_navbar.html`)
+- Pie de página  (`templates/site/partials/_footer.html`)
+- Plantilla base que incluye ambas y define blocks `header` y `content`  (`templates/site/layout.html` + `templates/site/base.html`)
+- CSS/JS/Logo cargados con `{% static %}`  (`static/site/...`)
+- Herencia de todas las páginas desde `site/base.html`  (`templates/site/pages/*.html`)
+- Refactor de listas con `{% include %}`  (`productos_list.html` → `includes/_producto_item.html`)
+- **Template tags (≥5)**: `extends`, `include`, `url`, `if/else`, `for/empty`, `with (opcional)`
+- **Operadores en if (≥5)**: `and`, `or`, `not`, `in`, `==`, `>`, `!=` (ver plantillas)
+- Fechas con formato correcto: `date`, `timesince` (opcional `humanize`)
+- **Template filters (≥10)**: `date`, `timesince`, `default`, `default_if_none`, `length`, `upper`, `capfirst`, `truncatechars`, `truncatewords`, `floatformat`, `pluralize`
+
+
