@@ -104,3 +104,9 @@ class LineaPedido(models.Model):
     
     def __str__(self): 
         return f"{self.cantidad}x {self.plato.nombre}"
+class lista_clientes(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.cliente.nombre} - {self.fecha_registro}"

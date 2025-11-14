@@ -11,6 +11,7 @@ urlpatterns = [
     path('pedidos/', views.lista_pedidos, name='lista_pedidos'),
     path('pedidos/sin-lineas/', views.pedidos_sin_lineas, name='pedidos_sin_lineas'),
     path('clientes/frecuentes/', views.clientes_frecuentes, name='clientes_frecuentes'),
+    path('clientes/', views.lista_clientes, name='listar_clientes'),
     re_path(r'^buscar/(?P<texto>\w{3,20})/$', views.buscar_simple, name='buscar_simple'),
     
     

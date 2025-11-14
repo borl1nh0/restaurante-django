@@ -257,3 +257,27 @@ def buscar_simple(request, texto: str):
         'clientes': clientes,
         'platos': platos,
     })
+
+def lista_clientes(request):
+    
+    """
+    restaurantes con su dirección (OneToOne) y contadores de platos/mesas.
+   
+    SQL:
+      
+      FROM restaurante_restaurante r
+      JOIN restaurante_direccion d ON r.direccion_id=d.id
+      LEFT JOIN restaurante_plato p ON p.restaurante_id=r.id
+     
+     
+    """
+    qs = (
+        Restaurante.objects
+        .select_related('direccion')
+        .annotate(
+            num_platos=Count('plato', distinct=True),
+            num_mesas=Count('mesa', distinct=True),
+        )
+        .order_by('nombre')
+    )
+    return render(request, 'restaurante/listar_clientes.html', {'restaurantes': qs})

@@ -1,0 +1,22 @@
+<h1>Lista de Clientes</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Fecha de Registro</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.fecha_registro }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><a href="{% url 'index' %}">Volver</a></p>
