@@ -1,8 +1,10 @@
 # restaurante/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
+from restaurante.form import RestauranteForm
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
+from django.contrib import messages
 
 def index(request):
     """
@@ -255,3 +257,37 @@ def buscar_simple(request, texto: str):
         'clientes': clientes,
         'platos': platos,
     })
+
+def index(request):
+    return render(request, 'restaurante/index.html')
+
+def lista_restaurantes(request):
+    restaurantes = Restaurante.objects.select_related('direccion').all()
+    return render(request, 'restaurante/restaurantes.html', {'restaurantes': restaurantes})
+
+def crear_restaurante(request):
+    
+    form = RestauranteForm(request.POST or None)
+    
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Restaurante creado correctamente.")
+        return redirect('lista_restaurantes')
+    # 👇 Aquí se pasa el formulario al contexto del template
+    
+    return render(request, 'restaurante/form_restaurante.html', {'form': form})
+
+def editar_restaurante(request, id):
+    restaurante = get_object_or_404(Restaurante, pk=id)
+    form = RestauranteForm(request.POST or None, instance=restaurante)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Restaurante editado correctamente.")
+        return redirect('lista_restaurantes')
+    return render(request, 'restaurante/form_restaurante.html', {'form': form})
+
+def eliminar_restaurante(request, id):
+    restaurante = get_object_or_404(Restaurante, pk=id)
+    restaurante.delete()
+    messages.warning(request, "Restaurante eliminado correctamente.")
+    return redirect('lista_restaurantes')

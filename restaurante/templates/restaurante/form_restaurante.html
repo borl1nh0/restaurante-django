@@ -1,0 +1,9 @@
+{% extends "restaurante/base.html" %}
+{% block header %}<h2>Formulario Restaurante</h2>{% endblock %}
+{% block content %}
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+</form>
+<p><a href="{% url 'lista_restaurantes' %}">Volver</a></p>
+{% endblock %}
