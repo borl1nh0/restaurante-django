@@ -291,3 +291,23 @@ def eliminar_restaurante(request, id):
     restaurante.delete()
     messages.warning(request, "Restaurante eliminado correctamente.")
     return redirect('lista_restaurantes')
+
+def crear_direccion(request):
+   
+    if request.method == 'POST':
+        calle = request.POST.get('calle')
+        numero = request.POST.get('numero')
+        ciudad = request.POST.get('ciudad')
+        codigo_postal = request.POST.get('codigo_postal')
+        provincia = request.POST.get('provincia')
+
+        Direccion.objects.create(
+            calle=calle,
+            numero=numero,
+            ciudad=ciudad,
+            codigo_postal=codigo_postal,
+            provincia=provincia
+        )
+        return redirect('crear_restaurante')
+
+    return render(request, 'restaurante/crear_direccion.html')
