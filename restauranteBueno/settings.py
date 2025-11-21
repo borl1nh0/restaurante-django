@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurante',
+    'django_bootstrap5',
+    'django_bootstrap_icons',
 ]
 
 MIDDLEWARE = [
