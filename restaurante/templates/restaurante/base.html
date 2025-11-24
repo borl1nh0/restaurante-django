@@ -6,10 +6,11 @@
   <title>{% block title %}Restaurante Bueno{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
   <script src="{% static 'js/script.js' %}"></script>
-  {% load bootstrap5 %}
-  {% bootstrap5_css %}
-  {% bootstrap5_javascript %}
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
   {% load bootstrap_icons %}
+
 </head>
 <body>
   <header>
