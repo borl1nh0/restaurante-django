@@ -1,0 +1,10 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Eliminar Perfil</h2>
+<p>¿Seguro que quieres eliminar el perfil de <strong>{{ perfil.cliente.nombre }}</strong>?</p>
+<form method="post" action="{% url 'perfil_eliminar' perfil.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Eliminar</button>
+  <a href="{% url 'perfil_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

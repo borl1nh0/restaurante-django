@@ -26,6 +26,11 @@ urlpatterns = [
     path('reservas/eliminar/<int:pk>/', views.reservas_eliminar, name='reservas_eliminar'),
     path('pedidos/sin-lineas/', views.pedidos_sin_lineas, name='pedidos_sin_lineas'),
     path('clientes/frecuentes/', views.clientes_frecuentes, name='clientes_frecuentes'),
+    # CRUD para PerfilCliente
+    path('perfiles/', views.perfil_listar, name='perfil_listar'),
+    path('perfiles/crear/', views.perfil_crear, name='perfil_crear'),
+    path('perfiles/editar/<int:pk>/', views.perfil_editar, name='perfil_editar'),
+    path('perfiles/eliminar/<int:pk>/', views.perfil_eliminar, name='perfil_eliminar'),
     re_path(r'^buscar/(?P<texto>\w{3,20})/$', views.buscar_simple, name='buscar_simple'),
     
     
