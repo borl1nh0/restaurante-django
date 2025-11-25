@@ -2,18 +2,15 @@ from django import forms
 from .models import Restaurante, Direccion, Cliente
 
 
-# Formulario basado en forms.Form para edición completa
+
 class RestauranteForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=100, required=True)
     telefono = forms.CharField(label='Teléfono', max_length=20, required=True)
-    email = forms.EmailField(label='Email', required=False)
-    web = forms.URLField(label='Web', required=False)
-    abierto = forms.BooleanField(label='Abierto', required=False, initial=True)
     direccion = forms.ModelChoiceField(queryset=Direccion.objects.all(), required=True, empty_label=None)
     clientes_frecuentes = forms.ModelMultipleChoiceField(queryset=Cliente.objects.all(), required=False)
 
 
-# Formulario de creación: excluye abierto, web y email según petición
+# Formulario de creación
 class RestauranteCreateForm(forms.Form):
     nombre = forms.CharField(label='Nombre', max_length=100, required=True)
     telefono = forms.CharField(label='Teléfono', max_length=20, required=True)
@@ -24,13 +21,13 @@ class RestauranteCreateForm(forms.Form):
         direccion = self.cleaned_data.get('direccion')
         if direccion is None:
             return direccion
-        # Si la dirección ya está asociada a un restaurante, error
+       
         if Restaurante.objects.filter(direccion=direccion).exists():
             raise forms.ValidationError('Esa dirección ya está asociada a otro restaurante.')
         return direccion
 
 
-# Formulario para Reserva usando forms.Form
+# Formulario para Reserva 
 class ReservaForm(forms.Form):
     cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), required=True)
     mesa = forms.ModelChoiceField(queryset=Cliente.objects.none(), required=True)
@@ -41,12 +38,12 @@ class ReservaForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Mostrar mesas activas
+       
         from .models import Mesa
         self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
 
 
-# Formulario específico para creación: no incluye 'estado'
+# Formulario para creación
 class ReservaCreateForm(forms.Form):
     cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), required=True)
     mesa = forms.ModelChoiceField(queryset=Cliente.objects.none(), required=True)
@@ -58,3 +55,23 @@ class ReservaCreateForm(forms.Form):
         super().__init__(*args, **kwargs)
         from .models import Mesa
         self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
+
+
+# Formularios para PerfilCliente 
+class PerfilClienteCreateForm(forms.Form):
+    cliente = forms.ModelChoiceField(queryset=Cliente.objects.none(), required=True)
+    alergias = forms.CharField(label='Alergias', widget=forms.Textarea(), required=False)
+    preferencias = forms.CharField(label='Preferencias', widget=forms.Textarea(), required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        from .models import PerfilCliente
+        used = PerfilCliente.objects.values_list('cliente_id', flat=True)
+        self.fields['cliente'].queryset = Cliente.objects.exclude(id__in=used)
+
+
+class PerfilClienteForm(forms.Form):
+    alergias = forms.CharField(label='Alergias', widget=forms.Textarea(), required=False)
+    preferencias = forms.CharField(label='Preferencias', widget=forms.Textarea(), required=False)
+    # 'recibe_noticias' removed from forms per UI requirement; field remains in model.

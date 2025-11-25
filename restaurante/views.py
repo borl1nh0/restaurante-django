@@ -362,7 +362,7 @@ def direccion_eliminar(request, id):
 
 
 # CRUD para Reserva
-from restaurante.form import ReservaForm, ReservaCreateForm
+from restaurante.form import ReservaForm, ReservaCreateForm, PerfilClienteForm, PerfilClienteCreateForm
 
 def reservas_listar(request):
     reservas = Reserva.objects.select_related('cliente', 'mesa').order_by('-fecha', '-hora')
@@ -422,3 +422,55 @@ def reservas_eliminar(request, pk):
         messages.success(request, 'Reserva eliminada correctamente.')
         return redirect('reservas_listar')
     return render(request, 'restaurante/crud_reservas/eliminar.html', {'reserva': reserva})
+
+
+# CRUD para PerfilCliente
+def perfil_listar(request):
+    perfiles = PerfilCliente.objects.select_related('cliente').order_by('cliente__nombre')
+    return render(request, 'restaurante/crud_perfilClientes/listar.html', {'perfiles': perfiles})
+
+
+def perfil_crear(request):
+    if request.method == 'POST':
+        form = PerfilClienteCreateForm(request.POST)
+        if form.is_valid():
+            cliente = form.cleaned_data['cliente']
+            perfil = PerfilCliente.objects.create(
+                cliente=cliente,
+                alergias=form.cleaned_data.get('alergias', ''),
+                preferencias=form.cleaned_data.get('preferencias', ''),
+            )
+            messages.success(request, 'Perfil de cliente creado correctamente.')
+            return redirect('perfil_listar')
+    else:
+        form = PerfilClienteCreateForm()
+    return render(request, 'restaurante/crud_perfilClientes/crear.html', {'form': form})
+
+
+def perfil_editar(request, pk):
+    perfil = get_object_or_404(PerfilCliente, pk=pk)
+    if request.method == 'POST':
+        form = PerfilClienteForm(request.POST)
+        if form.is_valid():
+            perfil.alergias = form.cleaned_data.get('alergias', '')
+            perfil.preferencias = form.cleaned_data.get('preferencias', '')
+            # 'recibe_noticias' is not exposed in the edit form by design
+            perfil.save()
+            messages.success(request, 'Perfil actualizado correctamente.')
+            return redirect('perfil_listar')
+    else:
+        initial = {
+            'alergias': perfil.alergias,
+            'preferencias': perfil.preferencias,
+        }
+        form = PerfilClienteForm(initial=initial)
+    return render(request, 'restaurante/crud_perfilClientes/editar.html', {'form': form, 'perfil': perfil})
+
+
+def perfil_eliminar(request, pk):
+    perfil = get_object_or_404(PerfilCliente, pk=pk)
+    if request.method == 'POST':
+        perfil.delete()
+        messages.success(request, 'Perfil eliminado correctamente.')
+        return redirect('perfil_listar')
+    return render(request, 'restaurante/crud_perfilClientes/eliminar.html', {'perfil': perfil})

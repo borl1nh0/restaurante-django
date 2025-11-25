@@ -1,0 +1,36 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Perfiles de Clientes</h2>
+
+<a class="btn btn-primary mb-3" href="{% url 'perfil_crear' %}">Crear nuevo perfil</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Alergias</th>
+      <th>Preferencias</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in perfiles %}
+    <tr>
+      <td>{{ p.cliente.nombre }}</td>
+      <td>{{ p.alergias|default:'-' }}</td>
+      <td>{{ p.preferencias|default:'-' }}</td>
+      <td>
+        <!--
+          botones para editar y eliminar el perfil.
+          - Son enlaces de Bootstrap (`btn btn-sm btn-outline-*`).
+        -->
+        <a href="{% url 'perfil_editar' p.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+        <a href="{% url 'perfil_eliminar' p.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No hay perfiles registrados.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'restaurante/base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h2>Editar Perfil</h2>
+
+<form method="post" action="{% url 'perfil_editar' perfil.id %}">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a class="btn btn-link" href="{% url 'perfil_listar' %}">Volver</a>
+  </div>
+</form>
+{% endblock %}
