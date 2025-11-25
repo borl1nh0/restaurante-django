@@ -359,3 +359,66 @@ def direccion_eliminar(request, id):
         messages.success(request, 'Dirección eliminada.')
         return redirect('direccion_listar')
     return render(request, 'restaurante/direccion_confirm_delete.html', {'direccion': direccion})
+
+
+# CRUD para Reserva
+from restaurante.form import ReservaForm, ReservaCreateForm
+
+def reservas_listar(request):
+    reservas = Reserva.objects.select_related('cliente', 'mesa').order_by('-fecha', '-hora')
+    return render(request, 'restaurante/crud_reservas/listar.html', {'reservas': reservas})
+
+
+def reservas_crear(request):
+    if request.method == 'POST':
+        form = ReservaCreateForm(request.POST)
+        if form.is_valid():
+            r = Reserva.objects.create(
+                cliente=form.cleaned_data['cliente'],
+                mesa=form.cleaned_data['mesa'],
+                fecha=form.cleaned_data['fecha'],
+                hora=form.cleaned_data['hora'],
+                estado='pendiente',
+                notas=form.cleaned_data.get('notas', ''),
+            )
+            messages.success(request, 'Reserva creada correctamente.')
+            return redirect('reservas_listar')
+    else:
+        form = ReservaCreateForm()
+    return render(request, 'restaurante/crud_reservas/crear.html', {'form': form})
+
+
+def reservas_editar(request, pk):
+    reserva = get_object_or_404(Reserva, pk=pk)
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            reserva.cliente = form.cleaned_data['cliente']
+            reserva.mesa = form.cleaned_data['mesa']
+            reserva.fecha = form.cleaned_data['fecha']
+            reserva.hora = form.cleaned_data['hora']
+            reserva.estado = form.cleaned_data.get('estado', reserva.estado)
+            reserva.notas = form.cleaned_data.get('notas', reserva.notas)
+            reserva.save()
+            messages.success(request, 'Reserva actualizada correctamente.')
+            return redirect('reservas_listar')
+    else:
+        initial = {
+            'cliente': reserva.cliente,
+            'mesa': reserva.mesa,
+            'fecha': reserva.fecha,
+            'hora': reserva.hora,
+            'estado': reserva.estado,
+            'notas': reserva.notas,
+        }
+        form = ReservaForm(initial=initial)
+    return render(request, 'restaurante/crud_reservas/editar.html', {'form': form, 'reserva': reserva})
+
+
+def reservas_eliminar(request, pk):
+    reserva = get_object_or_404(Reserva, pk=pk)
+    if request.method == 'POST':
+        reserva.delete()
+        messages.success(request, 'Reserva eliminada correctamente.')
+        return redirect('reservas_listar')
+    return render(request, 'restaurante/crud_reservas/eliminar.html', {'reserva': reserva})
