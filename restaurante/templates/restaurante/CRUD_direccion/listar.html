@@ -9,9 +9,6 @@
   <li>
     <strong>{{ r.nombre }}</strong><br>
     Teléfono: {{ r.telefono }}<br>
-    Email: {{ r.email }}<br>
-    Web: {{ r.web }}<br>
-    Abierto: {% if r.abierto %}Sí{% else %}No{% endif %}<br>
     Dirección: {{ r.direccion }}<br>
     Clientes frecuentes: 
     {% for c in r.clientes_frecuentes.all %}
