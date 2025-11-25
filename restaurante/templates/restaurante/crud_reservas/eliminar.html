@@ -1,0 +1,10 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Eliminar Reserva</h2>
+<p>¿Seguro que quieres eliminar la reserva de <strong>{{ reserva.cliente.nombre }}</strong> (Mesa {{ reserva.mesa.numero }})?</p>
+<form method="post" action="{% url 'reservas_eliminar' reserva.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Eliminar</button>
+  <a href="{% url 'reservas_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

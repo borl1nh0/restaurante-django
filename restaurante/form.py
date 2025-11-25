@@ -28,3 +28,33 @@ class RestauranteCreateForm(forms.Form):
         if Restaurante.objects.filter(direccion=direccion).exists():
             raise forms.ValidationError('Esa dirección ya está asociada a otro restaurante.')
         return direccion
+
+
+# Formulario para Reserva usando forms.Form
+class ReservaForm(forms.Form):
+    cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), required=True)
+    mesa = forms.ModelChoiceField(queryset=Cliente.objects.none(), required=True)
+    fecha = forms.DateField(label='Fecha', widget=forms.SelectDateWidget())
+    hora = forms.TimeField(label='Hora', widget=forms.TimeInput(format='%H:%M'))
+    estado = forms.CharField(label='Estado', max_length=20, required=False, initial='pendiente')
+    notas = forms.CharField(label='Notas', widget=forms.Textarea(), required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Mostrar mesas activas
+        from .models import Mesa
+        self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
+
+
+# Formulario específico para creación: no incluye 'estado'
+class ReservaCreateForm(forms.Form):
+    cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), required=True)
+    mesa = forms.ModelChoiceField(queryset=Cliente.objects.none(), required=True)
+    fecha = forms.DateField(label='Fecha', widget=forms.SelectDateWidget())
+    hora = forms.TimeField(label='Hora', widget=forms.TimeInput(format='%H:%M'))
+    notas = forms.CharField(label='Notas', widget=forms.Textarea(), required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from .models import Mesa
+        self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
