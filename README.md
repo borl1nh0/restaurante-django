@@ -183,16 +183,32 @@ python manage.py loaddata backups\datos.json  o: python manage.py seed_10
 python manage.py runserver
 
 
-## Requisitos de entrega
-- Menú superior con links (`templates/site/partials/_navbar.html`)
-- Pie de página  (`templates/site/partials/_footer.html`)
-- Plantilla base que incluye ambas y define blocks `header` y `content`  (`templates/site/layout.html` + `templates/site/base.html`)
-- CSS/JS/Logo cargados con `{% static %}`  (`static/site/...`)
-- Herencia de todas las páginas desde `site/base.html`  (`templates/site/pages/*.html`)
-- Refactor de listas con `{% include %}`  (`productos_list.html` → `includes/_producto_item.html`)
-- **Template tags (≥5)**: `extends`, `include`, `url`, `if/else`, `for/empty`, `with (opcional)`
-- **Operadores en if (≥5)**: `and`, `or`, `not`, `in`, `==`, `>`, `!=` (ver plantillas)
-- Fechas con formato correcto: `date`, `timesince` (opcional `humanize`)
-- **Template filters (≥10)**: `date`, `timesince`, `default`, `default_if_none`, `length`, `upper`, `capfirst`, `truncatechars`, `truncatewords`, `floatformat`, `pluralize`
 
+## Validaciones
+- En la app revisamos algunas cosas para que los datos no se líen ni haya errores.
 
+- Lo que hace la base de datos sola:
+
+- Los correos de los clientes no pueden repetirse, cada uno debe ser distinto.
+
+- Algunos números, como el número de mesa o la cantidad de un pedido, tienen que ser positivos (no puedes poner -2 mesas ni 0 en un pedido).
+
+- La dirección sólo puede tenerla un restaurante, no se comparte entre varios.
+
+- Los precios se guardan con dos decimales, para no liar los cálculos de dinero.
+
+- Lo que revisa el formulario antes de guardar:
+
+- Cuando creas un restaurante, te pide nombre, teléfono y dirección, pero si la dirección ya está ocupada por otro restaurante, te salta un aviso y no te deja.
+
+- Al reservar, eliges cliente, mesa, fecha y hora, pero solo te deja elegir mesas que estén activas. Cada reserva nueva la pone como "pendiente".
+
+- Si intentas hacer otro perfil para el mismo cliente, no te deja, sólo puede haber uno por cliente.
+
+- Si escribes un email o web, revisa si están bien escritos antes de guardarlos.
+
+## Si hay error:
+
+- Los formularios te enseñan mensajes claros para saber qué tienes que arreglar.
+
+- Si desde el código o la base de datos se fuerza algo que no se puede (por ejemplo, usar una dirección que ya está puesta), - Django te tira un error especial (IntegrityError). Por eso intentamos que no pase usando los formularios bien.
