@@ -1,11 +1,15 @@
 <nav>
   <ul>
     <li><a href="{% url 'index' %}">Inicio</a></li>
-    <li><a href="{% url 'lista_restaurantes' %}">Restaurantes</a></li>
+    <li><a href="{% url 'restaurantes_listar' %}">Restaurantes</a></li>
+    
     <li><a href="{% url 'lista_platos' %}">Platos</a></li>
     <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
     <li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
-    <li><a href="{% url 'crear_restaurante' %}">Crear Restaurante</a></li>
-    <li><a href="{% url 'crear_direccion' %}">Crear Dirección</a></li>
+    <li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
+    <li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
+    <li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
+
+    <li><a href="{% url 'restaurantes_listar' %}">Restaurantes</a></li>
   </ul>
 </nav>

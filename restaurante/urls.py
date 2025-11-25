@@ -1,12 +1,20 @@
-from django.urls import path, re_path
+from django.urls import include, path, re_path
 from . import views
 
 urlpatterns = [
+    
     path('', views.index, name='index'),
-    path('restaurantes/', views.lista_restaurantes, name='lista_restaurantes'),
+    path('restaurante/', views.restaurantes_listar, name='restaurantes_listar'),
+    path('restaurante/crear/', views.restaurantes_crear, name='restaurantes_crear'),
+    path('restaurante/editar/<int:pk>/', views.restaurantes_editar, name='restaurantes_editar'),
+    path('restaurante/eliminar/<int:pk>/', views.restaurantes_eliminar, name='restaurantes_eliminar'),
+     # CRUD de Direccion
+    path('direcciones/', views.direccion_listar, name='direccion_listar'),
+    path('direcciones/crear/', views.direccion_crear, name='direccion_crear'),
+    path('direcciones/editar/<int:id>/', views.direccion_editar, name='direccion_editar'),
+    path('direcciones/eliminar/<int:id>/', views.direccion_eliminar, name='direccion_eliminar'),
+    
     path('restaurante/<int:id>/', views.detalle_restaurante, name='detalle_restaurante'),
-    path('restaurante/crear/', views.crear_restaurante, name='crear_restaurante'),
-    path('crear_direccion/', views.crear_direccion, name='crear_direccion'),
     path('platos/', views.lista_platos, name='lista_platos'),
     path('platos/categoria/<str:categoria>/', views.platos_por_categoria, name='platos_por_categoria'),
     path('platos/buscar/<str:texto>/<int:precio_min>/', views.buscar_platos, name='buscar_platos'),

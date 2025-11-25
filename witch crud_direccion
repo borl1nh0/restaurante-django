@@ -1,0 +1,18 @@
+  Backups                  [m dd5f021 me confundi de rama
+  Configuracion_inicial    [m 2f7fe83 configuracion inicial del restaurante
+  Modelos                  [m 77a07a6 Modelos
+  crud_direccion           [m ec831b8 Bootstrap añadido
+* [32mmain                     [m ec831b8 Bootstrap añadido
+  tarea_templates          [m 1272fcf agregardo separadores horizontales en las listas de pedidos, platos y platos por categoría
+  templates_tarea          [m 22fa9c9 Templates funcionando, logo no funciona
+  url01_index              [m 78753d0 [ahead 13] urls eliminada (duplicada) bbdd seed
+  url02_restaurantes       [m 78753d0 [ahead 12] urls eliminada (duplicada) bbdd seed
+  url03_restaurante_detalle[m 78753d0 [ahead 11] urls eliminada (duplicada) bbdd seed
+  url04_platos             [m 78753d0 [ahead 10] urls eliminada (duplicada) bbdd seed
+  url05_platos_categoria   [m 78753d0 [ahead 9] urls eliminada (duplicada) bbdd seed
+  url06_platos_buscar      [m 78753d0 [ahead 8] urls eliminada (duplicada) bbdd seed
+  url07_pedidos            [m 78753d0 [ahead 7] urls eliminada (duplicada) bbdd seed
+  url08_pedidos_sin_lineas [m 78753d0 [ahead 6] urls eliminada (duplicada) bbdd seed
+  url09_clientes_frecuentes[m 78753d0 [ahead 5] urls eliminada (duplicada) bbdd seed
+  url10_buscar_simple      [m 78753d0 [ahead 4] urls eliminada (duplicada) bbdd seed
+  urls_tarea               [m 78753d0 urls eliminada (duplicada) bbdd seed

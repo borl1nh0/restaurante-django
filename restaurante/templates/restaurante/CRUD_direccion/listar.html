@@ -1,0 +1,30 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Listado de Restaurantes</h2>
+
+<a href="{% url 'restaurantes_crear' %}">Crear nuevo restaurante</a>
+
+<ul>
+  {% for r in restaurantes %}
+  <li>
+    <strong>{{ r.nombre }}</strong><br>
+    Teléfono: {{ r.telefono }}<br>
+    Email: {{ r.email }}<br>
+    Web: {{ r.web }}<br>
+    Abierto: {% if r.abierto %}Sí{% else %}No{% endif %}<br>
+    Dirección: {{ r.direccion }}<br>
+    Clientes frecuentes: 
+    {% for c in r.clientes_frecuentes.all %}
+      {{ c.nombre }}{% if not forloop.last %}, {% endif %}
+    {% empty %}
+      Ninguno
+    {% endfor %}
+    <br>
+    <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> | 
+    <a href="{% url 'restaurantes_eliminar' r.id %}">Eliminar</a>
+  </li>
+  {% empty %}
+  <li>No hay restaurantes registrados.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

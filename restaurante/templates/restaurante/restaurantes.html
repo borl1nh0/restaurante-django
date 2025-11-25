@@ -1,14 +1,9 @@
-{% extends "restaurante/base.html" %}
-{% block title %}Restaurantes{% endblock %}
-{% block header %}<h1>Lista de Restaurantes</h1>{% endblock %}
-{% block content %}
+<h1>Lista de Restaurantes</h1>
 <ul>
   {% for r in restaurantes %}
-    {% include 'restaurante/includes/restaurante_item.html' %}
+    <li>{{ r.nombre }} — {{ r.telefono }}</li>
   {% empty %}
-    <li>No hay restaurantes disponibles.</li>
+    <li>No hay restaurantes registrados.</li>
   {% endfor %}
 </ul>
-
-<p><a href="{% url 'index' %}">Volver</a></p>
-{% endblock %}
+<a href="{% url 'index' %}">Volver al inicio</a>

@@ -1,0 +1,21 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Listado de Direcciones</h2>
+
+<a href="{% url 'direccion_crear' %}">Crear nueva dirección</a>
+
+<ul>
+  {% for d in direcciones %}
+    <li>
+      <strong>{{ d.calle }} {{ d.numero }}</strong><br>
+      {{ d.codigo_postal }} — {{ d.ciudad }} ({{ d.provincia }})<br>
+      <a href="{% url 'direccion_editar' d.id %}">Editar</a> |
+      <a href="{% url 'direccion_eliminar' d.id %}">Eliminar</a>
+    </li>
+  {% empty %}
+    <li>No hay direcciones registradas.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

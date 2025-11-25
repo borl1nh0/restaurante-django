@@ -1,0 +1,12 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+<h2>Eliminar Restaurante</h2>
+<p>¿Seguro que deseas eliminar el restaurante "{{ restaurante.nombre }}"?</p>
+
+<form method="post" action="{% url 'restaurantes_eliminar' restaurante.id %}">
+  {% csrf_token %}
+  <button type="submit">Confirmar</button>
+</form>
+
+<a href="{% url 'restaurantes_listar' %}">Cancelar</a>
+{% endblock %}

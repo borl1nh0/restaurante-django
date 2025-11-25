@@ -2,14 +2,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
-from restaurante.form import RestauranteForm
+from restaurante.form import RestauranteForm, RestauranteCreateForm
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 from django.contrib import messages
 
 def index(request):
-    """
-    Índice con enlaces.
-    """
+    """Índice con enlaces."""
     return render(request, 'restaurante/index.html')
 
 def error_400(request, exception=None):
@@ -258,56 +256,106 @@ def buscar_simple(request, texto: str):
         'platos': platos,
     })
 
-def index(request):
-    return render(request, 'restaurante/index.html')
+def restaurantes_listar(request):
+    restaurantes = Restaurante.objects.all()
+    return render(request, 'restaurante/CRUD_direccion/listar.html', {'restaurantes': restaurantes})
 
-def lista_restaurantes(request):
-    restaurantes = Restaurante.objects.select_related('direccion').all()
-    return render(request, 'restaurante/restaurantes.html', {'restaurantes': restaurantes})
 
-def crear_restaurante(request):
-    
-    form = RestauranteForm(request.POST or None)
-    
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Restaurante creado correctamente.")
-        return redirect('lista_restaurantes')
-    # 👇 Aquí se pasa el formulario al contexto del template
-    
-    return render(request, 'restaurante/form_restaurante.html', {'form': form})
-
-def editar_restaurante(request, id):
-    restaurante = get_object_or_404(Restaurante, pk=id)
-    form = RestauranteForm(request.POST or None, instance=restaurante)
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Restaurante editado correctamente.")
-        return redirect('lista_restaurantes')
-    return render(request, 'restaurante/form_restaurante.html', {'form': form})
-
-def eliminar_restaurante(request, id):
-    restaurante = get_object_or_404(Restaurante, pk=id)
-    restaurante.delete()
-    messages.warning(request, "Restaurante eliminado correctamente.")
-    return redirect('lista_restaurantes')
-
-def crear_direccion(request):
-   
+def restaurantes_crear(request):
     if request.method == 'POST':
-        calle = request.POST.get('calle')
-        numero = request.POST.get('numero')
-        ciudad = request.POST.get('ciudad')
-        codigo_postal = request.POST.get('codigo_postal')
-        provincia = request.POST.get('provincia')
+        form = RestauranteCreateForm(request.POST)
+        if form.is_valid():
+            # Crear manualmente el restaurante (excluimos abierto/web/email)
+            nombre = form.cleaned_data['nombre']
+            telefono = form.cleaned_data['telefono']
+            direccion = form.cleaned_data['direccion']
+            clientes = form.cleaned_data.get('clientes_frecuentes')
+            r = Restaurante.objects.create(nombre=nombre, telefono=telefono, direccion=direccion)
+            if clientes:
+                r.clientes_frecuentes.set(clientes)
+            messages.success(request, 'Restaurante creado correctamente.')
+            return redirect('restaurantes_listar')
+    else:
+        form = RestauranteCreateForm()
+    return render(request, 'restaurante/CRUD_direccion/crear.html', {'form': form})
 
-        Direccion.objects.create(
-            calle=calle,
-            numero=numero,
-            ciudad=ciudad,
-            codigo_postal=codigo_postal,
-            provincia=provincia
-        )
-        return redirect('crear_restaurante')
 
-    return render(request, 'restaurante/crear_direccion.html')
+def restaurantes_editar(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    if request.method == 'POST':
+        form = RestauranteForm(request.POST)
+        if form.is_valid():
+            restaurante.nombre = form.cleaned_data['nombre']
+            restaurante.telefono = form.cleaned_data['telefono']
+            restaurante.email = form.cleaned_data.get('email')
+            restaurante.web = form.cleaned_data.get('web')
+            restaurante.abierto = form.cleaned_data.get('abierto', True)
+            restaurante.direccion = form.cleaned_data['direccion']
+            restaurante.save()
+            clientes = form.cleaned_data.get('clientes_frecuentes')
+            if clientes is not None:
+                restaurante.clientes_frecuentes.set(clientes)
+            messages.success(request, 'Restaurante actualizado correctamente.')
+            return redirect('restaurantes_listar')
+    else:
+        # Pegar los valores actuales en initial
+        initial = {
+            'nombre': restaurante.nombre,
+            'telefono': restaurante.telefono,
+            'email': restaurante.email,
+            'web': restaurante.web,
+            'abierto': restaurante.abierto,
+            'direccion': restaurante.direccion,
+            'clientes_frecuentes': restaurante.clientes_frecuentes.all(),
+        }
+        form = RestauranteForm(initial=initial)
+    return render(request, 'restaurante/CRUD_direccion/editar.html', {'form': form, 'restaurante': restaurante})
+
+def restaurantes_eliminar(request, pk):
+    restaurante = get_object_or_404(Restaurante, pk=pk)
+    if request.method == 'POST':
+        restaurante.delete()
+        messages.success(request, 'Restaurante eliminado correctamente.')
+        return redirect('restaurantes_listar')
+    return render(request, 'restaurante/CRUD_direccion/eliminar.html', {'restaurante': restaurante})
+
+
+# CRUD para Direccion 
+from django.forms import modelform_factory
+
+DireccionForm = modelform_factory(Direccion, fields='__all__')
+
+def direccion_listar(request):
+    direcciones = Direccion.objects.all()
+    return render(request, 'restaurante/direcciones.html', {'direcciones': direcciones})
+
+def direccion_crear(request):
+    if request.method == 'POST':
+        form = DireccionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dirección creada.')
+            return redirect('direccion_listar')
+    else:
+        form = DireccionForm()
+    return render(request, 'restaurante/form_direccion.html', {'form': form})
+
+def direccion_editar(request, id):
+    direccion = get_object_or_404(Direccion, pk=id)
+    if request.method == 'POST':
+        form = DireccionForm(request.POST, instance=direccion)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dirección actualizada.')
+            return redirect('direccion_listar')
+    else:
+        form = DireccionForm(instance=direccion)
+    return render(request, 'restaurante/form_direccion.html', {'form': form, 'direccion': direccion})
+
+def direccion_eliminar(request, id):
+    direccion = get_object_or_404(Direccion, pk=id)
+    if request.method == 'POST':
+        direccion.delete()
+        messages.success(request, 'Dirección eliminada.')
+        return redirect('direccion_listar')
+    return render(request, 'restaurante/direccion_confirm_delete.html', {'direccion': direccion})

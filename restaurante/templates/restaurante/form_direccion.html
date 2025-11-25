@@ -1,9 +1,13 @@
-{% extends "base.html" %}
+{% extends 'restaurante/base.html' %}
+{% load django_bootstrap5 %}
 {% block header %}<h2>Formulario Dirección</h2>{% endblock %}
 {% block content %}
 <form method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Guardar Dirección</button>
+  {% bootstrap_form form %}
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Guardar Dirección</button>
+    <a class="btn btn-secondary ms-2" href="{% url 'direccion_listar' %}">Cancelar</a>
+  </div>
 </form>
-<p><a href="{% url 'lista_restaurantes' %}">Volver</a></p>
+<p><a href="{% url 'direccion_listar' %}">Volver</a></p>
 {% endblock %}

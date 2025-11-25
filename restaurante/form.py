@@ -1,51 +1,30 @@
 from django import forms
-from .models import Restaurante
+from .models import Restaurante, Direccion, Cliente
 
-class RestauranteForm(forms.ModelForm):
-    class Meta:
-        model = Restaurante
-        fields = ['nombre', 'telefono', 'direccion']
-        widgets = {
-            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre del restaurante'}),
-            'telefono': forms.TextInput(attrs={'placeholder': 'Teléfono'}),
-    }
-        help_texts = {
-            'direccion': 'Crea primero una direccion valida.',
-        }
-    
-    def clean(self):
-        super().clean()
-        telefono = self.cleaned_data.get('telefono')
-        nombre = self.cleaned_data.get('nombre')
 
-        if not telefono.isdigit():
-            self.add_error('telefono', 'El teléfono debe contener solo números.')
-        
-        if len(telefono) < 9:
-            self.add_error('telefono', 'El teléfono debe contener al menos 9 dígitos.')
+# Formulario basado en forms.Form para edición completa
+class RestauranteForm(forms.Form):
+    nombre = forms.CharField(label='Nombre', max_length=100, required=True)
+    telefono = forms.CharField(label='Teléfono', max_length=20, required=True)
+    email = forms.EmailField(label='Email', required=False)
+    web = forms.URLField(label='Web', required=False)
+    abierto = forms.BooleanField(label='Abierto', required=False, initial=True)
+    direccion = forms.ModelChoiceField(queryset=Direccion.objects.all(), required=True, empty_label=None)
+    clientes_frecuentes = forms.ModelMultipleChoiceField(queryset=Cliente.objects.all(), required=False)
 
-        if(len(nombre) < 3):
-            self.add_error('nombre', 'El nombre debe tener al menos 3 caracteres.')
-            nombre = Restaurante.objects.filter(nombre=nombre)
-        
-        if (not nombre is None):
-            self.add_error('nombre', 'El nombre del restaurante ya existe.')
-        
-        return self.cleaned_data
 
-        
-class DireccionForm(forms.ModelForm):
-    class Meta:
-        model = Restaurante
-        fields = ['direccion']
-        widgets = {
-            'direccion': forms.TextInput(attrs={'placeholder': 'Dirección completa'}),
-        }
-    
-    def clean(self):
-        super().clean()
+# Formulario de creación: excluye abierto, web y email según petición
+class RestauranteCreateForm(forms.Form):
+    nombre = forms.CharField(label='Nombre', max_length=100, required=True)
+    telefono = forms.CharField(label='Teléfono', max_length=20, required=True)
+    direccion = forms.ModelChoiceField(queryset=Direccion.objects.all(), required=True, empty_label=None)
+    clientes_frecuentes = forms.ModelMultipleChoiceField(queryset=Cliente.objects.all(), required=False)
+
+    def clean_direccion(self):
         direccion = self.cleaned_data.get('direccion')
-
-        if direccion and len(direccion) < 10:
-            self.add_error('direccion', 'La dirección debe tener al menos 10 caracteres.')
-
+        if direccion is None:
+            return direccion
+        # Si la dirección ya está asociada a un restaurante, error
+        if Restaurante.objects.filter(direccion=direccion).exists():
+            raise forms.ValidationError('Esa dirección ya está asociada a otro restaurante.')
+        return direccion
