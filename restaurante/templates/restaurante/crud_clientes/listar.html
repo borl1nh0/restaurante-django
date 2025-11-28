@@ -1,0 +1,36 @@
+{% extends 'restaurante/base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h2>Clientes</h2>
+
+<a class="btn btn-primary mb-3" href="{% url 'crud_clientes:crear' %}">Crear cliente</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in clientes %}
+    <tr>
+      <td>{{ c.nombre }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.telefono|default:'-' }}</td>
+      <td>
+        <a href="{% url 'crud_clientes:editar' c.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+        <form method="post" action="{% url 'crud_clientes:eliminar' c.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar a {{ c.nombre }}?')">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No hay clientes.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

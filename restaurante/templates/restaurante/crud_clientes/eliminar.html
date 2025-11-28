@@ -1,0 +1,10 @@
+{% extends 'restaurante/base.html' %}
+
+{% block content %}
+  <h1>Eliminar Cliente</h1>
+  <p>¿Seguro que deseas eliminar "{{ object.nombre }}"?</p>
+  <form method="post">{% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'crud_clientes:listar' %}" class="btn btn-link">Cancelar</a>
+  </form>
+{% endblock %}

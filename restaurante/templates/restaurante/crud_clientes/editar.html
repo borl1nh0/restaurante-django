@@ -1,0 +1,14 @@
+{% extends 'restaurante/base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h2>Editar Cliente</h2>
+
+<form method="post" action="{% url 'crud_clientes:editar' cliente.pk %}">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <div class="mb-3">
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a class="btn btn-link" href="{% url 'crud_clientes:listar' %}">Volver</a>
+  </div>
+</form>
+{% endblock %}
