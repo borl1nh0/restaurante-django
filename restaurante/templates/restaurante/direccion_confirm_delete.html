@@ -3,7 +3,7 @@
 <h2>Eliminar Dirección</h2>
 <p>¿Seguro que deseas eliminar la dirección "{{ direccion.calle }} {{ direccion.numero }}"?</p>
 
-<form method="post" action="{% url 'direccion_eliminar' direccion.id %}">
+<form method="post" action="{% url 'direccion_eliminar' direccion.id %}" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar la dirección '{{ direccion.calle }} {{ direccion.numero }}'?">
   {% csrf_token %}
   <button type="submit">Confirmar</button>
 </form>

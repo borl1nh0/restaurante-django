@@ -29,4 +29,26 @@
   {% include 'restaurante/footer.html' %}
   <!-- La confirmación se maneja con el diálogo nativo (confirm) en static/js/script.js -->
 </body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // Confirm deletion for any link with class 'confirm-delete' or form with class 'confirm-delete'
+  document.body.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a.confirm-delete');
+    if(a){
+      var msg = a.dataset.confirm || '¿Seguro que deseas eliminar este elemento?';
+      if(!confirm(msg)) e.preventDefault();
+    }
+  });
+
+  document.body.addEventListener('submit', function(e){
+    var f = e.target.closest && e.target.closest('form.confirm-delete');
+    if(f){
+      var msg = f.dataset.confirm || '¿Seguro que deseas eliminar este elemento?';
+      if(!confirm(msg)) e.preventDefault();
+    }
+  });
+});
+</script>
+
 </html>

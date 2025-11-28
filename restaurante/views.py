@@ -287,10 +287,19 @@ def restaurantes_editar(request, pk):
         if form.is_valid():
             restaurante.nombre = form.cleaned_data['nombre']
             restaurante.telefono = form.cleaned_data['telefono']
-            restaurante.email = form.cleaned_data.get('email')
-            restaurante.web = form.cleaned_data.get('web')
-            restaurante.abierto = form.cleaned_data.get('abierto', True)
+            # Only update optional fields if present in the form (avoid setting None)
+            if 'email' in form.cleaned_data:
+                restaurante.email = form.cleaned_data.get('email') or ''
+            if 'web' in form.cleaned_data:
+                restaurante.web = form.cleaned_data.get('web') or ''
+            if 'abierto' in form.cleaned_data:
+                restaurante.abierto = form.cleaned_data.get('abierto', True)
             restaurante.direccion = form.cleaned_data['direccion']
+            # Ensure non-nullable string fields are not set to None
+            if restaurante.email is None:
+                restaurante.email = ''
+            if restaurante.web is None:
+                restaurante.web = ''
             restaurante.save()
             clientes = form.cleaned_data.get('clientes_frecuentes')
             if clientes is not None:
@@ -317,7 +326,8 @@ def restaurantes_eliminar(request, pk):
         restaurante.delete()
         messages.success(request, 'Restaurante eliminado correctamente.')
         return redirect('restaurantes_listar')
-    return render(request, 'restaurante/CRUD_direccion/eliminar.html', {'restaurante': restaurante})
+    # Do not show a server-side confirmation page on GET: redirect to list
+    return redirect('restaurantes_listar')
 
 
 # CRUD para Direccion 
@@ -358,7 +368,8 @@ def direccion_eliminar(request, id):
         direccion.delete()
         messages.success(request, 'Dirección eliminada.')
         return redirect('direccion_listar')
-    return render(request, 'restaurante/direccion_confirm_delete.html', {'direccion': direccion})
+    # Avoid rendering a separate confirmation page on GET
+    return redirect('direccion_listar')
 
 
 # CRUD para Reserva
@@ -421,7 +432,8 @@ def reservas_eliminar(request, pk):
         reserva.delete()
         messages.success(request, 'Reserva eliminada correctamente.')
         return redirect('reservas_listar')
-    return render(request, 'restaurante/crud_reservas/eliminar.html', {'reserva': reserva})
+    # Avoid rendering a separate confirmation page on GET
+    return redirect('reservas_listar')
 
 
 # CRUD para PerfilCliente
@@ -473,4 +485,5 @@ def perfil_eliminar(request, pk):
         perfil.delete()
         messages.success(request, 'Perfil eliminado correctamente.')
         return redirect('perfil_listar')
-    return render(request, 'restaurante/crud_perfilClientes/eliminar.html', {'perfil': perfil})
+    # Avoid rendering a separate confirmation page on GET
+    return redirect('perfil_listar')

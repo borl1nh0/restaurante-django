@@ -2,7 +2,9 @@ from django.urls import include, path, re_path
 from . import views
 
 urlpatterns = [
-    
+    # CRUD RESTAURANTE (nuevo módulo)
+    path('crud_restaurante/', include('restaurante.crud_restaurante.urls')),
+
     path('', views.index, name='index'),
     path('restaurante/', views.restaurantes_listar, name='restaurantes_listar'),
     path('restaurante/crear/', views.restaurantes_crear, name='restaurantes_crear'),

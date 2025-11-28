@@ -2,7 +2,7 @@
 {% block content %}
 <h2>Eliminar Perfil</h2>
 <p>¿Seguro que quieres eliminar el perfil de <strong>{{ perfil.cliente.nombre }}</strong>?</p>
-<form method="post" action="{% url 'perfil_eliminar' perfil.id %}">
+<form method="post" action="{% url 'perfil_eliminar' perfil.id %}" class="confirm-delete" data-confirm="¿Seguro que quieres eliminar el perfil de {{ perfil.cliente.nombre }}?">
   {% csrf_token %}
   <button type="submit" class="btn btn-danger">Eliminar</button>
   <a href="{% url 'perfil_listar' %}">Cancelar</a>

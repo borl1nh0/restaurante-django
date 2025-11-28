@@ -10,9 +10,15 @@
       <strong>{{ d.calle }} {{ d.numero }}</strong><br>
       {{ d.codigo_postal }} — {{ d.ciudad }} ({{ d.provincia }})<br>
       <a href="{% url 'direccion_editar' d.id %}">Editar</a> |
+<<<<<<< HEAD
       <form method="post" action="{% url 'direccion_eliminar' d.id %}" style="display:inline;">
         {% csrf_token %}
         <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar la dirección {{ d.calle }} {{ d.numero }}?')">Eliminar</button>
+=======
+      <form method="post" action="{% url 'direccion_eliminar' d.id %}" style="display:inline" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar la dirección '{{ d.calle }} {{ d.numero }}'?">
+        {% csrf_token %}
+        <button type="submit" style="border:none;background:none;padding:0;color:#0d6efd;">Eliminar</button>
+>>>>>>> b496dcda6782a2a2f12cdfd9f433900e878d4912
       </form>
     </li>
   {% empty %}
