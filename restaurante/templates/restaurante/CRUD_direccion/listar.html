@@ -18,7 +18,10 @@
     {% endfor %}
     <br>
     <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> | 
-    <a href="{% url 'restaurantes_eliminar' r.id %}">Eliminar</a>
+      <form method="post" action="{% url 'restaurantes_eliminar' r.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar el restaurante {{ r.nombre }}?')">Eliminar</button>
+    </form>
   </li>
   {% empty %}
   <li>No hay restaurantes registrados.</li>
