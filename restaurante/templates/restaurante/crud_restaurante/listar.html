@@ -1,0 +1,17 @@
+{% extends 'restaurante/base.html' %}
+
+{% block content %}
+  <h1>Restaurantes</h1>
+  <p><a href="{% url 'crud_restaurante:crear' %}">Crear restaurante</a></p>
+  <ul>
+  {% for r in restaurantes %}
+    <li>
+      <a href="{% url 'crud_restaurante:detalle' r.pk %}">{{ r.nombre }}</a>
+      - <a href="{% url 'crud_restaurante:editar' r.pk %}">Editar</a>
+      - <a href="{% url 'crud_restaurante:eliminar' r.pk %}" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar el restaurante '{{ r.nombre }}'?">Eliminar</a>
+    </li>
+  {% empty %}
+    <li>No hay restaurantes.</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -18,7 +18,7 @@
         {% endif %}
         <div class="mt-auto">
           <a href="{% url 'reservas_editar' res.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-          <a href="{% url 'reservas_eliminar' res.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+          <a href="{% url 'reservas_eliminar' res.id %}" class="btn btn-sm btn-outline-danger confirm-delete" data-confirm="¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?">Eliminar</a>
         </div>
       </div>
     </div>

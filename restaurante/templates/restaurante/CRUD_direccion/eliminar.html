@@ -3,7 +3,7 @@
 <h2>Eliminar Restaurante</h2>
 <p>¿Seguro que deseas eliminar el restaurante "{{ restaurante.nombre }}"?</p>
 
-<form method="post" action="{% url 'restaurantes_eliminar' restaurante.id %}">
+<form method="post" action="{% url 'restaurantes_eliminar' restaurante.id %}" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar el restaurante '{{ restaurante.nombre }}'?">
   {% csrf_token %}
   <button type="submit">Confirmar</button>
 </form>

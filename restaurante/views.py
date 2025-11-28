@@ -287,10 +287,19 @@ def restaurantes_editar(request, pk):
         if form.is_valid():
             restaurante.nombre = form.cleaned_data['nombre']
             restaurante.telefono = form.cleaned_data['telefono']
-            restaurante.email = form.cleaned_data.get('email')
-            restaurante.web = form.cleaned_data.get('web')
-            restaurante.abierto = form.cleaned_data.get('abierto', True)
+            # Only update optional fields if present in the form (avoid setting None)
+            if 'email' in form.cleaned_data:
+                restaurante.email = form.cleaned_data.get('email') or ''
+            if 'web' in form.cleaned_data:
+                restaurante.web = form.cleaned_data.get('web') or ''
+            if 'abierto' in form.cleaned_data:
+                restaurante.abierto = form.cleaned_data.get('abierto', True)
             restaurante.direccion = form.cleaned_data['direccion']
+            # Ensure non-nullable string fields are not set to None
+            if restaurante.email is None:
+                restaurante.email = ''
+            if restaurante.web is None:
+                restaurante.web = ''
             restaurante.save()
             clientes = form.cleaned_data.get('clientes_frecuentes')
             if clientes is not None:
