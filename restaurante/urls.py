@@ -16,10 +16,18 @@ crud_clientes_patterns = [
     path('eliminar/<int:pk>/', views.clientes_eliminar, name='eliminar'),
 ]
 
+crud_platos_patterns = [
+    path('', views.platos_listar, name='listar'),
+    path('crear/', views.platos_crear, name='crear'),
+    path('editar/<int:pk>/', views.platos_editar, name='editar'),
+    path('eliminar/<int:pk>/', views.platos_eliminar, name='eliminar'),
+]
+
 urlpatterns = [
     # CRUD RESTAURANTE 
     path('crud_restaurante/', include((crud_restaurante_patterns, 'crud_restaurante'), namespace='crud_restaurante')),
     path('crud_clientes/', include((crud_clientes_patterns, 'crud_clientes'), namespace='crud_clientes')),
+    path('crud_platos/', include((crud_platos_patterns, 'crud_platos'), namespace='crud_platos')),
 
     path('', views.index, name='index'),
     path('restaurante/', views.restaurantes_listar, name='restaurantes_listar'),

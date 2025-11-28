@@ -1,0 +1,11 @@
+{% extends 'restaurante/base.html' %}
+{% block title %}Platos - Crear{% endblock %}
+{% block content %}
+<h1>Crear plato</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Crear</button>
+  <a class="btn btn-link" href="{% url 'index' %}">Volver</a>
+</form>
+{% endblock %}

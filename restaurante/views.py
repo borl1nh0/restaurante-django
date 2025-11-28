@@ -527,3 +527,44 @@ def clientes_eliminar(request, pk):
         messages.success(request, 'Cliente eliminado correctamente.')
         return redirect('crud_clientes:listar')
     return render(request, 'restaurante/crud_clientes/eliminar.html', {'cliente': cliente})
+
+
+# CRUD para Plato (crud_platos)
+from django.forms import modelform_factory as _modelform_factory
+
+PlatoForm = _modelform_factory(Plato, fields='__all__')
+
+def platos_listar(request):
+    platos = Plato.objects.select_related('restaurante').order_by('nombre')
+    return render(request, 'restaurante/crud_platos/listar.html', {'platos': platos})
+
+def platos_crear(request):
+    if request.method == 'POST':
+        form = PlatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Plato creado correctamente.')
+            return redirect('crud_platos:listar')
+    else:
+        form = PlatoForm()
+    return render(request, 'restaurante/crud_platos/crear.html', {'form': form})
+
+def platos_editar(request, pk):
+    plato = get_object_or_404(Plato, pk=pk)
+    if request.method == 'POST':
+        form = PlatoForm(request.POST, instance=plato)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Plato actualizado correctamente.')
+            return redirect('crud_platos:listar')
+    else:
+        form = PlatoForm(instance=plato)
+    return render(request, 'restaurante/crud_platos/editar.html', {'form': form, 'plato': plato})
+
+def platos_eliminar(request, pk):
+    plato = get_object_or_404(Plato, pk=pk)
+    if request.method == 'POST':
+        plato.delete()
+        messages.success(request, 'Plato eliminado correctamente.')
+        return redirect('crud_platos:listar')
+    return render(request, 'restaurante/crud_platos/eliminar.html', {'plato': plato})
