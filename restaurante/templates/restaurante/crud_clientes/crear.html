@@ -1,0 +1,11 @@
+{% extends 'restaurante/base.html' %}
+{% block title %}Clientes - Crear{% endblock %}
+{% block content %}
+<h1>Crear cliente</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Crear</button>
+</form>
+<p><a href="{% url 'index' %}">Volver</a></p>
+{% endblock %}

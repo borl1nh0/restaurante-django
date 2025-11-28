@@ -1,0 +1,11 @@
+{% extends 'restaurante/base.html' %}
+{% block title %}Clientes - Eliminar{% endblock %}
+{% block content %}
+<h1>Eliminar cliente</h1>
+<p>¿Seguro que quieres eliminar a <strong>{{ cliente.nombre }}</strong>?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Sí, eliminar</button>
+  <a href="{% url 'crud_clientes:listar' %}">Cancelar</a>
+</form>
+{% endblock %}

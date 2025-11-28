@@ -2,4 +2,18 @@
 {% block title %}Inicio{% endblock %}
 {% block header %}<h1>Bienvenido al Restaurante Bueno</h1>{% endblock %}
 {% block content %}
+<div class="container mt-4">
+	<h2>Menu de navegación</h2>
+	<ul>
+		<li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
+		<li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
+		<li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
+		<li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
+		<li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
+		<li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
+		<li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
+		<li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
+		<li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
+	</ul>
+</div>
 {% endblock %}

@@ -6,8 +6,8 @@
   {% bootstrap_form form %}
   <div class="mb-3">
     <button type="submit" class="btn btn-primary">Guardar Dirección</button>
-    <a class="btn btn-secondary ms-2" href="{% url 'direccion_listar' %}">Cancelar</a>
+    <a class="btn btn-secondary ms-2" href="{% url 'index' %}">Cancelar</a>
   </div>
 </form>
-<p><a href="{% url 'direccion_listar' %}">Volver</a></p>
+<p><a href="{% url 'index' %}">Volver</a></p>
 {% endblock %}

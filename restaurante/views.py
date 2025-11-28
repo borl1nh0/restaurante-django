@@ -486,3 +486,44 @@ def perfil_eliminar(request, pk):
         return redirect('perfil_listar')
     
     return redirect('perfil_listar')
+
+
+# CRUD para Cliente (crud_clientes)
+from django.forms import modelform_factory
+
+ClienteForm = modelform_factory(Cliente, fields=('nombre', 'email', 'telefono'))
+
+def clientes_listar(request):
+    clientes = Cliente.objects.order_by('nombre')
+    return render(request, 'restaurante/crud_clientes/listar.html', {'clientes': clientes})
+
+def clientes_crear(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente creado correctamente.')
+            return redirect('crud_clientes:listar')
+    else:
+        form = ClienteForm()
+    return render(request, 'restaurante/crud_clientes/crear.html', {'form': form})
+
+def clientes_editar(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente actualizado correctamente.')
+            return redirect('crud_clientes:listar')
+    else:
+        form = ClienteForm(instance=cliente)
+    return render(request, 'restaurante/crud_clientes/editar.html', {'form': form, 'cliente': cliente})
+
+def clientes_eliminar(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == 'POST':
+        cliente.delete()
+        messages.success(request, 'Cliente eliminado correctamente.')
+        return redirect('crud_clientes:listar')
+    return render(request, 'restaurante/crud_clientes/eliminar.html', {'cliente': cliente})

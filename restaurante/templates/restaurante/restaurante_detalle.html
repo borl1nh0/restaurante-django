@@ -10,4 +10,4 @@
 <h2>Clientes frecuentes</h2>
 <ul>{% for c in r.clientes_frecuentes.all %}<li>{{ c.nombre }} ({{ c.email }})</li>{% empty %}<li>Sin clientes</li>{% endfor %}</ul>
 
-<p><a href="{% url 'lista_restaurantes' %}">Volver</a></p>
+<p><a href="{% url 'index' %}">Volver</a></p>
