@@ -207,8 +207,3 @@ python manage.py runserver
 
 - Si escribes un email o web, revisa si están bien escritos antes de guardarlos.
 
-## Si hay error:
-
-- Los formularios te enseñan mensajes claros para saber qué tienes que arreglar.
-
-- Si desde el código o la base de datos se fuerza algo que no se puede (por ejemplo, usar una dirección que ya está puesta), - Django te tira un error especial (IntegrityError). Por eso intentamos que no pase usando los formularios bien.

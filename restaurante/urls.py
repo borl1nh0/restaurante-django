@@ -1,9 +1,17 @@
 from django.urls import include, path, re_path
 from . import views
 
+crud_restaurante_patterns = [
+    path('', views.restaurantes_listar, name='listar'),
+    path('crear/', views.restaurantes_crear, name='crear'),
+    path('detalle/<int:id>/', views.detalle_restaurante, name='detalle'),
+    path('editar/<int:pk>/', views.restaurantes_editar, name='editar'),
+    path('eliminar/<int:pk>/', views.restaurantes_eliminar, name='eliminar'),
+]
+
 urlpatterns = [
-    # CRUD RESTAURANTE (nuevo módulo)
-    path('crud_restaurante/', include('restaurante.crud_restaurante.urls')),
+    # CRUD RESTAURANTE 
+    path('crud_restaurante/', include((crud_restaurante_patterns, 'crud_restaurante'), namespace='crud_restaurante')),
 
     path('', views.index, name='index'),
     path('restaurante/', views.restaurantes_listar, name='restaurantes_listar'),

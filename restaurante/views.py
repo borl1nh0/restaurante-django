@@ -1,4 +1,3 @@
-# restaurante/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
@@ -265,7 +264,7 @@ def restaurantes_crear(request):
     if request.method == 'POST':
         form = RestauranteCreateForm(request.POST)
         if form.is_valid():
-            # Crear manualmente el restaurante (excluimos abierto/web/email)
+            
             nombre = form.cleaned_data['nombre']
             telefono = form.cleaned_data['telefono']
             direccion = form.cleaned_data['direccion']
@@ -287,7 +286,7 @@ def restaurantes_editar(request, pk):
         if form.is_valid():
             restaurante.nombre = form.cleaned_data['nombre']
             restaurante.telefono = form.cleaned_data['telefono']
-            # Only update optional fields if present in the form (avoid setting None)
+            
             if 'email' in form.cleaned_data:
                 restaurante.email = form.cleaned_data.get('email') or ''
             if 'web' in form.cleaned_data:
@@ -295,7 +294,7 @@ def restaurantes_editar(request, pk):
             if 'abierto' in form.cleaned_data:
                 restaurante.abierto = form.cleaned_data.get('abierto', True)
             restaurante.direccion = form.cleaned_data['direccion']
-            # Ensure non-nullable string fields are not set to None
+            
             if restaurante.email is None:
                 restaurante.email = ''
             if restaurante.web is None:
@@ -307,7 +306,7 @@ def restaurantes_editar(request, pk):
             messages.success(request, 'Restaurante actualizado correctamente.')
             return redirect('restaurantes_listar')
     else:
-        # Pegar los valores actuales en initial
+        
         initial = {
             'nombre': restaurante.nombre,
             'telefono': restaurante.telefono,
@@ -326,7 +325,7 @@ def restaurantes_eliminar(request, pk):
         restaurante.delete()
         messages.success(request, 'Restaurante eliminado correctamente.')
         return redirect('restaurantes_listar')
-    # Do not show a server-side confirmation page on GET: redirect to list
+   
     return redirect('restaurantes_listar')
 
 
@@ -368,7 +367,7 @@ def direccion_eliminar(request, id):
         direccion.delete()
         messages.success(request, 'Dirección eliminada.')
         return redirect('direccion_listar')
-    # Avoid rendering a separate confirmation page on GET
+  
     return redirect('direccion_listar')
 
 
@@ -432,7 +431,7 @@ def reservas_eliminar(request, pk):
         reserva.delete()
         messages.success(request, 'Reserva eliminada correctamente.')
         return redirect('reservas_listar')
-    # Avoid rendering a separate confirmation page on GET
+    
     return redirect('reservas_listar')
 
 
@@ -466,7 +465,7 @@ def perfil_editar(request, pk):
         if form.is_valid():
             perfil.alergias = form.cleaned_data.get('alergias', '')
             perfil.preferencias = form.cleaned_data.get('preferencias', '')
-            # 'recibe_noticias' is not exposed in the edit form by design
+           
             perfil.save()
             messages.success(request, 'Perfil actualizado correctamente.')
             return redirect('perfil_listar')
@@ -485,5 +484,5 @@ def perfil_eliminar(request, pk):
         perfil.delete()
         messages.success(request, 'Perfil eliminado correctamente.')
         return redirect('perfil_listar')
-    # Avoid rendering a separate confirmation page on GET
+    
     return redirect('perfil_listar')

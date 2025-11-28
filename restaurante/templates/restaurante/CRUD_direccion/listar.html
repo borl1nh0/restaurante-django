@@ -12,7 +12,7 @@
     Dirección: {{ r.direccion }}<br>
     Clientes frecuentes: 
       {% for c in r.clientes_frecuentes.all %}
-      {# placeholder for cliente links, avoid delete here #}
+      
       {% empty %}
       Ninguno
     {% endfor %}

@@ -18,15 +18,11 @@
         {% endif %}
         <div class="mt-auto">
           <a href="{% url 'reservas_editar' res.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-<<<<<<< HEAD
+
           <form method="post" action="{% url 'reservas_eliminar' res.id %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?')">Eliminar</button>
-=======
-          <form method="post" action="{% url 'reservas_eliminar' res.id %}" style="display:inline" class="confirm-delete" data-confirm="¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
->>>>>>> b496dcda6782a2a2f12cdfd9f433900e878d4912
+
           </form>
         </div>
       </div>

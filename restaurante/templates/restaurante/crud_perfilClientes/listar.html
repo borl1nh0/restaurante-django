@@ -25,15 +25,9 @@
           - Son enlaces de Bootstrap (`btn btn-sm btn-outline-*`).
         -->
         <a href="{% url 'perfil_editar' p.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-<<<<<<< HEAD
         <form method="post" action="{% url 'perfil_eliminar' p.id %}" style="display:inline;">
           {% csrf_token %}
           <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar el perfil de {{ p.cliente.nombre }}?')">Eliminar</button>
-=======
-        <form method="post" action="{% url 'perfil_eliminar' p.id %}" style="display:inline" class="confirm-delete" data-confirm="¿Seguro que quieres eliminar el perfil de {{ p.cliente.nombre }}?">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
->>>>>>> b496dcda6782a2a2f12cdfd9f433900e878d4912
         </form>
       </td>
     </tr>
