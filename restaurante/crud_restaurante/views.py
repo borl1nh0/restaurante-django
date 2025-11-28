@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import RestauranteForm
@@ -37,3 +38,7 @@ class RestauranteDeleteView(DeleteView):
     model = Restaurante
     template_name = 'restaurante/crud_restaurante/eliminar.html'
     success_url = reverse_lazy('crud_restaurante:listar')
+
+    def get(self, request, *args, **kwargs):
+        # Don't render a separate confirmation page on GET; redirect to list.
+        return redirect(self.success_url)

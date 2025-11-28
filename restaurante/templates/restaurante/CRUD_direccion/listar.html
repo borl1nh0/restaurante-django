@@ -11,14 +11,17 @@
     Teléfono: {{ r.telefono }}<br>
     Dirección: {{ r.direccion }}<br>
     Clientes frecuentes: 
-    {% for c in r.clientes_frecuentes.all %}
-      <a href="{% url 'restaurantes_eliminar' r.id %}" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar el restaurante '{{ r.nombre }}'?">Eliminar</a>
-    {% empty %}
+      {% for c in r.clientes_frecuentes.all %}
+      {# placeholder for cliente links, avoid delete here #}
+      {% empty %}
       Ninguno
     {% endfor %}
     <br>
     <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> | 
-    <a href="{% url 'restaurantes_eliminar' r.id %}" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar el restaurante '{{ r.nombre }}'?">Eliminar</a>
+    <form method="post" action="{% url 'restaurantes_eliminar' r.id %}" style="display:inline" class="confirm-delete" data-confirm="¿Seguro que deseas eliminar el restaurante '{{ r.nombre }}'?">
+      {% csrf_token %}
+      <button type="submit" style="border:none;background:none;padding:0;color:#0d6efd;">Eliminar</button>
+    </form>
   </li>
   {% empty %}
   <li>No hay restaurantes registrados.</li>
