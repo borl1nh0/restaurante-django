@@ -1,7 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
-from restaurante.form import RestauranteForm, RestauranteCreateForm
+from restaurante.form import (
+    RestauranteForm,
+    RestauranteCreateForm,
+    DireccionForm,
+    ClienteForm,
+    PlatoForm,
+    ReservaForm,
+    ReservaCreateForm,
+    PerfilClienteForm,
+    PerfilClienteCreateForm,
+)
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 from django.contrib import messages
 
@@ -329,10 +339,7 @@ def restaurantes_eliminar(request, pk):
     return redirect('restaurantes_listar')
 
 
-# CRUD para Direccion 
-from django.forms import modelform_factory
-
-DireccionForm = modelform_factory(Direccion, fields='__all__')
+# CRUD para Direccion: ahora usamos `DireccionForm` definido en `restaurante/form.py`
 
 def direccion_listar(request):
     direcciones = Direccion.objects.all()
@@ -488,10 +495,7 @@ def perfil_eliminar(request, pk):
     return redirect('perfil_listar')
 
 
-# CRUD para Cliente (crud_clientes)
-from django.forms import modelform_factory
-
-ClienteForm = modelform_factory(Cliente, fields=('nombre', 'email', 'telefono'))
+# CRUD para Cliente (crud_clientes). Usamos `ClienteForm` de `restaurante/form.py`.
 
 def clientes_listar(request):
     clientes = Cliente.objects.order_by('nombre')
@@ -529,10 +533,7 @@ def clientes_eliminar(request, pk):
     return render(request, 'restaurante/crud_clientes/eliminar.html', {'cliente': cliente})
 
 
-# CRUD para Plato (crud_platos)
-from django.forms import modelform_factory as _modelform_factory
-
-PlatoForm = _modelform_factory(Plato, fields='__all__')
+# CRUD para Plato (crud_platos). Usamos `PlatoForm` de `restaurante/form.py`.
 
 def platos_listar(request):
     platos = Plato.objects.select_related('restaurante').order_by('nombre')

@@ -189,8 +189,6 @@ python manage.py runserver
 
 - Lo que hace la base de datos sola:
 
-- Los correos de los clientes no pueden repetirse, cada uno debe ser distinto.
-
 - Algunos números, como el número de mesa o la cantidad de un pedido, tienen que ser positivos (no puedes poner -2 mesas ni 0 en un pedido).
 
 - La dirección sólo puede tenerla un restaurante, no se comparte entre varios.
@@ -201,9 +199,30 @@ python manage.py runserver
 
 - Cuando creas un restaurante, te pide nombre, teléfono y dirección, pero si la dirección ya está ocupada por otro restaurante, te salta un aviso y no te deja.
 
-- Al reservar, eliges cliente, mesa, fecha y hora, pero solo te deja elegir mesas que estén activas. Cada reserva nueva la pone como "pendiente".
+- Al reservar, eliges cliente, mesa, fecha y hora.
 
 - Si intentas hacer otro perfil para el mismo cliente, no te deja, sólo puede haber uno por cliente.
 
-- Si escribes un email o web, revisa si están bien escritos antes de guardarlos.
+
+## Widgets usados en los formularios
+
+- `SelectDateWidget` — usado en `ReservaForm`/`ReservaCreateForm` (campo `fecha`).
+	- Selector de fecha por campos día/mes/año
+
+- `TimeInput(format='%H:%M')` — usado en `ReservaForm`/`ReservaCreateForm` (campo `hora`).
+	- Entrada de hora con formato HH:MM 
+
+- `Textarea` — usado en `ReservaForm` (campo `notas`) y en `PerfilClienteForm`/`PerfilClienteCreateForm` (campos `alergias`, `preferencias`).
+	-texto para notas
+
+- `EmailInput` — usado en `ClienteForm` (campo `email`).
+	- Input tipo email 
+
+- `NumberInput` — usado en `DireccionForm` (campo `numero`) y en `PlatoForm` (campo `precio` con `step='0.01'`).
+	-Input numérico; en `precio` se añade `step` para decimales."
+
+- `CheckboxInput` — usado en `PlatoForm` (campo `disponible`).
+	-Checkbox para marcar si un plato está disponible (True/False)."
+
+
 
