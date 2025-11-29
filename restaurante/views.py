@@ -329,7 +329,7 @@ def restaurantes_eliminar(request, pk):
     return redirect('restaurantes_listar')
 
 
-# CRUD para Direccion: ahora usamos `DireccionForm` definido en `restaurante/form.py`
+# CRUD para Direccion
 
 def direccion_listar(request):
     direcciones = Direccion.objects.all()
@@ -485,7 +485,7 @@ def perfil_eliminar(request, pk):
     return redirect('perfil_listar')
 
 
-# CRUD para Cliente (crud_clientes). Usamos `ClienteForm` de `restaurante/form.py`.
+# CRUD para Cliente.
 
 def clientes_listar(request):
     clientes = Cliente.objects.order_by('nombre')
@@ -523,7 +523,7 @@ def clientes_eliminar(request, pk):
     return render(request, 'restaurante/crud_clientes/eliminar.html', {'cliente': cliente})
 
 
-# CRUD para Plato (crud_platos). Usamos `PlatoForm` de `restaurante/form.py`.
+# CRUD para Plato .
 
 def platos_listar(request):
     platos = Plato.objects.select_related('restaurante').order_by('nombre')
