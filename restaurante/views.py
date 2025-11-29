@@ -1,17 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
-from restaurante.form import (
-    RestauranteForm,
-    RestauranteCreateForm,
-    DireccionForm,
-    ClienteForm,
-    PlatoForm,
-    ReservaForm,
-    ReservaCreateForm,
-    PerfilClienteForm,
-    PerfilClienteCreateForm,
-)
+from restaurante.form import (RestauranteForm,RestauranteCreateForm,DireccionForm,ClienteForm,PlatoForm,ReservaForm,ReservaCreateForm,PerfilClienteForm,PerfilClienteCreateForm,)
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 from django.contrib import messages
 

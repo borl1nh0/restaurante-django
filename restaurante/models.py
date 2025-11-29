@@ -32,9 +32,6 @@ class PerfilCliente(models.Model):
 class Restaurante(models.Model):
     nombre = models.CharField(max_length=100)
     telefono = models.CharField(max_length=20)
-    email = models.EmailField(blank=True)
-    web = models.URLField(blank=True)
-    abierto = models.BooleanField(default=True)
     direccion = models.OneToOneField(Direccion, on_delete=models.CASCADE)
     clientes_frecuentes = models.ManyToManyField(Cliente, blank=True, related_name="restaurantes_favoritos")
     
@@ -55,7 +52,6 @@ class Plato(models.Model):
     nombre = models.CharField(max_length=100)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     categoria = models.CharField(max_length=20, default="principal")
-    disponible = models.BooleanField(default=True)
     etiquetas = models.ManyToManyField(Etiqueta, blank=True)
     
     def __str__(self): 
@@ -64,8 +60,6 @@ class Plato(models.Model):
 class Mesa(models.Model):
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     numero = models.PositiveIntegerField()
-    capacidad = models.PositiveIntegerField()
-    ubicacion = models.CharField(max_length=20, default="interior")
     activa = models.BooleanField(default=True)
     
     def __str__(self): 
@@ -87,8 +81,6 @@ class Pedido(models.Model):
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     reserva = models.OneToOneField(Reserva, on_delete=models.SET_NULL, null=True, blank=True) #este codigo es para borrar la reserva pero el pedido lo dejaria "guardado" teni pensado crea una pagina de merma, o desperdicios, y con este codigo podria hacerlo.
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
-    pagado = models.BooleanField(default=False)
-    creado = models.DateTimeField(auto_now_add=True)
     platos = models.ManyToManyField("Plato", through="LineaPedido")
     
     def __str__(self): 
