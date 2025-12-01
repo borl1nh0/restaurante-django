@@ -19,6 +19,7 @@
 <ul>
     <li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
     <li><a href="{% url 'crud_clientes:crear' %}">Crear Cliente</a></li>
+	<li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
 </ul>
 
 <h3>CRUD Perfiles de Cliente</h3>
@@ -31,6 +32,7 @@
 <ul>
     <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
     <li><a href="{% url 'crud_platos:crear' %}">Crear Plato</a></li>
+	<li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
 </ul>
 
 <h3>CRUD Reservas</h3>
@@ -41,9 +43,9 @@
 
 <h3>Consultas adicionales</h3>
 <ul>
-    <li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
+    
     <li><a href="{% url 'restaurante_busqueda_avanzada' %}">Búsqueda avanzada</a></li>
-    <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+ 
 </ul>
 
 {% endblock %}
