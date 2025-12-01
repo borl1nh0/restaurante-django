@@ -1,0 +1,44 @@
+{% extends 'restaurante/base.html' %}
+{% block content %}
+
+<h2>Búsqueda avanzada de restaurantes</h2>
+
+<form method="get" class="mb-3">
+
+  <div class="mb-3">
+    <label>Nombre contiene</label><br>
+    {{ form.nombre }}
+    <div style="color:red;">{{ form.nombre.errors }}</div>
+  </div>
+
+  <div class="mb-3">
+    <label>Teléfono contiene</label><br>
+    {{ form.telefono }}
+    <div style="color:red;">{{ form.telefono.errors }}</div>
+  </div>
+
+  <div class="mb-3">
+    <label>Dirección contiene</label><br>
+    {{ form.direccion }}
+    <div style="color:red;">{{ form.direccion.errors }}</div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Buscar</button>
+</form>
+
+<hr>
+
+{% if restaurantes %}
+<h3>Restaurantes encontrados ({{ restaurantes|length }})</h3>
+
+<ul>
+  {% for r in restaurantes %}
+    <li><strong>{{ r.nombre }}</strong> – {{ r.telefono }} – {{ r.direccion }}</li>
+  {% empty %}
+    <li>No se encontraron restaurantes.</li>
+  {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

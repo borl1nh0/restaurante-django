@@ -255,3 +255,42 @@ class PlatoForm(forms.ModelForm):
             self.add_error("nombre", "El nombre contiene palabras no permitidas.")
 
         return cleaned
+
+
+class RestauranteBusquedaAvanzadaForm(forms.Form):
+    nombre = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={})
+    )
+    telefono = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={})
+    )
+    direccion = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={})
+    )
+
+
+    def clean(self):
+        cleaned = super().clean()
+        nombre = cleaned.get("nombre")
+        telefono = cleaned.get("telefono")
+        direccion = cleaned.get("direccion")
+
+        # Validación 1
+        if not nombre and not telefono and not direccion:
+            self.add_error("nombre", "Debe rellenar al menos un campo para buscar.")
+            self.add_error("telefono", "")
+            self.add_error("direccion", "")
+            return cleaned
+
+        # Validación 2
+        if telefono and not telefono.replace(" ", "").isdigit():
+            self.add_error("telefono", "El teléfono debe contener solo números.")
+
+        # Validación 3
+        if nombre and nombre.strip() == "":
+            self.add_error("nombre", "El nombre no puede estar vacío.")
+
+        return cleaned

@@ -58,6 +58,8 @@ urlpatterns = [
     path('perfiles/editar/<int:pk>/', views.perfil_editar, name='perfil_editar'),
     path('perfiles/eliminar/<int:pk>/', views.perfil_eliminar, name='perfil_eliminar'),
     re_path(r'^buscar/(?P<texto>\w{3,20})/$', views.buscar_simple, name='buscar_simple'),
-    
+    # BUSQUEDA AVANZADA 
+    path("restaurantes/busqueda-avanzada/",views.restaurante_busqueda_avanzada,name="restaurante_busqueda_avanzada"),
     
 ]
+
