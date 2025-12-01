@@ -172,7 +172,8 @@ def lista_pedidos(request):
         Pedido.objects
         .select_related('cliente', 'restaurante', 'reserva')
         .prefetch_related('lineapedido_set__plato')
-        .order_by('-creado')[:100]
+        .order_by('-id')[:100]
+
     )
     return render(request, 'restaurante/pedidos.html', {
         'resumen': resumen,
