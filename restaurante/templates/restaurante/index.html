@@ -1,20 +1,49 @@
-{% extends "restaurante/base.html" %}
-{% block title %}Inicio{% endblock %}
-{% block header %}<h1>Bienvenido al Restaurante Bueno</h1>{% endblock %}
+{% extends 'restaurante/base.html' %}
 {% block content %}
-<div class="container mt-4">
-	<h2>Menu de navegación</h2>
-	<ul>
-		<li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
-		<li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
-		<li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
-		<li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
-		<li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
-		<li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
-		<li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
-		<li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
-		<li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
-		<li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
-	</ul>
-</div>
+
+<h1>Bienvenido al Restaurante Bueno</h1>
+
+<h3>CRUD Restaurantes</h3>
+<ul>
+    <li><a href="{% url 'restaurantes_listar' %}">Lista de Restaurantes</a></li>
+    <li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
+</ul>
+
+<h3>CRUD Direcciones</h3>
+<ul>
+    <li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
+    <li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
+</ul>
+
+<h3>CRUD Clientes</h3>
+<ul>
+    <li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
+    <li><a href="{% url 'crud_clientes:crear' %}">Crear Cliente</a></li>
+</ul>
+
+<h3>CRUD Perfiles de Cliente</h3>
+<ul>
+    <li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
+    <li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
+</ul>
+
+<h3>CRUD Platos</h3>
+<ul>
+    <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
+    <li><a href="{% url 'crud_platos:crear' %}">Crear Plato</a></li>
+</ul>
+
+<h3>CRUD Reservas</h3>
+<ul>
+    <li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
+    <li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
+</ul>
+
+<h3>Consultas adicionales</h3>
+<ul>
+    <li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
+    <li><a href="{% url 'restaurante_busqueda_avanzada' %}">Búsqueda avanzada</a></li>
+    <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+</ul>
+
 {% endblock %}
