@@ -63,7 +63,6 @@ class ReservaForm(forms.Form):
     mesa = forms.ModelChoiceField(queryset=Mesa.objects.none(), required=True)
     fecha = forms.DateField(label='Fecha', widget=forms.SelectDateWidget())
     hora = forms.TimeField(label='Hora', widget=forms.TimeInput(format='%H:%M'))
-    estado = forms.CharField(label='Estado', max_length=20, required=False, initial='pendiente')
     notas = forms.CharField(label='Notas', widget=forms.Textarea(), required=False)
 
     def __init__(self, *args, **kwargs):
@@ -102,11 +101,11 @@ class ReservaCreateForm(forms.Form):
         fecha = cleaned.get("fecha")
         cliente = cleaned.get("cliente")
 
-        #Validación: horario permitido (12:00 a 23:00)
+        #Validaci
         if hora and (hora.hour < 12 or hora.hour > 23):
             self.add_error("hora", "Solo se puede reservar de 12:00 a 23:00.")
 
-        #Validación: cliente no puede duplicar reservas
+        #Validacion no se puede duplicar reserva
         if cliente and fecha and hora:
             if Reserva.objects.filter(cliente=cliente, fecha=fecha, hora=hora).exists():
                 self.add_error("cliente", "Ya tienes una reserva en esa fecha y hora.")
@@ -207,10 +206,8 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ('nombre', 'email', 'telefono')
-        widgets = {
-            'email': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.com'}),
-        }
-
+        widgets = {'email': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.com'}),}
+        #attrs={'placeholder': 'correo@ejemplo.com'} ponemos en el recuaddro un ejemplo de lo que tiene que poner
     def clean(self):
         cleaned = super().clean()
         email = cleaned.get("email")
@@ -236,10 +233,7 @@ class PlatoForm(forms.ModelForm):
     class Meta:
         model = Plato
         fields = '__all__'
-        widgets = {
-            'precio': forms.NumberInput(attrs={'step': '0.01'}),
-            'disponible': forms.CheckboxInput(),
-        }
+        widgets = {'precio': forms.NumberInput(attrs={'step': '0.01'}),'disponible': forms.CheckboxInput(),}
 
     def clean(self):
         cleaned = super().clean()
