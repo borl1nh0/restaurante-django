@@ -1,5 +1,6 @@
 {% extends 'restaurante/base.html' %}
 {% block content %}
+
 <h2>Perfiles de Clientes</h2>
 
 <a class="btn btn-primary mb-3" href="{% url 'perfil_crear' %}">Crear nuevo perfil</a>
@@ -13,6 +14,7 @@
       <th>Acciones</th>
     </tr>
   </thead>
+
   <tbody>
     {% for p in perfiles %}
     <tr>
@@ -20,21 +22,34 @@
       <td>{{ p.alergias|default:'-' }}</td>
       <td>{{ p.preferencias|default:'-' }}</td>
       <td>
-        <!--
-          botones para editar y eliminar el perfil.
-          - Son enlaces de Bootstrap (`btn btn-sm btn-outline-*`).
-        -->
-        <a href="{% url 'perfil_editar' p.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-        <form method="post" action="{% url 'perfil_eliminar' p.id %}" style="display:inline;">
+
+        
+        <a href="{% url 'perfil_editar' p.id %}" 
+           class="btn btn-sm btn-outline-primary">Editar</a>
+
+        
+        <form method="post"
+              action="{% url 'perfil_eliminar' p.id %}"
+              style="display:inline;"
+              data-confirm="¿Seguro que quieres eliminar el perfil de {{ p.cliente.nombre }}?">
           {% csrf_token %}
-          <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar el perfil de {{ p.cliente.nombre }}?')">Eliminar</button>
+          <button type="submit" class="btn btn-sm btn-outline-danger">
+            Eliminar
+          </button>
         </form>
+
       </td>
     </tr>
     {% empty %}
-    <tr><td colspan="5">No hay perfiles registrados.</td></tr>
+    <tr>
+      <td colspan="5">No hay perfiles registrados.</td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
-<p class="mt-3"><a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a></p>
+
+<p class="mt-3">
+  <a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a>
+</p>
+
 {% endblock %}

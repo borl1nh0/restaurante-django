@@ -1,5 +1,6 @@
 {% extends 'restaurante/base.html' %}
 {% block content %}
+
 <h2>Listado de Restaurantes</h2>
 
 <a href="{% url 'restaurantes_crear' %}">Crear nuevo restaurante</a>
@@ -10,21 +11,35 @@
     <strong>{{ r.nombre }}</strong><br>
     Teléfono: {{ r.telefono }}<br>
     Dirección: {{ r.direccion }}<br>
-    Clientes frecuentes: 
+
+    Clientes frecuentes:
+    {% if r.clientes_frecuentes.all %}
       {% for c in r.clientes_frecuentes.all %}
-      
-      {% empty %}
+        {{ c.nombre }}{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    {% else %}
       Ninguno
-    {% endfor %}
+    {% endif %}
     <br>
-    <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> | 
-      <form method="post" action="{% url 'restaurantes_eliminar' r.id %}" style="display:inline;">
+
+    <!-- Botón editar -->
+    <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> |
+
+    <!-- Botón eliminar CONTROLADO POR TU JS -->
+    <form method="post"
+          action="{% url 'restaurantes_eliminar' r.id %}"
+          style="display:inline;"
+          data-confirm="¿Seguro que quieres eliminar el restaurante {{ r.nombre }}?">
       {% csrf_token %}
-      <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar el restaurante {{ r.nombre }}?')">Eliminar</button>
+      <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">
+        Eliminar
+      </button>
     </form>
+
   </li>
   {% empty %}
   <li>No hay restaurantes registrados.</li>
   {% endfor %}
 </ul>
+
 {% endblock %}

@@ -1,19 +1,44 @@
 {% extends 'restaurante/base.html' %}
 {% block title %}Clientes - Listar{% endblock %}
 {% block content %}
+
 <h1>Clientes</h1>
+
 <p><a href="{% url 'crud_clientes:crear' %}">Crear cliente</a></p>
+
 <table>
-  <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Acciones</th></tr></thead>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
   <tbody>
     {% for c in clientes %}
     <tr>
       <td>{{ c.nombre }}</td>
       <td>{{ c.email }}</td>
       <td>{{ c.telefono }}</td>
+
       <td>
+
+        <!-- Botón editar -->
         <a href="{% url 'crud_clientes:editar' c.pk %}">Editar</a> |
-        <a href="{% url 'crud_clientes:eliminar' c.pk %}">Eliminar</a>
+
+        <!-- Botón eliminar usando tu JS -->
+        <form method="post"
+              action="{% url 'crud_clientes:eliminar' c.pk %}"
+              style="display:inline;"
+              data-confirm="¿Seguro que quieres eliminar al cliente {{ c.nombre }}?">
+          {% csrf_token %}
+          <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">
+            Eliminar
+          </button>
+        </form>
+
       </td>
     </tr>
     {% empty %}
@@ -21,5 +46,9 @@
     {% endfor %}
   </tbody>
 </table>
-<p class="mt-3"><a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a></p>
+
+<p class="mt-3">
+  <a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a>
+</p>
+
 {% endblock %}
