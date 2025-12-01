@@ -214,8 +214,8 @@ class ClienteForm(forms.ModelForm):
         telefono = cleaned.get("telefono")
 
         # Email debe ser de dominio gmail.com
-        if email and not email.endswith("@gmail.com"):
-            self.add_error("email", "El email debe ser de dominio @gmail.com")
+        if email and "@" not in email:
+            self.add_error("email", "Debe contener un símbolo @ válido.")
 
         # Teléfono entre 9 y 15 dígitos
         if telefono and not (9 <= len(telefono) <= 15):
@@ -223,12 +223,7 @@ class ClienteForm(forms.ModelForm):
 
         return cleaned
 
-
-
-
 # ====================== FORMULARIO PLATO =====================
-
-
 class PlatoForm(forms.ModelForm):
     class Meta:
         model = Plato
