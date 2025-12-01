@@ -258,18 +258,9 @@ class PlatoForm(forms.ModelForm):
 
 
 class RestauranteBusquedaAvanzadaForm(forms.Form):
-    nombre = forms.CharField(
-        required=False,
-        widget=forms.TextInput(attrs={})
-    )
-    telefono = forms.CharField(
-        required=False,
-        widget=forms.TextInput(attrs={})
-    )
-    direccion = forms.CharField(
-        required=False,
-        widget=forms.TextInput(attrs={})
-    )
+    nombre = forms.CharField(required=False,widget=forms.TextInput(attrs={}))
+    telefono = forms.CharField(required=False,widget=forms.TextInput(attrs={}))
+    direccion = forms.CharField(required=False,widget=forms.TextInput(attrs={}))
 
 
     def clean(self):
