@@ -12,25 +12,45 @@
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{ res.cliente.nombre }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">Mesa {{ res.mesa.numero }}</h6>
-        <p class="card-text mb-1"><strong>Fecha:</strong> {{ res.fecha }} <strong>Hora:</strong> {{ res.hora }}</p>
+        <p class="card-text mb-1">
+          <strong>Fecha:</strong> {{ res.fecha }} 
+          <strong>Hora:</strong> {{ res.hora }}
+        </p>
+
         {% if res.notas %}
-          <p class="card-text"> <strong>Notas:</strong> {{ res.notas|truncatechars:100 }} </p>
+          <p class="card-text">
+            <strong>Notas:</strong> {{ res.notas|truncatechars:100 }}
+          </p>
         {% endif %}
+
         <div class="mt-auto">
+
           <a href="{% url 'reservas_editar' res.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
 
-          <form method="post" action="{% url 'reservas_eliminar' res.id %}" style="display:inline;">
+          
+          <form method="post" 
+                action="{% url 'reservas_eliminar' res.id %}" 
+                style="display:inline;"
+                data-confirm="¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?">
             {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?')">Eliminar</button>
-
+            <button type="submit" class="btn btn-sm btn-outline-danger">
+              Eliminar
+            </button>
           </form>
+
         </div>
       </div>
     </div>
   </div>
   {% empty %}
-  <div class="col-12"><p>No hay reservas registradas.</p></div>
+  <div class="col-12">
+    <p>No hay reservas registradas.</p>
+  </div>
   {% endfor %}
 </div>
-<p class="mt-3"><a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a></p>
+
+<p class="mt-3">
+  <a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a>
+</p>
+
 {% endblock %}

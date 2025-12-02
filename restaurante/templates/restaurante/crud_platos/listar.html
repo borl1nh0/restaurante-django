@@ -1,10 +1,22 @@
 {% extends 'restaurante/base.html' %}
 {% block title %}Platos - Listar{% endblock %}
 {% block content %}
+
 <h1>Platos</h1>
 <p><a href="{% url 'crud_platos:crear' %}">Crear plato</a></p>
+
 <table>
-  <thead><tr><th>Restaurante</th><th>Nombre</th><th>Precio</th><th>Categoría</th><th>Disponible</th><th>Acciones</th></tr></thead>
+  <thead>
+    <tr>
+      <th>Restaurante</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Categoría</th>
+      <th>Disponible</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
   <tbody>
     {% for p in platos %}
     <tr>
@@ -13,9 +25,21 @@
       <td>{{ p.precio }}</td>
       <td>{{ p.categoria }}</td>
       <td>{% if p.disponible %}Sí{% else %}No{% endif %}</td>
+
       <td>
         <a href="{% url 'crud_platos:editar' p.pk %}">Editar</a> |
-        <a href="{% url 'crud_platos:eliminar' p.pk %}">Eliminar</a>
+
+     
+        <form method="post" 
+              action="{% url 'crud_platos:eliminar' p.pk %}"
+              style="display:inline;"
+              data-confirm="¿Seguro que quieres eliminar el plato {{ p.nombre }}?">
+          {% csrf_token %}
+          <button type="submit" style="background:none;border:none;color:red;cursor:pointer;padding:0;">
+            Eliminar
+          </button>
+        </form>
+
       </td>
     </tr>
     {% empty %}
@@ -23,5 +47,9 @@
     {% endfor %}
   </tbody>
 </table>
-<p class="mt-3"><a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a></p>
+
+<p class="mt-3">
+  <a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a>
+</p>
+
 {% endblock %}

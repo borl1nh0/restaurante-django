@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
-from restaurante.form import (RestauranteForm,RestauranteCreateForm,DireccionForm,ClienteForm,PlatoForm,ReservaForm,ReservaCreateForm,PerfilClienteForm,PerfilClienteCreateForm,)
+from restaurante.form import (RestauranteBusquedaAvanzadaForm, RestauranteForm,RestauranteCreateForm,DireccionForm,ClienteForm,PlatoForm,ReservaForm,ReservaCreateForm,PerfilClienteForm,PerfilClienteCreateForm,)
 from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 from django.contrib import messages
 
@@ -172,7 +172,8 @@ def lista_pedidos(request):
         Pedido.objects
         .select_related('cliente', 'restaurante', 'reserva')
         .prefetch_related('lineapedido_set__plato')
-        .order_by('-creado')[:100]
+        .order_by('-id')[:100]
+
     )
     return render(request, 'restaurante/pedidos.html', {
         'resumen': resumen,
@@ -559,3 +560,45 @@ def platos_eliminar(request, pk):
         messages.success(request, 'Plato eliminado correctamente.')
         return redirect('crud_platos:listar')
     return render(request, 'restaurante/crud_platos/eliminar.html', {'plato': plato})
+
+
+def restaurante_busqueda_avanzada(request):
+    QS = Restaurante.objects.select_related("direccion").all()
+
+  
+    if request.GET:
+        form = RestauranteBusquedaAvanzadaForm(request.GET)
+
+        if form.is_valid():
+            nombre = form.cleaned_data.get("nombre")
+            telefono = form.cleaned_data.get("telefono")
+            direccion = form.cleaned_data.get("direccion")
+
+            if nombre:
+                QS = QS.filter(nombre__icontains=nombre)
+
+            if telefono:
+                QS = QS.filter(telefono__icontains=telefono)
+
+            if direccion:
+                QS = QS.filter(
+                    Q(direccion__calle__icontains=direccion) |
+                    Q(direccion__ciudad__icontains=direccion) |
+                    Q(direccion__codigo_postal__icontains=direccion)
+                )
+
+    else:
+       
+        form = RestauranteBusquedaAvanzadaForm()
+
+   
+    return render(
+        request,
+        "restaurante/busqueda_avanzada.html",
+        {
+            "form": form,             
+            "restaurantes": QS,
+        }
+    )
+
+
