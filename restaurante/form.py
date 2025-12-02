@@ -47,6 +47,18 @@ class RestauranteCreateForm(forms.Form):
 
 
 # --- Formularios de Reserva ---
+class RestauranteBusquedaAvanzadaForm(forms.Form):
+    """Formulario simple para la búsqueda avanzada de restaurantes.
+    Campos opcionales: nombre, telefono, direccion (busca en calle/ciudad/codigo_postal
+    como hace la vista `restaurante_busqueda_avanzada`).
+    """
+    nombre = forms.CharField(label='Nombre', max_length=100, required=False)
+    telefono = forms.CharField(label='Teléfono', max_length=20, required=False)
+    direccion = forms.CharField(label='Dirección', max_length=200, required=False)
+
+    def clean(self):
+        # Método preparado para futuras validaciones; por ahora delega en el padre.
+        return super().clean()
 class ReservaForm(forms.Form):
     cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(), required=True)
     mesa = forms.ModelChoiceField(queryset=Mesa.objects.none(), required=True)
