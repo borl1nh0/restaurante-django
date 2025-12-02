@@ -15,14 +15,27 @@ class RestauranteCreateForm(forms.Form):
     direccion = forms.ModelChoiceField(queryset=Direccion.objects.all(), required=True, empty_label=None)
     clientes_frecuentes = forms.ModelMultipleChoiceField(queryset=Cliente.objects.all(), required=False)
 
-    def clean_direccion(self):
-        direccion = self.cleaned_data.get('direccion')
+    def clean(self):
+        """Validación completa del formulario que añade errores a campos
+        concretos usando self.add_error en lugar de lanzar ValidationError
+        globales. Ejemplo de uso (similar al solicitado):
+            self.add_error('idioma', 'No puede usar la Biblioteca de la Universidad de Sevilla y el idioma Fránces')
+            self.add_error('biblioteca', 'No puede usar la Biblioteca de la Universidad de Sevilla y el idioma Fránces')
+
+        Aquí validamos que la dirección no esté ya asociada a otro restaurante
+        y añadimos el error al campo 'direccion' con self.add_error.
+        """
+        cleaned_data = super().clean()
+        direccion = cleaned_data.get('direccion')
+
         if direccion is None:
-            return direccion
+            return cleaned_data
 
         if Restaurante.objects.filter(direccion=direccion).exists():
-            raise forms.ValidationError('Esa dirección ya está asociada a otro restaurante.')
-        return direccion
+            # Añadimos el error al campo concreto en lugar de lanzar excepción
+            self.add_error('direccion', 'Esa dirección ya está asociada a otro restaurante.')
+
+        return cleaned_data
 
 
 # --- Formularios de Reserva ---
@@ -64,6 +77,7 @@ class PerfilClienteCreateForm(forms.Form):
         super().__init__(*args, **kwargs)
         used = PerfilCliente.objects.values_list('cliente_id', flat=True)
         self.fields['cliente'].queryset = Cliente.objects.exclude(id__in=used)
+        
 
 
 class PerfilClienteForm(forms.Form):
@@ -106,6 +120,6 @@ class PlatoForm(forms.ModelForm):
         model = Plato
         fields = '__all__'
         widgets = {
-            'precio': forms.NumberInput(attrs={'step': '0.01'}),
+            'precio': forms.NumberInput(attrs={'step': '0.01'}), 
             'disponible': forms.CheckboxInput(),
         }
