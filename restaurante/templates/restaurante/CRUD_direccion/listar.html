@@ -1,46 +1,43 @@
 {% extends 'restaurante/base.html' %}
-{% load django_bootstrap5 %}
+
 {% block content %}
 
-<h2>Listado de Restaurantes</h2>
+<h2 class="mb-4">Restaurantes</h2>
 
-<a href="{% url 'restaurantes_crear' %}">Crear nuevo restaurante</a>
+<a href="{% url 'restaurantes_crear' %}" class="btn btn-primary mb-3">Crear nuevo restaurante</a>
 
-<ul>
-  {% for r in restaurantes %}
-  <li>
-    <strong>{{ r.nombre }}</strong><br>
-    Teléfono: {{ r.telefono }}<br>
-    Dirección: {{ r.direccion }}<br>
+<ul class="list-group">
+    {% for r in restaurantes %}
+    <li class="list-group-item">
 
-    Clientes frecuentes:
-    {% if r.clientes_frecuentes.all %}
-      {% for c in r.clientes_frecuentes.all %}
-        {{ c.nombre }}{% if not forloop.last %}, {% endif %}
-      {% endfor %}
-    {% else %}
-      Ninguno
-    {% endif %}
-    <br>
+        <h5>{{ r.nombre }}</h5>
 
-    <!-- Botón editar -->
-    <a href="{% url 'restaurantes_editar' r.id %}">Editar</a> |
+        <p class="mb-1">
+            <strong>Teléfono:</strong> {{ r.telefono }}<br>
+            <strong>Dirección:</strong> {{ r.direccion }}<br>
+            <strong>Clientes frecuentes:</strong>
+            {% if r.clientes_frecuentes.exists %}
+                {% for c in r.clientes_frecuentes.all %}
+                    {{ c.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                Ninguno
+            {% endif %}
+        </p>
 
-    <!-- Botón eliminar CONTROLADO POR TU JS -->
-    <form method="post"
-          action="{% url 'restaurantes_eliminar' r.id %}"
-          style="display:inline;"
-          data-confirm="¿Seguro que quieres eliminar el restaurante {{ r.nombre }}?">
-      {% csrf_token %}
-      <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">
-        Eliminar
-      </button>
-    </form>
+        <a href="{% url 'restaurantes_editar' r.id %}" class="btn btn-sm btn-primary">Editar</a>
+        
+        <form method="post" action="{% url 'restaurantes_eliminar' r.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger" data-confirm="¿Seguro que quieres eliminar este restaurante?">
+                Eliminar
+            </button>
+        </form>
 
-  </li>
-  {% empty %}
-  <li>No hay restaurantes registrados.</li>
-  {% endfor %}
+    </li>
+    {% empty %}
+        <li class="list-group-item">No hay restaurantes registrados.</li>
+    {% endfor %}
 </ul>
 
 {% endblock %}

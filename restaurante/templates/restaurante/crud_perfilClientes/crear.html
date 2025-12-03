@@ -1,14 +1,34 @@
 {% extends 'restaurante/base.html' %}
 {% load django_bootstrap5 %}
-{% block content %}
-<h2>Crear Perfil de Cliente</h2>
 
-<form method="post" action="{% url 'perfil_crear' %}">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  <div class="mb-3">
-    <button type="submit" class="btn btn-success">Guardar</button>
-    <a class="btn btn-link" href="{% url 'index' %}">Volver</a>
-  </div>
-</form>
+{% block content %}
+
+<div class="container mt-4" style="max-width: 700px;">
+
+    <h2 class="mb-4">Crear Perfil de Cliente</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Cliente</label>
+            {% bootstrap_field form.cliente %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Alergias</label>
+            {% bootstrap_field form.alergias %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Preferencias</label>
+            {% bootstrap_field form.preferencias %}
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'perfil_listar' %}" class="btn btn-secondary ms-2">Volver</a>
+    </form>
+
+</div>
+
 {% endblock %}

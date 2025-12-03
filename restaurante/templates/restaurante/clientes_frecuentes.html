@@ -1,18 +1,40 @@
-{% extends "restaurante/base.html" %}
-
-{% block title %}
-Clientes frecuentes
-{% endblock %}
+{% extends 'restaurante/base.html' %}
 
 {% block content %}
-<h1>Clientes frecuentes</h1>
-<ul>
-{% for c in clientes %}
-  <li>
-    {{ c.nombre }} — Pedidos: {{ c.num_pedidos }} — Favoritos:
-    {% for r in c.restaurantes_favoritos.all %} {{ r.nombre }} {% empty %}(ninguno){% endfor %}
-  </li>
-{% empty %}<li>No hay clientes</li>{% endfor %}
-</ul>
-<p><a href="{% url 'index' %}">Volver</a></p>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Clientes frecuentes</h2>
+
+    <ul class="list-group mb-3">
+
+        {% for cliente in clientes %}
+        <li class="list-group-item">
+            <strong>{{ cliente.nombre }}</strong>
+            —
+            Pedidos: {{ cliente.num_pedidos }}
+            —
+            Favoritos:
+            {% if cliente.restaurantes_favoritos.all %}
+                {% if cliente.restaurantes_favoritos.count > 0 %}
+                    {% for r in cliente.restaurantes_favoritos.all %}
+                        {{ r.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% else %}
+                    (ninguno)
+                {% endif %}
+            {% else %}
+                (ninguno)
+            {% endif %}
+        </li>
+        {% empty %}
+        <li class="list-group-item">No hay clientes frecuentes.</li>
+        {% endfor %}
+
+    </ul>
+
+    <a href="{% url 'index' %}" class="btn btn-secondary">Volver</a>
+
+</div>
+
 {% endblock %}

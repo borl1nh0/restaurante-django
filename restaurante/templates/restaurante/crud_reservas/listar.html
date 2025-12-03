@@ -1,56 +1,47 @@
 {% extends 'restaurante/base.html' %}
-{% load django_bootstrap5 %}
+
 {% block content %}
-<h2>Listado de Reservas</h2>
 
-<a class="btn btn-primary mb-3" href="{% url 'reservas_crear' %}">Crear nueva reserva</a>
+<div class="container mt-4">
 
-<div class="row">
-  {% for res in reservas %}
-  <div class="col-sm-6 col-md-4 mb-4">
-    <div class="card h-100">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title">{{ res.cliente.nombre }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Mesa {{ res.mesa.numero }}</h6>
-        <p class="card-text mb-1">
-          <strong>Fecha:</strong> {{ res.fecha }} 
-          <strong>Hora:</strong> {{ res.hora }}
-        </p>
+    <h2 class="mb-4">Listado de Reservas</h2>
 
-        {% if res.notas %}
-          <p class="card-text">
-            <strong>Notas:</strong> {{ res.notas|truncatechars:100 }}
-          </p>
-        {% endif %}
+    <a href="{% url 'reservas_crear' %}" class="btn btn-primary mb-3">
+        Crear nueva reserva
+    </a>
 
-        <div class="mt-auto">
+    {% for r in reservas %}
+        <div class="p-3 border mb-3">
 
-          <a href="{% url 'reservas_editar' res.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+            <h5 class="mb-1">{{ r.cliente.nombre }}</h5>
 
-          
-          <form method="post" 
-                action="{% url 'reservas_eliminar' res.id %}" 
-                style="display:inline;"
-                data-confirm="¿Seguro que quieres eliminar la reserva de {{ res.cliente.nombre }} (Mesa {{ res.mesa.numero }})?">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-              Eliminar
-            </button>
-          </form>
+            <p class="mb-1">
+                Mesa {{ r.mesa.numero }} <br>
+                <strong>Fecha:</strong> {{ r.fecha }}  
+                <strong>Hora:</strong> {{ r.hora }}
+            </p>
+
+            <a href="{% url 'reservas_editar' r.id %}" class="btn btn-sm btn-primary">
+                Editar
+            </a>
+
+            <form action="{% url 'reservas_eliminar' r.id %}" 
+                  method="post" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-danger" 
+                        data-confirm="¿Seguro que quieres eliminar esta reserva?">
+                    Eliminar
+                </button>
+            </form>
 
         </div>
-      </div>
-    </div>
-  </div>
-  {% empty %}
-  <div class="col-12">
-    <p>No hay reservas registradas.</p>
-  </div>
-  {% endfor %}
-</div>
 
-<p class="mt-3">
-  <a class="btn btn-link" href="{% url 'index' %}">Volver al inicio</a>
-</p>
+    {% empty %}
+        <p class="text-muted">No hay reservas disponibles.</p>
+    {% endfor %}
+
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Volver al inicio</a>
+
+</div>
 
 {% endblock %}

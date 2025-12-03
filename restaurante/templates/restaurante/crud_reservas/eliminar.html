@@ -1,6 +1,8 @@
 {% extends 'restaurante/base.html' %}
 {% block content %}
+
 <h2>Eliminar Reserva</h2>
+
 <p>¿Seguro que quieres eliminar la reserva de <strong>{{ reserva.cliente.nombre }}</strong> (Mesa {{ reserva.mesa.numero }})?</p>
 <form method="post" action="{% url 'reservas_eliminar' reserva.id %}" class="confirm-delete" data-confirm="¿Seguro que quieres eliminar la reserva de {{ reserva.cliente.nombre }} (Mesa {{ reserva.mesa.numero }})?">
   {% csrf_token %}

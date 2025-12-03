@@ -1,14 +1,31 @@
 {% extends 'restaurante/base.html' %}
 {% load django_bootstrap5 %}
-{% block content %}
-<h2>Editar Perfil</h2>
 
-<form method="post" action="{% url 'perfil_editar' perfil.id %}">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  <div class="mb-3">
-    <button type="submit" class="btn btn-primary">Actualizar</button>
-    <a class="btn btn-link" href="{% url 'index' %}">Volver</a>
-  </div>
-</form>
+{% block content %}
+
+<div class="container mt-4" style="max-width: 600px;">
+
+    <h2 class="mb-4">Editar Perfil</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Alergias -->
+        <div class="mb-3">
+            <label class="form-label">Alergias</label>
+            {% bootstrap_field form.alergias show_label=False %}
+        </div>
+
+        <!-- Preferencias -->
+        <div class="mb-3">
+            <label class="form-label">Preferencias</label>
+            {% bootstrap_field form.preferencias show_label=False %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{% url 'perfil_listar' %}" class="btn btn-secondary ms-2">Volver</a>
+    </form>
+
+</div>
+
 {% endblock %}

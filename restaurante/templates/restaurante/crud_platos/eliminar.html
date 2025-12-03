@@ -2,8 +2,11 @@
 {% load django_bootstrap5 %}
 {% block title %}Platos - Eliminar{% endblock %}
 {% block content %}
+
 <h1>Eliminar plato</h1>
+
 <p>¿Seguro que quieres eliminar <strong>{{ plato.nombre }}</strong>?</p>
+
 <form method="post">
   {% csrf_token %}
   <button type="submit" class="btn btn-danger">Sí, eliminar</button>

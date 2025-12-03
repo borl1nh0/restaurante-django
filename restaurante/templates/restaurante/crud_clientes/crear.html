@@ -1,11 +1,21 @@
 {% extends 'restaurante/base.html' %}
-{% block title %}Clientes - Crear{% endblock %}
+{% load django_bootstrap5 %}
+
 {% block content %}
-<h1>Crear cliente</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Crear</button>
-</form>
-<p><a href="{% url 'index' %}">Volver</a></p>
+
+<div class="container mt-4" style="max-width: 500px;">
+
+    <h2 class="mb-4">Crear cliente</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <button type="submit" class="btn btn-primary">Crear</button>
+        <a href="{% url 'crud_clientes:listar' %}" class="btn btn-secondary ms-2">Volver</a>
+    </form>
+
+</div>
+
 {% endblock %}

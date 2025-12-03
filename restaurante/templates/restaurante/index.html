@@ -1,51 +1,83 @@
 {% extends 'restaurante/base.html' %}
+
 {% block content %}
 
-<h1>Bienvenido al Restaurante Bueno</h1>
+<div class="container mt-4">
 
-<h3>CRUD Restaurantes</h3>
-<ul>
-    <li><a href="{% url 'restaurantes_listar' %}">Lista de Restaurantes</a></li>
-    <li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
-</ul>
+    <h1 class="mb-4">Bienvenido al Restaurante Bueno</h1>
 
-<h3>CRUD Direcciones</h3>
-<ul>
-    <li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
-    <li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
-</ul>
+    <div class="row">
+        <!--Esto nos los enseño Carlos en sus clases y creo que visualmete es mas bonito que tener una lista simple-->
+        <!-- CRUD Restaurantes -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Restaurantes</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'restaurantes_listar' %}">Lista de Restaurantes</a></li>
+                <li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
+            </ul>
+        </div>
 
-<h3>CRUD Clientes</h3>
-<ul>
-    <li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
-    <li><a href="{% url 'crud_clientes:crear' %}">Crear Cliente</a></li>
-	<li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
-</ul>
+        <!-- CRUD Direcciones -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Direcciones</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
+                <li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
+            </ul>
+        </div>
 
-<h3>CRUD Perfiles de Cliente</h3>
-<ul>
-    <li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
-    <li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
-</ul>
+        <!-- CRUD Clientes -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Clientes</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
+                <li><a href="{% url 'crud_clientes:crear' %}">Crear Cliente</a></li>
+                <li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
+            </ul>
+        </div>
 
-<h3>CRUD Platos</h3>
-<ul>
-    <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
-    <li><a href="{% url 'crud_platos:crear' %}">Crear Plato</a></li>
-	<li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
-</ul>
+    </div>
 
-<h3>CRUD Reservas</h3>
-<ul>
-    <li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
-    <li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
-</ul>
+    <div class="row">
 
-<h3>Consultas adicionales</h3>
-<ul>
-    
-    <li><a href="{% url 'restaurante_busqueda_avanzada' %}">Búsqueda avanzada</a></li>
- 
-</ul>
+        <!-- CRUD Perfiles -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Perfiles de Cliente</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
+                <li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
+            </ul>
+        </div>
+
+        <!-- CRUD Platos -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Platos</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
+                <li><a href="{% url 'crud_platos:crear' %}">Crear Plato</a></li>
+                <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+            </ul>
+        </div>
+
+        <!-- CRUD Reservas -->
+        <div class="col-md-4 mb-4">
+            <h4>CRUD Reservas</h4>
+            <ul class="list-unstyled ms-2">
+                <li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
+                <li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Consultas adicionales -->
+    <div class="mt-3">
+        <h4>Consultas adicionales</h4>
+        <ul class="list-unstyled ms-2">
+            <li><a href="{% url 'restaurante_busqueda_avanzada' %}">Búsqueda avanzada</a></li>
+        </ul>
+    </div>
+
+</div>
 
 {% endblock %}

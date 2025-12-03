@@ -1,24 +1,38 @@
 {% extends 'restaurante/base.html' %}
+
 {% block content %}
-<h2>Listado de Direcciones</h2>
 
-<a href="{% url 'direccion_crear' %}">Crear nueva dirección</a>
+<h2 class="mb-4">Listado de Direcciones</h2>
 
-<ul>
-  {% for d in direcciones %}
-    <li>
-      <strong>{{ d.calle }} {{ d.numero }}</strong><br>
-      {{ d.codigo_postal }} — {{ d.ciudad }} ({{ d.provincia }})<br>
-      <a href="{% url 'direccion_editar' d.id %}">Editar</a> |
-      <form method="post" action="{% url 'direccion_eliminar' d.id %}" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar la dirección {{ d.calle }} {{ d.numero }}?')">Eliminar</button>
-      </form>
+<a href="{% url 'direccion_crear' %}" class="btn btn-primary mb-3">Crear nueva dirección</a>
+
+<ul class="list-group">
+    {% for d in direcciones %}
+    <li class="list-group-item">
+
+        <h5>{{ d.calle }} {{ d.numero }}</h5>
+
+        <p class="mb-1">
+            <strong>{{ d.codigo_postal }}</strong> — {{ d.ciudad }} ({{ d.provincia }})
+        </p>
+
+        <a href="{% url 'direccion_editar' d.id %}" class="btn btn-sm btn-primary">Editar</a>
+
+        <form action="{% url 'direccion_eliminar' d.id %}"
+              method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" 
+                    class="btn btn-sm btn-danger"
+                    data-confirm="¿Seguro que quieres eliminar esta dirección?">
+                Eliminar
+            </button>
+        </form>
+
     </li>
-  {% empty %}
-    <li>No hay direcciones registradas.</li>
-  {% endfor %}
+
+    {% empty %}
+    <li class="list-group-item">No hay direcciones registradas.</li>
+    {% endfor %}
 </ul>
 
-<a href="{% url 'index' %}">Volver al inicio</a>
 {% endblock %}

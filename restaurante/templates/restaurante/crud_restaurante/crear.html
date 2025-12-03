@@ -1,10 +1,23 @@
 {% extends 'restaurante/base.html' %}
 
 {% block content %}
-  <h1>Crear Restaurante</h1>
-  <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-    <a href="{% url 'crud_restaurante:listar' %}">Cancelar</a>
-  </form>
+<h1 class="mb-4">Crear Restaurante</h1>
+
+<form method="post" class="w-50 mx-auto border rounded p-4 shadow-sm bg-light">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div class="text-danger small">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'crud_restaurante:listar' %}" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
 {% endblock %}
