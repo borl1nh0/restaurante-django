@@ -1,6 +1,7 @@
 from django import forms
 from .models import Restaurante, Direccion, Cliente, Plato, PerfilCliente, Mesa, Reserva
 from datetime import date
+from django.db.models import Q
 
 
 
@@ -222,3 +223,31 @@ class PlatoForm(forms.ModelForm):
             'precio': forms.NumberInput(attrs={'step': '0.01'}),
             'disponible': forms.CheckboxInput(),
         }
+
+#====================== Busqueda avanzada==================
+class RestauranteBusquedaAvanzadaForm(forms.Form):
+    """
+    Formulario para la búsqueda avanzada de restaurantes por nombre, 
+    teléfono y campos de la dirección.
+    """
+    nombre = forms.CharField(
+        max_length=100,
+        required=False,
+        label="Nombre del Restaurante",
+        widget=forms.TextInput(attrs={'placeholder': 'Ej. Sabor Andaluz'})
+    )
+    
+    telefono = forms.CharField(
+        max_length=20,
+        required=False,
+        label="Teléfono",
+        widget=forms.TextInput(attrs={'placeholder': 'Ej. 600123456'})
+    )
+    
+    # campo para buscar en Calle, Ciudad o Código Postal.
+    direccion = forms.CharField(
+        max_length=200,
+        required=False,
+        label="Dirección (Calle, Ciudad o C.P.)",
+        widget=forms.TextInput(attrs={'placeholder': 'Ej. Sevilla o 41001'})
+    )
