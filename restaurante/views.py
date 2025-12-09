@@ -563,40 +563,28 @@ def platos_eliminar(request, pk):
 
 
 def restaurante_busqueda_avanzada(request):
+   
+    form = RestauranteBusquedaAvanzadaForm(request.GET or None)
+
     QS = Restaurante.objects.select_related("direccion").all()
 
-  
-    if request.GET:
-        form = RestauranteBusquedaAvanzadaForm(request.GET)
+    
+    if request.GET and form.is_valid():
+        nombre = form.cleaned_data.get("nombre")
+        telefono = form.cleaned_data.get("telefono")
+        direccion = form.cleaned_data.get("direccion")
 
-        if form.is_valid():
-            nombre = form.cleaned_data.get("nombre")
-            telefono = form.cleaned_data.get("telefono")
-            direccion = form.cleaned_data.get("direccion")
+        QS = Restaurante.objects.advanced_filter(
+            nombre=nombre,
+            telefono=telefono,
+            direccion=direccion,
+        )
 
-            if nombre:
-                QS = QS.filter(nombre__icontains=nombre)
-
-            if telefono:
-                QS = QS.filter(telefono__icontains=telefono)
-
-            if direccion:
-                QS = QS.filter(
-                    Q(direccion__calle__icontains=direccion) |
-                    Q(direccion__ciudad__icontains=direccion) |
-                    Q(direccion__codigo_postal__icontains=direccion)
-                )
-
-    else:
-       
-        form = RestauranteBusquedaAvanzadaForm()
-
-   
     return render(
         request,
         "restaurante/busqueda_avanzada.html",
         {
-            "form": form,             
+            "form": form,
             "restaurantes": QS,
         }
     )

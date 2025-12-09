@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 # Create your models here.
 class Direccion(models.Model):
@@ -29,13 +30,47 @@ class PerfilCliente(models.Model):
     def __str__(self): 
         return f"Perfil de {self.cliente.nombre}"
 
+class RestauranteQuerySet(models.QuerySet):
+    """QuerySet con filtros reutilizables para búsquedas avanzadas."""
+
+    def advanced_filter(self, nombre: str | None = None, telefono: str | None = None, direccion: str | None = None):
+        qs = self.select_related("direccion").all()
+
+        if nombre:
+            qs = qs.filter(nombre__icontains=nombre)
+
+        if telefono:
+            qs = qs.filter(telefono__icontains=telefono)
+
+        if direccion:
+            qs = qs.filter(
+                Q(direccion__calle__icontains=direccion)
+                | Q(direccion__ciudad__icontains=direccion)
+                | Q(direccion__codigo_postal__icontains=direccion)
+            )
+
+        return qs
+
+
+class RestauranteManager(models.Manager):
+    """Manager que expone métodos de búsqueda en el modelo."""
+
+    def get_queryset(self):
+        return RestauranteQuerySet(self.model, using=self._db)
+
+    def advanced_filter(self, nombre: str | None = None, telefono: str | None = None, direccion: str | None = None):
+        return self.get_queryset().advanced_filter(nombre=nombre, telefono=telefono, direccion=direccion)
+
 class Restaurante(models.Model):
     nombre = models.CharField(max_length=100)
     telefono = models.CharField(max_length=20)
     direccion = models.OneToOneField(Direccion, on_delete=models.CASCADE)
     clientes_frecuentes = models.ManyToManyField(Cliente, blank=True, related_name="restaurantes_favoritos")
-    
-    def __str__(self): 
+
+    # Registrar el manager personalizado directamente en la clase
+    objects = RestauranteManager()
+
+    def __str__(self):
         return self.nombre
 
 class Etiqueta(models.Model):

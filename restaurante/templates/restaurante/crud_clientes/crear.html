@@ -7,7 +7,7 @@
 
     <h2 class="mb-4">Crear cliente</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'crud_clientes:crear' %}">
         {% csrf_token %}
 
         {% bootstrap_form form %}

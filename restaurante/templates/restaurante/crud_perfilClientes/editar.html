@@ -7,7 +7,7 @@
 
     <h2 class="mb-4">Editar Perfil</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'perfil_editar' perfil.pk %}">
         {% csrf_token %}
 
         <!-- Alergias -->

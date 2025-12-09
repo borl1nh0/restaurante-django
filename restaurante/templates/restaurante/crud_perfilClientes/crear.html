@@ -7,7 +7,7 @@
 
     <h2 class="mb-4">Crear Perfil de Cliente</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'perfil_crear' %}">
         {% csrf_token %}
 
         <div class="mb-3">

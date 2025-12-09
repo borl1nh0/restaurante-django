@@ -7,7 +7,7 @@
 
     <h2 class="mb-4">Crear plato</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'crud_platos:crear' %}">
         {% csrf_token %}
 
         <!-- Restaurante -->

@@ -3,7 +3,7 @@
 {% block title %}Platos - Editar{% endblock %}
 {% block content %}
 <h1>Editar plato</h1>
-<form method="post">
+<form method="post" action="{% url 'crud_platos:editar' plato.pk %}">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit" class="btn btn-primary">Guardar</button>

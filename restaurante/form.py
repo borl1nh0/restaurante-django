@@ -46,6 +46,27 @@ class RestauranteCreateForm(forms.Form):
             raise forms.ValidationError('Esa dirección ya está asociada a otro restaurante.')
         return direccion
 
+    def clean(self):
+        cleaned = super().clean()
+        nombre = cleaned.get("nombre")
+        telefono = cleaned.get("telefono")
+
+        # Validación: teléfono solo numérico
+        if telefono and not telefono.isdigit():
+            self.add_error("telefono", "El teléfono solo puede contener números.")
+
+        # Validación: nombre único
+        if nombre and Restaurante.objects.filter(nombre=nombre).exists():
+            self.add_error("nombre", "Ya existe un restaurante con ese nombre.")
+
+        # Validación: longitudes máximas (defensivo, además del modelo)
+        if nombre and len(nombre) > 100:
+            self.add_error("nombre", "El nombre no puede superar 100 caracteres.")
+        if telefono and len(telefono) > 20:
+            self.add_error("telefono", "El teléfono no puede superar 20 caracteres.")
+
+        return cleaned
+
 
 # --- Formularios de Reserva ---
 class ReservaForm(forms.Form):
@@ -224,12 +245,35 @@ class PlatoForm(forms.ModelForm):
             'disponible': forms.CheckboxInput(),
         }
 
+    def clean(self):
+        cleaned = super().clean()
+        nombre = cleaned.get("nombre")
+        precio = cleaned.get("precio")
+        restaurante = cleaned.get("restaurante")
+
+        
+        if precio is not None and precio <= 0:
+            self.add_error("precio", "El precio debe ser mayor que 0.")
+
+        
+        if nombre is not None and nombre.strip() == "":
+            self.add_error("nombre", "El nombre no puede estar vacío.")
+        if nombre and len(nombre) > 100:
+            self.add_error("nombre", "El nombre no puede superar 100 caracteres.")
+
+       
+        if restaurante and nombre:
+            qs = Plato.objects.filter(restaurante=restaurante, nombre=nombre)
+            
+            if self.instance and self.instance.pk:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                self.add_error("nombre", "Ya existe un plato con ese nombre en este restaurante.")
+
+        return cleaned
+
 #====================== Busqueda avanzada==================
 class RestauranteBusquedaAvanzadaForm(forms.Form):
-    """
-    Formulario para la búsqueda avanzada de restaurantes por nombre, 
-    teléfono y campos de la dirección.
-    """
     nombre = forms.CharField(
         max_length=100,
         required=False,
@@ -244,10 +288,37 @@ class RestauranteBusquedaAvanzadaForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Ej. 600123456'})
     )
     
-    # campo para buscar en Calle, Ciudad o Código Postal.
     direccion = forms.CharField(
         max_length=200,
         required=False,
         label="Dirección (Calle, Ciudad o C.P.)",
         widget=forms.TextInput(attrs={'placeholder': 'Ej. Sevilla o 41001'})
     )
+
+    def clean(self):
+        cleaned = super().clean()
+
+        nombre = cleaned.get("nombre")
+        telefono = cleaned.get("telefono")
+        direccion = cleaned.get("direccion")
+
+        
+        if not nombre and not telefono and not direccion:
+            mensaje = "Debes rellenar al menos un campo."
+            self.add_error("nombre", mensaje)
+            self.add_error("telefono", mensaje)
+            self.add_error("direccion", mensaje)
+
+        else:
+            
+            if telefono and not telefono.isdigit():
+                self.add_error("telefono", "El teléfono solo puede contener números.")
+
+            
+            if nombre is not None and nombre.strip() == "":
+                self.add_error("nombre", "No puedes poner solo espacios.")
+
+            if direccion is not None and direccion.strip() == "":
+                self.add_error("direccion", "No puedes poner solo espacios.")
+
+        return cleaned

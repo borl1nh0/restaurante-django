@@ -2,7 +2,7 @@
 {% block title %}Clientes - Editar{% endblock %}
 {% block content %}
 <h1>Editar cliente</h1>
-<form method="post">
+<form method="post" action="{% url 'crud_clientes:editar' cliente.pk %}">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Guardar</button>

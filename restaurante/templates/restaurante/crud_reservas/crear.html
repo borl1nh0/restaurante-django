@@ -7,7 +7,7 @@
 
     <h2 class="mb-4">Crear Reserva</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'reservas_crear' %}">
         {% csrf_token %}
 
         <!-- Cliente -->

@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Editar Restaurante</h2>
 
-<form method="post">
+<form method="post" action="{% url 'restaurantes_editar' restaurante.pk %}">
   {% csrf_token %}
   {% bootstrap_form form %}
   <div class="mb-3">
