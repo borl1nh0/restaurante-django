@@ -1,54 +1,70 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
 <!doctype html>
 <html lang="es">
 <head>
-  {% load static %}
-  <meta charset="utf-8">
-  <title>{% block title %}Restaurante Bueno{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
-  <script src="{% static 'js/script.js' %}"></script>
-    {% load django_bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-  {% load bootstrap_icons %}
-
+    <meta charset="utf-8">
+    <title>{% block title %}Restaurante Bueno{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="{% static 'img/logo.jpg' %}" alt="Logo del Restaurante" width="120">
+    <header>
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Logo del Restaurante" width="120">
+        </div>
+
+        {% include 'restaurante/menu.html' %}
+        <div id="content">
+        {% block contenido %}
+        {% endblock %}
     </div>
+        <nav class="mt-2">
+            {% if request.user.is_authenticated %}
+                {% if perms.restaurante.add_reserva %}
+                    <a href="{% url 'reserva_crear' %}" class="btn btn-outline-primary btn-sm">Hacer Reserva</a>
+                    <a href="{% url 'mis_reservas' %}" class="btn btn-outline-secondary btn-sm">Mis Reservas</a>
+                {% endif %}
 
-    {% include 'restaurante/menu.html' %}
-  </header>
+                {% if perms.restaurante.add_plato %}
+                    <a href="{% url 'plato_crear' %}" class="btn btn-outline-success btn-sm">Crear Plato (Gestión)</a>
+                {% endif %}
 
-  <section id="contenido">
-    {% block header %} {% endblock %}
-    {% block content %} {% endblock %}
-  </section>
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Salir ({{ request.user.username }})</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Iniciar Sesión</a>
+                <a href="{% url 'registrar_usuario' %}" class="btn btn-secondary btn-sm">Registrarse</a>
+            {% endif %}
+        </nav>
 
-  {% include 'restaurante/footer.html' %}
+        <div class="session-info mt-2">
+            {% if request.user.is_authenticated %}
+                <small>
+                    Rol: {{ request.session.rol_usuario }} |
+                    Inicio: {{ request.session.fecha_inicio_sesion }} |
+                    Último menú: {{ request.session.ultimo_acceso_menu }} |
+                    Reservas activas: {{ request.session.total_reservas_activas }}
+                </small>
+            {% else %}
+                <small>
+                    Invitado desde: {{ request.session.fecha_inicio_sesion }} |
+                    Reservas activas: {{ request.session.total_reservas_activas }}
+                </small>
+            {% endif %}
+        </div>
+
+        {% bootstrap_messages %}
+    </header>
+
+    <section id="contenido" class="container mt-3">
+        {% block content %}{% endblock %}
+    </section>
 
 </body>
-
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  
-  document.body.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a.confirm-delete');
-    if(a){
-      var msg = a.dataset.confirm || '¿Seguro que deseas eliminar este elemento?';
-      if(!confirm(msg)) e.preventDefault();
-    }
-  });
-
-  document.body.addEventListener('submit', function(e){
-    var f = e.target.closest && e.target.closest('form.confirm-delete');
-    if(f){
-      var msg = f.dataset.confirm || '¿Seguro que deseas eliminar este elemento?';
-      if(!confirm(msg)) e.preventDefault();
-    }
-  });
-});
-</script>
-
 </html>

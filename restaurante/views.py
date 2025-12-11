@@ -1,9 +1,13 @@
+import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.defaults import page_not_found
 from django.db.models import Q, Count, Sum, Avg
-from restaurante.form import (RestauranteBusquedaAvanzadaForm, RestauranteForm,RestauranteCreateForm,DireccionForm,ClienteForm,PlatoForm,ReservaForm,ReservaCreateForm,PerfilClienteForm,PerfilClienteCreateForm,)
-from .models import (Restaurante, Direccion, Plato, Etiqueta, Mesa, Cliente, PerfilCliente, Reserva, Pedido, LineaPedido)
 from django.contrib import messages
+from django.utils import timezone
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required, permission_required
+from restaurante.form import (RestauranteBusquedaAvanzadaForm,RestauranteForm,RestauranteCreateForm,DireccionForm,ClienteForm,PlatoForm,ReservaForm,ReservaCreateForm,PerfilClienteForm,PerfilClienteCreateForm,RegistroForm,)
+from .models import (Restaurante,Direccion,Plato,Etiqueta,Mesa,Cliente,PerfilCliente,Reserva,Pedido,LineaPedido,Usuario,)
 
 def index(request):
     """Índice con enlaces."""
@@ -256,11 +260,14 @@ def buscar_simple(request, texto: str):
         'platos': platos,
     })
 
+@login_required(login_url='login')
+@permission_required('restaurante.view_restaurante', login_url='login')
 def restaurantes_listar(request):
     restaurantes = Restaurante.objects.all()
     return render(request, 'restaurante/CRUD_direccion/listar.html', {'restaurantes': restaurantes})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.add_restaurante', login_url='login')
 def restaurantes_crear(request):
     if request.method == 'POST':
         form = RestauranteCreateForm(request.POST)
@@ -279,7 +286,8 @@ def restaurantes_crear(request):
         form = RestauranteCreateForm()
     return render(request, 'restaurante/CRUD_direccion/crear.html', {'form': form})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.change_restaurante', login_url='login')
 def restaurantes_editar(request, pk):
     restaurante = get_object_or_404(Restaurante, pk=pk)
     if request.method == 'POST':
@@ -319,7 +327,8 @@ def restaurantes_editar(request, pk):
         }
         form = RestauranteForm(initial=initial)
     return render(request, 'restaurante/CRUD_direccion/editar.html', {'form': form, 'restaurante': restaurante})
-
+@login_required(login_url='login')
+@permission_required('restaurante.delete_restaurante', login_url='login')
 def restaurantes_eliminar(request, pk):
     restaurante = get_object_or_404(Restaurante, pk=pk)
     if request.method == 'POST':
@@ -332,10 +341,14 @@ def restaurantes_eliminar(request, pk):
 
 # CRUD para Direccion
 
+@login_required(login_url='login')
+@permission_required('restaurante.view_direccion', login_url='login')
 def direccion_listar(request):
     direcciones = Direccion.objects.all()
     return render(request, 'restaurante/direcciones.html', {'direcciones': direcciones})
 
+@login_required(login_url='login')
+@permission_required('restaurante.add_direccion', login_url='login')
 def direccion_crear(request):
     if request.method == 'POST':
         form = DireccionForm(request.POST)
@@ -347,6 +360,8 @@ def direccion_crear(request):
         form = DireccionForm()
     return render(request, 'restaurante/form_direccion.html', {'form': form})
 
+@login_required(login_url='login')
+@permission_required('restaurante.change_direccion', login_url='login')
 def direccion_editar(request, id):
     direccion = get_object_or_404(Direccion, pk=id)
     if request.method == 'POST':
@@ -359,6 +374,8 @@ def direccion_editar(request, id):
         form = DireccionForm(instance=direccion)
     return render(request, 'restaurante/form_direccion.html', {'form': form, 'direccion': direccion})
 
+@login_required(login_url='login')
+@permission_required('restaurante.delete_direccion', login_url='login')
 def direccion_eliminar(request, id):
     direccion = get_object_or_404(Direccion, pk=id)
     if request.method == 'POST':
@@ -372,14 +389,17 @@ def direccion_eliminar(request, id):
 # CRUD para Reserva
 from restaurante.form import ReservaForm, ReservaCreateForm, PerfilClienteForm, PerfilClienteCreateForm
 
+@login_required(login_url='login')
+@permission_required('restaurante.view_reserva', login_url='login')
 def reservas_listar(request):
     reservas = Reserva.objects.select_related('cliente', 'mesa').order_by('-fecha', '-hora')
     return render(request, 'restaurante/crud_reservas/listar.html', {'reservas': reservas})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.add_reserva', login_url='login')
 def reservas_crear(request):
     if request.method == 'POST':
-        form = ReservaCreateForm(request.POST)
+        form = ReservaCreateForm(request.POST, request=request)
         if form.is_valid():
             r = Reserva.objects.create(
                 cliente=form.cleaned_data['cliente'],
@@ -388,14 +408,16 @@ def reservas_crear(request):
                 hora=form.cleaned_data['hora'],
                 estado='pendiente',
                 notas=form.cleaned_data.get('notas', ''),
+                creado_por=request.user,
             )
             messages.success(request, 'Reserva creada correctamente.')
             return redirect('reservas_listar')
     else:
-        form = ReservaCreateForm()
+        form = ReservaCreateForm(request=request)
     return render(request, 'restaurante/crud_reservas/crear.html', {'form': form})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.change_reserva', login_url='login')
 def reservas_editar(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
     if request.method == 'POST':
@@ -422,7 +444,8 @@ def reservas_editar(request, pk):
         form = ReservaForm(initial=initial)
     return render(request, 'restaurante/crud_reservas/editar.html', {'form': form, 'reserva': reserva})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.delete_reserva', login_url='login')
 def reservas_eliminar(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
     if request.method == 'POST':
@@ -434,11 +457,14 @@ def reservas_eliminar(request, pk):
 
 
 # CRUD para PerfilCliente
+@login_required(login_url='login')
+@permission_required('restaurante.view_perfilcliente', login_url='login')
 def perfil_listar(request):
     perfiles = PerfilCliente.objects.select_related('cliente').order_by('cliente__nombre')
     return render(request, 'restaurante/crud_perfilClientes/listar.html', {'perfiles': perfiles})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.add_perfilcliente', login_url='login')
 def perfil_crear(request):
     if request.method == 'POST':
         form = PerfilClienteCreateForm(request.POST)
@@ -455,7 +481,8 @@ def perfil_crear(request):
         form = PerfilClienteCreateForm()
     return render(request, 'restaurante/crud_perfilClientes/crear.html', {'form': form})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.change_perfilcliente', login_url='login')
 def perfil_editar(request, pk):
     perfil = get_object_or_404(PerfilCliente, pk=pk)
     if request.method == 'POST':
@@ -475,7 +502,8 @@ def perfil_editar(request, pk):
         form = PerfilClienteForm(initial=initial)
     return render(request, 'restaurante/crud_perfilClientes/editar.html', {'form': form, 'perfil': perfil})
 
-
+@login_required(login_url='login')
+@permission_required('restaurante.delete_perfilcliente', login_url='login')
 def perfil_eliminar(request, pk):
     perfil = get_object_or_404(PerfilCliente, pk=pk)
     if request.method == 'POST':
@@ -488,21 +516,30 @@ def perfil_eliminar(request, pk):
 
 # CRUD para Cliente.
 
+@login_required(login_url='login')
+@permission_required('restaurante.view_cliente', login_url='login')
 def clientes_listar(request):
     clientes = Cliente.objects.order_by('nombre')
     return render(request, 'restaurante/crud_clientes/listar.html', {'clientes': clientes})
 
+@login_required(login_url='login')
+@permission_required('restaurante.add_cliente', login_url='login')
 def clientes_crear(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         if form.is_valid():
-            form.save()
+            cliente = form.save(commit=False)
+            if request.user.is_authenticated:
+                cliente.creado_por = request.user
+            cliente.save()
             messages.success(request, 'Cliente creado correctamente.')
             return redirect('crud_clientes:listar')
     else:
         form = ClienteForm()
     return render(request, 'restaurante/crud_clientes/crear.html', {'form': form})
 
+@login_required(login_url='login')
+@permission_required('restaurante.change_cliente', login_url='login')
 def clientes_editar(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == 'POST':
@@ -515,6 +552,8 @@ def clientes_editar(request, pk):
         form = ClienteForm(instance=cliente)
     return render(request, 'restaurante/crud_clientes/editar.html', {'form': form, 'cliente': cliente})
 
+@login_required(login_url='login')
+@permission_required('restaurante.delete_cliente', login_url='login')
 def clientes_eliminar(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == 'POST':
@@ -526,10 +565,14 @@ def clientes_eliminar(request, pk):
 
 # CRUD para Plato .
 
+@login_required(login_url='login')
+@permission_required('restaurante.view_plato', login_url='login')
 def platos_listar(request):
     platos = Plato.objects.select_related('restaurante').order_by('nombre')
     return render(request, 'restaurante/crud_platos/listar.html', {'platos': platos})
 
+@login_required(login_url='login')
+@permission_required('restaurante.add_plato', login_url='login')
 def platos_crear(request):
     if request.method == 'POST':
         form = PlatoForm(request.POST)
@@ -541,6 +584,8 @@ def platos_crear(request):
         form = PlatoForm()
     return render(request, 'restaurante/crud_platos/crear.html', {'form': form})
 
+@login_required(login_url='login')
+@permission_required('restaurante.change_plato', login_url='login')
 def platos_editar(request, pk):
     plato = get_object_or_404(Plato, pk=pk)
     if request.method == 'POST':
@@ -553,6 +598,8 @@ def platos_editar(request, pk):
         form = PlatoForm(instance=plato)
     return render(request, 'restaurante/crud_platos/editar.html', {'form': form, 'plato': plato})
 
+@login_required(login_url='login')
+@permission_required('restaurante.delete_plato', login_url='login')
 def platos_eliminar(request, pk):
     plato = get_object_or_404(Plato, pk=pk)
     if request.method == 'POST':
@@ -601,4 +648,118 @@ def restaurante_busqueda_avanzada(request):
         }
     )
 
+# --- VISTA INICIAL ---
 
+def index(request):
+    """Página de inicio.
+
+    - Invitado: se le muestra directamente la lista de restaurantes.
+    - Usuario autenticado: ve el panel de inicio con los bloques según sus permisos.
+    """
+
+    # Datos de la sesion
+    if "fecha_inicio_sesion" not in request.session:
+        request.session["fecha_inicio_sesion"] = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
+        request.session["ultimo_acceso_menu"] = "Nunca"
+        request.session["total_reservas_activas"] = 0
+
+    hoy = timezone.now().date()
+    activas = Reserva.objects.filter(fecha__gte=hoy).count()
+    request.session["total_reservas_activas"] = activas
+
+    # Si no hay usuario autenticado, mostrar solo la lista de restaurantes
+    if not request.user.is_authenticated:
+        return redirect('restaurantes_listar')
+
+    rol_label = None
+    user = request.user
+
+    if user.groups.filter(name="Administradores").exists():
+        rol_label = "Administrador"
+    elif user.groups.filter(name="Gerentes").exists():
+        rol_label = "Gerente"
+    elif user.groups.filter(name="Empleados").exists():
+        rol_label = "Empleado"
+    else:
+        rol_label = user.get_rol_display()
+
+    request.session["rol_usuario"] = rol_label
+
+    return render(request, 'restaurante/index.html')
+
+# --- REGISTRO  ---
+def registrar_usuario(request):
+    if request.method == 'POST': 
+        formulario = RegistroForm(request.POST) 
+        if formulario.is_valid(): 
+            user = formulario.save() 
+           
+            login(request, user)
+            messages.success(request, f'¡Registro exitoso! Bienvenido {user.username}.')
+            return redirect('index') 
+        else:
+            messages.error(request, 'Error en el formulario de registro. Revisa los datos.')
+    else:
+        formulario = RegistroForm() 
+    
+    return render(request, 'registration/signup.html', {'formulario': formulario}) 
+
+
+@permission_required('restaurante.add_plato', login_url='index') # Si no tiene permiso, redirige a 'index'
+def plato_create(request):
+    """Acceso rápido a la creación de platos desde el menú principal.
+
+    Reutiliza el mismo formulario y plantilla que el CRUD de platos.
+    """
+
+    if request.method == "POST":
+        form = PlatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Plato creado correctamente.")
+            return redirect('crud_platos:listar')
+    else:
+        form = PlatoForm()
+
+    return render(request, 'restaurante/crud_platos/crear.html', {"form": form})
+
+
+@login_required(login_url='login')
+def reserva_create(request):
+    """Crear una reserva usando el mismo modelo de reservas CRUD.
+
+    Versión simplificada: no asocia automáticamente con el usuario autenticado,
+    sino que permite escoger cliente y mesa igual que en el CRUD general.
+    """
+
+    if request.method == "POST":
+        form = ReservaCreateForm(request.POST, request=request)
+        if form.is_valid():
+            Reserva.objects.create(
+                cliente=form.cleaned_data["cliente"],
+                mesa=form.cleaned_data["mesa"],
+                fecha=form.cleaned_data["fecha"],
+                hora=form.cleaned_data["hora"],
+                estado="pendiente",
+                notas=form.cleaned_data.get("notas", ""),
+                creado_por=request.user,
+            )
+            messages.success(request, "Reserva creada correctamente.")
+            return redirect("reservas_listar")
+    else:
+        form = ReservaCreateForm(request=request)
+
+  
+    return render(request, "restaurante/crud_reservas/crear.html", {"form": form})
+
+# --- FILTRO DE BÚSQUEDA/LISTADO POR USUARIO ---
+@login_required(login_url='login')
+def lista_mis_reservas(request):
+    """Listado de reservas creadas por el usuario autenticado."""
+
+    reservas = Reserva.objects.filter(creado_por=request.user).order_by("-fecha", "-hora")
+
+    request.session["ultimo_acceso_menu"] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    
+    return render(request, "restaurante/crud_reservas/listar.html", {"reservas": reservas})

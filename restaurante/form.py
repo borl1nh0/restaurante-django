@@ -1,7 +1,11 @@
 from django import forms
-from .models import Restaurante, Direccion, Cliente, Plato, PerfilCliente, Mesa, Reserva
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
+from django.utils import timezone
+from .models import Restaurante, Direccion, Cliente, Plato, PerfilCliente, Mesa, Reserva, Usuario
 from datetime import date
 from django.db.models import Q
+import re
 
 
 
@@ -83,7 +87,20 @@ class ReservaCreateForm(forms.Form):
     hora = forms.TimeField(label='Hora', widget=forms.TimeInput(format='%H:%M'))
     notas = forms.CharField(label='Notas', widget=forms.Textarea(), required=False)
 
-    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+
+        # Mesas activas siempre
+        self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
+
+        # Clientes dependientes del usuario logueado (si tiene clientes creados)
+        qs = Cliente.objects.all()
+        if self.request is not None and getattr(self.request, "user", None) and self.request.user.is_authenticated:
+            propios = qs.filter(creado_por=self.request.user)
+            if propios.exists():
+                qs = propios
+        self.fields['cliente'].queryset = qs
 
     def clean(self):
         cleaned = super().clean()
@@ -226,28 +243,119 @@ class PlatoForm(forms.ModelForm):
 
 #====================== Busqueda avanzada==================
 class RestauranteBusquedaAvanzadaForm(forms.Form):
+    """Formulario para la búsqueda avanzada de restaurantes.
+
+    Permite filtrar por nombre, teléfono y campos de la dirección.
     """
-    Formulario para la búsqueda avanzada de restaurantes por nombre, 
-    teléfono y campos de la dirección.
-    """
+
     nombre = forms.CharField(
         max_length=100,
         required=False,
         label="Nombre del Restaurante",
-        widget=forms.TextInput(attrs={'placeholder': 'Ej. Sabor Andaluz'})
+        widget=forms.TextInput(attrs={"placeholder": "Ej. Sabor Andaluz"}),
     )
-    
+
     telefono = forms.CharField(
         max_length=20,
         required=False,
         label="Teléfono",
-        widget=forms.TextInput(attrs={'placeholder': 'Ej. 600123456'})
+        widget=forms.TextInput(attrs={"placeholder": "Ej. 600123456"}),
     )
-    
-    # campo para buscar en Calle, Ciudad o Código Postal.
+
+    # Campo para buscar en Calle, Ciudad o Código Postal.
     direccion = forms.CharField(
         max_length=200,
         required=False,
         label="Dirección (Calle, Ciudad o C.P.)",
-        widget=forms.TextInput(attrs={'placeholder': 'Ej. Sevilla o 41001'})
+        widget=forms.TextInput(attrs={"placeholder": "Ej. Sevilla o 41001"}),
     )
+
+    def clean(self):
+        
+        super().clean()
+
+        # Obtener los datos limpios del formulario
+        nombre = (self.cleaned_data.get("nombre") or "").strip()
+        telefono = (self.cleaned_data.get("telefono") or "").strip()
+        direccion = (self.cleaned_data.get("direccion") or "").strip()
+
+        # al menos un campo tenga valor
+        if not nombre and not telefono and not direccion:
+            mensaje = "Debe introducir al menos un valor en algún campo de búsqueda."
+            self.add_error("nombre", mensaje)
+            self.add_error("telefono", mensaje)
+            self.add_error("direccion", mensaje)
+        else:
+            #longitud del nombre
+            if nombre and len(nombre) > 100:
+                self.add_error("nombre", "El nombre no puede tener más de 100 caracteres.")
+
+            #longitud y formato del teléfono
+            if telefono:
+                if len(telefono) > 20:
+                    self.add_error("telefono", "El teléfono no puede tener más de 20 caracteres.")
+                # Solo dígitos (permitiendo espacios intermedios)
+                if not re.fullmatch(r"\d+", telefono.replace(" ", "")):
+                    self.add_error("telefono", "El teléfono solo puede contener números.")
+
+            # longitud de dirección
+            if direccion and len(direccion) > 200:
+                self.add_error("direccion", "La dirección no puede tener más de 200 caracteres.")
+
+        return self.cleaned_data
+
+class RegistroForm(UserCreationForm):
+    roles_registro = (
+        (Usuario.EMPLEADO, 'Empleado'),
+        (Usuario.GERENTE, 'Gerente'),
+    )
+    rol = forms.ChoiceField(choices=roles_registro, initial=Usuario.EMPLEADO, label='Tipo de Cuenta')
+
+    class Meta:
+        model = Usuario
+        
+        fields = ('username', 'email', 'rol')
+        
+    def save(self, commit=True):
+        
+        user = super().save(commit=False)
+        user.rol = self.cleaned_data.get('rol', Usuario.EMPLEADO)
+
+        if commit:
+            user.save()
+
+            
+            mapa_grupos = {
+                Usuario.EMPLEADO: 'Empleados',
+                Usuario.GERENTE: 'Gerentes',
+            }
+            nombre_grupo = mapa_grupos.get(user.rol)
+            if nombre_grupo:
+                grupo, _ = Group.objects.get_or_create(name=nombre_grupo)
+                user.groups.add(grupo)
+
+        return user
+
+    def clean(self):
+        
+        super().clean()
+        email = self.cleaned_data.get('email')
+        if email and email.endswith('@bloqueado.com'):
+            self.add_error('email', 'Este dominio de correo no está permitido.')
+        return self.cleaned_data
+
+class PedidoFormRequest(forms.Form):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+
+        
+        platos_disponibles = Plato.objects.filter(disponible=True)
+        
+        self.fields["platos"] = forms.ModelMultipleChoiceField( 
+            queryset=platos_disponibles,
+            required=True,
+            widget=forms.CheckboxSelectMultiple,
+            label="Platos disponibles para el Pedido"
+        )

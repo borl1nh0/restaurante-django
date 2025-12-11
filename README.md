@@ -10,8 +10,7 @@ Para usar desde el **panel de administración**.
 - Trabajo por **ramas** para que en GitHub se vea cada paso.
 
 ---
-
-Modelos (explicación clara)
+Modelos 
 
 # 1) Dirección
 
@@ -148,42 +147,6 @@ descuento_porcentaje (PositiveIntegerField, default=0).
 
 from django.db.models import Q, Count, Sum, Avg --> herramientas para construir consultas (QuerySets) 
 
-De los viwers me entere poco sinceramente.
-
-## Cómo ejecutar en Linux
-
-git clone https://github.com/borl1nh0/restaurante-django
-
-py -m venv myvenv
-
-myvenv\Scripts\activate
-
-pip install -r requirements.txt
-
-python manage.py migrate
-
-python manage.py loaddata backups\datos.json   # o: python manage.py seed_10
-
-python manage.py runserver
-
-## Cómo ejecutar en Windows (lo hice en windows)
-
-git clone https://github.com/borl1nh0/restaurante-django
-
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -> Se usa para activar un entorno virtual ya que por politicas de windows lo bloquea, de esta forma hacemos una "excepcion".
-
-myvenv\Scripts\activate 
-
-pip install -r requirements.txt
-
-python manage.py migrate
-
-python manage.py loaddata backups\datos.json  o: python manage.py seed_10
-
-python manage.py runserver
-
-
-
 ## Validaciones
 - En la app revisamos algunas cosas para que los datos no se líen ni haya errores.
 
@@ -223,6 +186,54 @@ python manage.py runserver
 
 - `CheckboxInput` — usado en `PlatoForm` (campo `disponible`).
 	-Checkbox para marcar si un plato está disponible (True/False)."
+## -------------------------------------------------------------------------------------------- ##
+## Tipos de usuario y accesos
+
+En la aplicación se usan principalmente **dos roles de trabajo**:
+
+- **Gerente** (grupo "Gerentes")
+	- Acceso al panel de gestión completo desde la web:
+		- CRUD de **Restaurantes**, **Clientes**, **Direcciones**, **Perfiles de cliente**, **Platos**, **Reservas** y **Pedidos**.
+	- Ve todos los bloques de la página de inicio y puede entrar en todas las opciones de menú relacionadas con gestión.
+
+- **Empleado** (grupo "Empleados")
+	- Puede ver el listado de **Platos** y trabajar con **Reservas** y **Pedidos** (crear y modificar los que haga falta).
+	- No puede crear ni borrar **Restaurantes**, **Clientes**, **Direcciones** ni tocar la configuración general.
+	- En el menú ve: **Inicio**, **Restaurantes**, **Platos**, **Pedidos** y **Búsqueda avanzada**, pero sin opciones de administración completas.
+
+Además, existe el **superusuario de Django** (administrador técnico) que se usa solo para tareas internas en `/admin`, pero no se considera un rol funcional de la aplicación.
 
 
 
+## -------------------------------------------------------------------------------------------- ##
+## Cómo ejecutar en Linux
+
+git clone https://github.com/borl1nh0/restaurante-django
+
+py -m venv myvenv
+
+myvenv\Scripts\activate
+
+pip install -r requirements.txt
+
+python manage.py migrate
+
+python manage.py loaddata backups\datos.json   # o: python manage.py seed_10
+
+python manage.py runserver
+
+## Cómo ejecutar en Windows (lo hice en windows)
+
+git clone https://github.com/borl1nh0/restaurante-django
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -> Se usa para activar un entorno virtual ya que por politicas de windows lo bloquea, de esta forma hacemos una "excepcion".
+
+myvenv\Scripts\activate 
+
+pip install -r requirements.txt
+
+python manage.py migrate
+
+python manage.py loaddata backups\datos.json  o: python manage.py seed_10
+
+python manage.py runserver
