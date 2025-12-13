@@ -201,7 +201,7 @@ En la aplicación se usan principalmente **dos roles de trabajo**:
 	- No puede crear ni borrar **Restaurantes**, **Clientes**, **Direcciones** ni tocar la configuración general.
 	- En el menú ve: **Inicio**, **Restaurantes**, **Platos**, **Pedidos** y **Búsqueda avanzada**, pero sin opciones de administración completas.
 
-Además, existe el **superusuario de Django** (administrador técnico) que se usa solo para tareas internas en `/admin`, pero no se considera un rol funcional de la aplicación.
+Además, existe el **superusuario de Django** (administrador técnico) que se usa solo para tareas internas en `/admin`, pero no se considera un rol funcional de la aplicación
 
 
 
