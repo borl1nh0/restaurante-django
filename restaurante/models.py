@@ -1,4 +1,23 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.db.models import Q
+
+
+class Usuario(AbstractUser):
+    ROL_ADMINISTRADOR = "ADMINISTRADOR"
+    ROL_GERENTE = "GERENTE"
+    ROL_EMPLEADO = "EMPLEADO"
+    ROL_CLIENTE = "CLIENTE"
+
+    ROL_CHOICES = [
+        (ROL_ADMINISTRADOR, "Administrador"),
+        (ROL_GERENTE, "Gerente"),
+        (ROL_EMPLEADO, "Empleado"),
+        (ROL_CLIENTE, "Cliente"),
+    ]
+
+    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default=ROL_CLIENTE)
+
 
 # Create your models here.
 class Direccion(models.Model):

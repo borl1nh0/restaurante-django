@@ -8,6 +8,43 @@ from django.db.models import Q
 import re
 
 
+# =============== FORMULARIO REGISTRO USUARIO ==================
+
+
+class RegistroForm(UserCreationForm):
+    """Formulario de registro para el modelo de usuario personalizado.
+
+    Crea instancias de ``Usuario`` y opcionalmente las asocia a un ``Group``
+    según el rol elegido.
+    """
+
+    rol = forms.ChoiceField(choices=Usuario.ROL_CHOICES, initial=Usuario.ROL_CLIENTE)
+
+    class Meta(UserCreationForm.Meta):
+        model = Usuario
+        fields = ("username", "first_name", "last_name", "email", "rol")
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data.get("email", "")
+        user.rol = self.cleaned_data.get("rol", Usuario.ROL_CLIENTE)
+
+        if commit:
+            user.save()
+
+            # Asignar automáticamente un grupo según el rol (si existen)
+            rol_grupo_map = {
+                Usuario.ROL_ADMINISTRADOR: "Administradores",
+                Usuario.ROL_GERENTE: "Gerentes",
+                Usuario.ROL_EMPLEADO: "Empleados",
+            }
+            nombre_grupo = rol_grupo_map.get(user.rol)
+            if nombre_grupo:
+                grupo, _ = Group.objects.get_or_create(name=nombre_grupo)
+                user.groups.add(grupo)
+
+        return user
+
 
 # =============== FORMULARIOS DE RESTAURANTE ==================
 
