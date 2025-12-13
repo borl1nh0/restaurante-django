@@ -60,6 +60,11 @@ urlpatterns = [
     re_path(r'^buscar/(?P<texto>\w{3,20})/$', views.buscar_simple, name='buscar_simple'),
     # BUSQUEDA AVANZADA 
     path("restaurantes/busqueda-avanzada/",views.restaurante_busqueda_avanzada,name="restaurante_busqueda_avanzada"),
-    
+   
+   # Autenticación y Registro 
+    path('registrar/', views.registrar_usuario, name='registrar_usuario'),
+    path('plato/crear/', views.plato_create, name='plato_crear'), 
+    path('reservas/nueva/', views.reserva_create, name='reserva_crear'), 
+    path('reservas/mis_reservas/', views.lista_mis_reservas, name='mis_reservas'), 
 ]
 

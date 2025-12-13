@@ -1,7 +1,11 @@
 from django import forms
-from .models import Restaurante, Direccion, Cliente, Plato, PerfilCliente, Mesa, Reserva
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
+from django.utils import timezone
+from .models import Restaurante, Direccion, Cliente, Plato, PerfilCliente, Mesa, Reserva, Usuario
 from datetime import date
 from django.db.models import Q
+import re
 
 
 
@@ -104,7 +108,20 @@ class ReservaCreateForm(forms.Form):
     hora = forms.TimeField(label='Hora', widget=forms.TimeInput(format='%H:%M'))
     notas = forms.CharField(label='Notas', widget=forms.Textarea(), required=False)
 
-    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+
+        # Mesas activas siempre
+        self.fields['mesa'].queryset = Mesa.objects.filter(activa=True)
+
+        # Clientes dependientes del usuario logueado (si tiene clientes creados)
+        qs = Cliente.objects.all()
+        if self.request is not None and getattr(self.request, "user", None) and self.request.user.is_authenticated:
+            propios = qs.filter(creado_por=self.request.user)
+            if propios.exists():
+                qs = propios
+        self.fields['cliente'].queryset = qs
 
     def clean(self):
         cleaned = super().clean()
@@ -274,51 +291,28 @@ class PlatoForm(forms.ModelForm):
 
 #====================== Busqueda avanzada==================
 class RestauranteBusquedaAvanzadaForm(forms.Form):
+    """
+    Formulario para la búsqueda avanzada de restaurantes por nombre, 
+    teléfono y campos de la dirección.
+    """
     nombre = forms.CharField(
         max_length=100,
         required=False,
         label="Nombre del Restaurante",
-        widget=forms.TextInput(attrs={'placeholder': 'Ej. Sabor Andaluz'})
+        widget=forms.TextInput(attrs={"placeholder": "Ej. Sabor Andaluz"}),
     )
-    
+
     telefono = forms.CharField(
         max_length=20,
         required=False,
         label="Teléfono",
-        widget=forms.TextInput(attrs={'placeholder': 'Ej. 600123456'})
+        widget=forms.TextInput(attrs={"placeholder": "Ej. 600123456"}),
     )
     
+    # campo para buscar en Calle, Ciudad o Código Postal.
     direccion = forms.CharField(
         max_length=200,
         required=False,
         label="Dirección (Calle, Ciudad o C.P.)",
         widget=forms.TextInput(attrs={'placeholder': 'Ej. Sevilla o 41001'})
     )
-
-    def clean(self):
-        cleaned = super().clean()
-
-        nombre = cleaned.get("nombre")
-        telefono = cleaned.get("telefono")
-        direccion = cleaned.get("direccion")
-
-        
-        if not nombre and not telefono and not direccion:
-            mensaje = "Debes rellenar al menos un campo."
-            self.add_error("nombre", mensaje)
-            self.add_error("telefono", mensaje)
-            self.add_error("direccion", mensaje)
-
-        else:
-            
-            if telefono and not telefono.isdigit():
-                self.add_error("telefono", "El teléfono solo puede contener números.")
-
-            
-            if nombre is not None and nombre.strip() == "":
-                self.add_error("nombre", "No puedes poner solo espacios.")
-
-            if direccion is not None and direccion.strip() == "":
-                self.add_error("direccion", "No puedes poner solo espacios.")
-
-        return cleaned

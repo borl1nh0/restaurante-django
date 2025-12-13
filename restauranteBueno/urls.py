@@ -11,4 +11,5 @@ handler500 = 'restaurante.views.error_500'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('restaurante.urls')),  
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

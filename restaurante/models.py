@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Q
 
 # Create your models here.
 class Direccion(models.Model):
@@ -17,6 +16,13 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=20, blank=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
+    creado_por = models.ForeignKey(
+        Usuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="clientes_creados",
+    )
     
     def __str__(self): 
         return self.nombre
@@ -107,6 +113,13 @@ class Reserva(models.Model):
     hora = models.TimeField()
     estado = models.CharField(max_length=20, default="pendiente")
     notas = models.TextField(blank=True)
+    creado_por = models.ForeignKey(
+        Usuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="reservas_creadas",
+    )
 
     def __str__(self): 
         return f"Reserva {self.cliente.nombre} {self.fecha} {self.hora}"
@@ -117,6 +130,13 @@ class Pedido(models.Model):
     reserva = models.OneToOneField(Reserva, on_delete=models.SET_NULL, null=True, blank=True) #este codigo es para borrar la reserva pero el pedido lo dejaria "guardado" teni pensado crea una pagina de merma, o desperdicios, y con este codigo podria hacerlo.
     total = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     platos = models.ManyToManyField("Plato", through="LineaPedido")
+    creado_por = models.ForeignKey(
+        Usuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="pedidos_creados",
+    )
     
     def __str__(self): 
         return f"Pedido {self.id}"
@@ -128,6 +148,7 @@ class LineaPedido(models.Model):
     precio_unitario = models.DecimalField(max_digits=6, decimal_places=2)
     comentario = models.CharField(max_length=120, blank=True)
     descuento_porcentaje = models.PositiveIntegerField(default=0)
+    cantidad = models.PositiveIntegerField(default=1)
     
     def __str__(self): 
         return f"{self.cantidad}x {self.plato.nombre}"

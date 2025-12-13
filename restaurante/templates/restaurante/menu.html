@@ -2,9 +2,17 @@
   <ul>
     <li><a href="{% url 'index' %}">Inicio</a></li>
     <li><a href="{% url 'restaurantes_listar' %}">Restaurantes</a></li>
-    
-    <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
-    <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+
+    {# Solo usuarios con permiso sobre platos ven este enlace #}
+    {% if perms.restaurante.view_plato or perms.restaurante.add_plato %}
+      <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
+    {% endif %}
+
+    {# Solo usuarios con permiso sobre pedidos ven este enlace #}
+    {% if perms.restaurante.view_pedido or perms.restaurante.add_pedido %}
+      <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+    {% endif %}
+
     <li><a href="{% url 'restaurante_busqueda_avanzada' %}">Búsqueda avanzada</a></li>
 
   </ul>

@@ -7,66 +7,91 @@
     <h1 class="mb-4">Bienvenido al Restaurante Bueno</h1>
 
     <div class="row">
-        <!--Esto nos los enseño Carlos en sus clases y creo que visualmete es mas bonito que tener una lista simple-->
-        <!-- CRUD Restaurantes -->
+        <!-- CRUD Restaurantes (solo si tiene permiso de ver) -->
+        {% if perms.restaurante.view_restaurante %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Restaurantes</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'restaurantes_listar' %}">Lista de Restaurantes</a></li>
+                {% if perms.restaurante.add_restaurante %}
                 <li><a href="{% url 'restaurantes_crear' %}">Crear Restaurante</a></li>
+                {% endif %}
             </ul>
         </div>
+        {% endif %}
 
         <!-- CRUD Direcciones -->
+        {% if perms.restaurante.view_direccion %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Direcciones</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'direccion_listar' %}">Lista de Direcciones</a></li>
+                {% if perms.restaurante.add_direccion %}
                 <li><a href="{% url 'direccion_crear' %}">Crear Dirección</a></li>
+                {% endif %}
             </ul>
         </div>
+        {% endif %}
 
         <!-- CRUD Clientes -->
+        {% if perms.restaurante.view_cliente %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Clientes</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'crud_clientes:listar' %}">Clientes</a></li>
+                {% if perms.restaurante.add_cliente %}
                 <li><a href="{% url 'crud_clientes:crear' %}">Crear Cliente</a></li>
+                {% endif %}
                 <li><a href="{% url 'clientes_frecuentes' %}">Clientes Frecuentes</a></li>
             </ul>
         </div>
+        {% endif %}
 
     </div>
 
     <div class="row">
 
         <!-- CRUD Perfiles -->
+        {% if perms.restaurante.view_perfilcliente %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Perfiles de Cliente</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'perfil_listar' %}">Perfiles Clientes</a></li>
+                {% if perms.restaurante.add_perfilcliente %}
                 <li><a href="{% url 'perfil_crear' %}">Crear Perfil</a></li>
+                {% endif %}
             </ul>
         </div>
+        {% endif %}
 
         <!-- CRUD Platos -->
+        {% if perms.restaurante.view_plato %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Platos</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'crud_platos:listar' %}">Platos</a></li>
+                {% if perms.restaurante.add_plato %}
                 <li><a href="{% url 'crud_platos:crear' %}">Crear Plato</a></li>
+                {% endif %}
+                {% if perms.restaurante.view_pedido %}
                 <li><a href="{% url 'lista_pedidos' %}">Pedidos</a></li>
+                {% endif %}
             </ul>
         </div>
+        {% endif %}
 
         <!-- CRUD Reservas -->
+        {% if perms.restaurante.view_reserva %}
         <div class="col-md-4 mb-4">
             <h4>CRUD Reservas</h4>
             <ul class="list-unstyled ms-2">
                 <li><a href="{% url 'reservas_listar' %}">Reservas</a></li>
+                {% if perms.restaurante.add_reserva %}
                 <li><a href="{% url 'reservas_crear' %}">Crear Reserva</a></li>
+                {% endif %}
             </ul>
         </div>
+        {% endif %}
 
     </div>
 
