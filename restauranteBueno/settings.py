@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import environ
+import os
+environ.Env.read_env(os.path.join(BASE_DIR,'.env'),True)
+env = environ.Env()
+SECRET_KEY = env('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 AUTH_USER_MODEL = 'restaurante.Usuario'
@@ -24,9 +28,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SECRET_KEY = 'django-insecure-$1sw8)7x!g#v0g8oc6_rs2-1!sj(+)qo^hd@&l4!$2pbsj57e)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver", "0.0.0.0"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver", "0.0.0.0","BoRLo.pythonanywhere.com"]
 
 # Application definition
 
