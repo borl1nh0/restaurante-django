@@ -13,11 +13,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import environ
 import os
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR,'.env'),True)
 env = environ.Env()
 SECRET_KEY = env('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 AUTH_USER_MODEL = 'restaurante.Usuario'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
